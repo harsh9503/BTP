@@ -9,5 +9,5 @@ exports.dbconnect= () =>{
             console.log("DB CONNECTION FAILED");
             console.log(error);
             process.exit(1);
-        })
+        });
 };
