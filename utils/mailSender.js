@@ -10,7 +10,6 @@ const mailSender = async (email, title, body) => {
                 }
             })
 
-
             let info = await transporter.sendMail({
                 from: 'VirtuLearn',
                 to:`${email}`,
@@ -18,6 +17,7 @@ const mailSender = async (email, title, body) => {
                 html: `${body}`,
             })
             console.log(info);
+            
             return info;
     }
     catch(error) {
