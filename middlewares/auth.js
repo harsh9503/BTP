@@ -26,7 +26,8 @@ exports.auth = async (req, res, next) => {
 			console.log(decode);
 			// Storing the decoded JWT payload in the request object for further use
 			req.user = decode;
-		} catch (error) {
+		} 
+		catch (error) {
 			// If JWT verification fails, return 401 Unauthorized response
 			return res
 				.status(401)
@@ -43,6 +44,8 @@ exports.auth = async (req, res, next) => {
 		});
 	}
 };
+
+
 exports.isStudent = async (req, res, next) => {
 	try {
 		const userDetails = await User.findOne({ email: req.user.email });
@@ -57,9 +60,13 @@ exports.isStudent = async (req, res, next) => {
 	} catch (error) {
 		return res
 			.status(500)
-			.json({ success: false, message: `User Role Can't be Verified` });
+			.json({ success: false, 
+					message: `Student Role Can't be Verified` 
+				});
 	}
 };
+
+
 exports.isAdmin = async (req, res, next) => {
 	try {
 		const userDetails = await User.findOne({ email: req.user.email });
@@ -71,12 +78,17 @@ exports.isAdmin = async (req, res, next) => {
 			});
 		}
 		next();
-	} catch (error) {
+	} 
+	catch (error) {
 		return res
 			.status(500)
-			.json({ success: false, message: `User Role Can't be Verified` });
+			.json({ success: false, 
+					message: `Admin Role Can't be Verified` 
+				});
 	}
 };
+
+
 exports.isInstructor = async (req, res, next) => {
 	try {
 		const userDetails = await User.findOne({ email: req.user.email });
@@ -91,9 +103,12 @@ exports.isInstructor = async (req, res, next) => {
 			});
 		}
 		next();
-	} catch (error) {
+	} 
+	catch (error) {
 		return res
 			.status(500)
-			.json({ success: false, message: `User Role Can't be Verified` });
+			.json({ success: false, 
+					message: `Instructor Role Can't be Verified` 
+				});
 	}
 };

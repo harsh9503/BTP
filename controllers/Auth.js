@@ -25,13 +25,7 @@ exports.signup = async (req, res) => {
     } = req.body
     // Check if All Details are there or not
     if (
-      !firstName ||
-      !lastName ||
-      !email ||
-      !password ||
-      !confirmPassword ||
-      !otp
-    ) {
+      !firstName ||!lastName ||!email ||!password ||!confirmPassword ||!otp) {
       return res.status(403).send({
         success: false,
         message: "All Fields are required",
@@ -75,9 +69,7 @@ exports.signup = async (req, res) => {
     // Hash the password
     const hashedPassword = await bcrypt.hash(password, 10)
 
-    // Create the user
-    let approved = ""
-    approved === "Instructor" ? (approved = false) : (approved = true)
+   
 
     // Create the Additional Profile For User
     const profileDetails = await Profile.create({
@@ -86,6 +78,7 @@ exports.signup = async (req, res) => {
       about: null,
       contactNumber: null,
     })
+
     const user = await User.create({
       firstName,
       lastName,
@@ -103,11 +96,12 @@ exports.signup = async (req, res) => {
       user,
       message: "User registered successfully",
     })
-  } catch (error) {
+  } 
+  catch (error) {
     console.error(error)
     return res.status(500).json({
       success: false,
-      message: "User cannot be registered. Please try again.",
+      message: "User not registered. Please try again.",
     })
   }
 }
@@ -142,7 +136,11 @@ exports.login = async (req, res) => {
     // Generate JWT token and Compare Password
     if (await bcrypt.compare(password, user.password)) {
       const token = jwt.sign(
-        { email: user.email, id: user._id, role: user.role },
+        { 
+          email: user.email, 
+          id: user._id, 
+          role: user.role 
+        },
         process.env.JWT_SECRET,
         {
           expiresIn: "24h",
@@ -152,24 +150,28 @@ exports.login = async (req, res) => {
       // Save token to user document in database
       user.token = token
       user.password = undefined
+
       // Set cookie for token and return success response
       const options = {
         expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
         httpOnly: true,
       }
+
       res.cookie("token", token, options).status(200).json({
         success: true,
         token,
         user,
         message: `User Login Success`,
       })
-    } else {
+    } 
+    else {
       return res.status(401).json({
         success: false,
         message: `Password is incorrect`,
       })
     }
-  } catch (error) {
+  } 
+  catch (error) {
     console.error(error)
     // Return 500 Internal Server Error status code with error message
     return res.status(500).json({
@@ -204,6 +206,7 @@ exports.sendotp = async (req, res) => {
       lowerCaseAlphabets: false,
       specialChars: false,
     })
+
     const result = await OTP.findOne({ otp: otp })
     console.log("Result is Generate OTP Func")
     console.log("OTP", otp)
@@ -245,7 +248,10 @@ exports.changePassword = async (req, res) => {
       // If old password does not match, return a 401 (Unauthorized) error
       return res
         .status(401)
-        .json({ success: false, message: "The password is incorrect" })
+        .json({ 
+          success: false, 
+          message: "The password is incorrect" 
+        })
     }
 
     // Update password
@@ -267,7 +273,8 @@ exports.changePassword = async (req, res) => {
         )
       )
       console.log("Email sent successfully:", emailResponse.response)
-    } catch (error) {
+    } 
+    catch (error) {
       // If there's an error sending the email, log the error and return a 500 (Internal Server Error) error
       console.error("Error occurred while sending email:", error)
       return res.status(500).json({
