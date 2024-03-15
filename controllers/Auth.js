@@ -269,7 +269,7 @@ exports.changePassword = async (req, res) => {
         "Password for your account has been updated",
         passwordUpdated(
           updatedUserDetails.email,
-          `Password updated successfully for ${updatedUserDetails.firstName} ${updatedUserDetails.lastName}`
+          `${updatedUserDetails.firstName} ${updatedUserDetails.lastName}`
         )
       )
       console.log("Email sent successfully:", emailResponse.response)
