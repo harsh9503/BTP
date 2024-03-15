@@ -4,7 +4,9 @@ require("dotenv").config();
 
 exports.dbconnect= () =>{
         mongoose.connect(process.env.MONGODB_URL)
-        .then(()=>{console.log("DB CONNECTED SUCCESSFULLY")})
+        .then(()=>{
+            console.log("DB CONNECTED SUCCESSFULLY")
+        })
         .catch((error)=>{
             console.log("DB CONNECTION FAILED");
             console.log(error);

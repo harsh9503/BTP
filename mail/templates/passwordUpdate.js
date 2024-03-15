@@ -56,7 +56,7 @@ exports.passwordUpdated = (email, name) => {
     <body>
         <div class="container">
             <a href="#"><img class="logo"
-                    src="" alt="VirtuLearn Logo"></a>
+                    src="https://res.cloudinary.com/dqpjwgdn6/image/upload/v1710480760/virtulearn/qiz31wfq33skjl8flmx1.png" alt="VirtuLearn Logo"></a>
             <div class="message">Password Update Confirmation</div>
             <div class="body">
                 <p>Hey ${name},</p>

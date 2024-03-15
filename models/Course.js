@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const coursesSchema = new mongoose.Schema({
 	courseName: {
          type: String 
-        },
+    },
 
 	courseDescription: { 
         type: String 
@@ -44,12 +44,12 @@ const coursesSchema = new mongoose.Schema({
 
 	tag: {
 		type: [String],
-		required: true,
+		//required: true,
 	},
 
 	category: {
 		type: mongoose.Schema.Types.ObjectId,
-		// required: true,
+		required: true,
 		ref: "Category",
 	},
 

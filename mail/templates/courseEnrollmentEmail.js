@@ -1,17 +1,10 @@
-exports.contactUsEmail = (
-    email,
-    firstname,
-    lastname,
-    message,
-    phoneNo,
-    countrycode
-  ) => {
+exports.courseEnrollmentEmail = (courseName, name) => {
     return `<!DOCTYPE html>
     <html>
     
     <head>
         <meta charset="UTF-8">
-        <title>Contact Form Confirmation</title>
+        <title>Course Registration Confirmation</title>
         <style>
             body {
                 background-color: #ffffff;
@@ -73,24 +66,21 @@ exports.contactUsEmail = (
     
     <body>
         <div class="container">
-            <a href=""><img class="logo"
-                    src="https://res.cloudinary.com/dqpjwgdn6/image/upload/v1710480760/virtulearn/qiz31wfq33skjl8flmx1.png" alt="VirtuLearn Logo"></a>
-            <div class="message">Contact Form Confirmation</div>
+            <a href=""><img class="logo" src="https://res.cloudinary.com/dqpjwgdn6/image/upload/v1710480760/virtulearn/qiz31wfq33skjl8flmx1.png"
+                    alt="VirtuLearn Logo"></a>
+            <div class="message">Course Registration Confirmation</div>
             <div class="body">
-                <p>Dear ${firstname} ${lastname},</p>
-                <p>Thank you for contacting us. We have received your message and will respond to you as soon as possible.
+                <p>Dear ${name},</p>
+                <p>You have successfully registered for the course <span class="highlight">"${courseName}"</span>. We
+                    are excited to have you as a participant!</p>
+                <p>Please log in to your learning dashboard to access the course materials and start your learning journey.
                 </p>
-                <p>Here are the details you provided:</p>
-                <p>Name: ${firstname} ${lastname}</p>
-                <p>Email: ${email}</p>
-                <p>Phone Number: ${phoneNo}</p>
-                <p>Message: ${message}</p>
-                <p>We appreciate your interest and will get back to you shortly. </p>
+                <a class="cta" href="">Go to Dashboard</a>
             </div>
-            <div class="support">If you have any further questions or need immediate assistance, please feel free to reach
-                out to us at <a href="mailto:virtulearn.noreply@gmail.com">virtulearn.noreply@gmail.com</a>. We are here to help!</div>
+            <div class="support">If you have any questions or need assistance, please feel free to reach out to us at <a
+                    href="mailto:virtulearn.noreply@gmail.com">virtulearn.noreply@gmail.com</a>. We are here to help!</div>
         </div>
     </body>
     
-    </html>`
-  }
+    </html>`;
+  };
