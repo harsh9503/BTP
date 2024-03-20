@@ -22,7 +22,6 @@ function ChangePassword(){
     const [completed, setCompleted] = useState(false);
     const HandleSubmit=()=>{
           setSpin(true);
-          console.log("HELLO");
           setTimeout(()=>{
             setSpin(false);
             setCompleted(true);
