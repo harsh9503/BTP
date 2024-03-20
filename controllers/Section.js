@@ -2,6 +2,7 @@ const Section = require("../models/Section");
 const Course = require("../models/Course");
 const SubSection = require("../models/SubSection");
 
+//-----------------------------------------------------------------------------------
 // CREATE a new section
 exports.createSection = async (req, res) => {
 	try {
@@ -53,7 +54,7 @@ exports.createSection = async (req, res) => {
 	}
 };
 
-
+//-------------------------------------------------------------------------------------
 // UPDATE a section
 exports.updateSection = async (req, res) => {
 	try {
@@ -86,7 +87,7 @@ exports.updateSection = async (req, res) => {
 		});
 	}
 };
-
+//------------------------------------------------------------------------------------------
 // DELETE a section
 exports.deleteSection = async (req, res) => {
 	try {
