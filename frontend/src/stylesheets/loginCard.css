@@ -1,0 +1,83 @@
+.loginMain{
+    width: 30%;
+    background: black;
+    color: #fff;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left:0;
+    right:0;
+    top: 100px;
+    display: flex;
+    flex-direction: row;
+    padding: 100px 0 100px 0; 
+    border-radius: 30px;
+  }
+  
+  .loginMain > *{
+    display: inline-block;
+  }
+  .loginPanel{
+    display: block;
+    width:100%;
+    height: inherit;
+  }
+  
+  .loginPanel input{
+    display: block;
+    color: #fff;
+    border-radius: 10px;
+    padding: 10px;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgb(13, 44, 94);
+  }
+  
+  .loginPanel button{
+      width:65%;
+      padding: 10px;
+      margin-top:30px;
+      margin-left: auto;
+      margin-right: auto;
+      display: block;
+      background-color:#f2d204;
+      border-radius: 10px;
+      transition: all 0.2s;
+  }
+  
+  .loginPanel a{
+    font-size: x-small;
+    display: block;
+    position: relative;
+    left:65%;
+    text-decoration: none;
+    margin-top: 3px;
+  }
+  .loginPanel h1{
+    display: block;
+    margin-top: -50px;
+    margin-bottom: 50px;
+    text-align: center;
+  }
+  .loginPanel a:hover{
+    text-decoration: underline;
+  }
+  .loginPanel button:hover{
+      cursor:pointer;
+      background-color: rgba(242, 210, 4,0.8);
+  }
+  .loginPanel input::placeholder{
+    color: grey;
+  }
+  
+  .loginPanel p{
+    display: inline-block;
+    font-size: x-small;
+    margin-bottom: 5px;
+    margin-left:19%;
+  }
+  
+  
+  
+  
