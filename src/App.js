@@ -1,23 +1,35 @@
-import logo from './logo.svg';
 import './App.css';
+import HomePage from './Pages/HomePage.js';
+import Header from './Pages/Header.js';
+import ForgotPassword from './Pages/ForgotPassword.js';
+import ChangePassword from './Pages/ChangePassword.js';
+import VerifyCard from './Pages/VerifyEmail.js';
+import {RouterProvider, createBrowserRouter} from "react-router-dom";
+import LogInHome from './Pages/LogInHome.js';
+const router = createBrowserRouter([
+  {
+    path:"/",
+    element:<HomePage/>,
+  },
+  {
+    path:"/verify",
+    element: <VerifyCard/>
+  },
+  {
+    path:"/changepassword",
+    element:<ChangePassword/>
+  },
+  {
+    path:"/home",
+    element:<LogInHome/>
+  }
+])
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header/>
+      <RouterProvider router={router}/>
     </div>
   );
 }

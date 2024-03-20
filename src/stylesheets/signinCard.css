@@ -1,0 +1,153 @@
+.SigninMain{
+    width: 100%;
+    background: transparent;
+    color: #fff;
+    position: relative;
+    padding: 10px 0 10px 0; 
+    border-radius: 30px;
+    display: inline-block;
+  }
+  
+  .SigninMain > *{
+    display: inline-block;
+  }
+  .SigninPanel{
+    display: block;
+    width:90%;
+    height: inherit;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .SigninPanel input{
+    display: block;
+    color: #fff;
+    border-radius: 10px;
+    padding: 10px;
+    width: 90%;
+    background-color: rgb(13, 44, 94);
+    box-sizing:border-box;
+    margin-bottom: 1%;
+    margin-left: 20px;
+  }
+  .SigninMain p{
+    display: block;
+    font-size: x-small;
+    margin-bottom: 4px;
+    margin-left:20px;
+  }
+  .SigninPanel button{
+      width:75%;
+      padding: 10px;
+      margin-top:20px;
+      margin-left: auto;
+      margin-right: auto;
+      display: block;
+      background-color:#f2d204;
+      border-radius: 8px;
+      transition: all 0.2s;
+  }
+  
+  .SigninPanel a{
+    font-size: x-small;
+    display: block;
+    position: relative;
+    left:65%;
+    text-decoration: none;
+    margin-top: 3px;
+  }
+  .SigninPanel h1{
+    display: block;
+    margin-top: -50px;
+    margin-bottom: 50px;
+    text-align: center;
+  }
+  .SigninPanel a:hover{
+    text-decoration: underline;
+  }
+  .SigninPanel button:hover{
+      cursor:pointer;
+      background-color: rgba(242, 210, 4,0.8);
+  }
+  .SigninPanel input::placeholder{
+    color: grey;
+  }
+
+.nameInput{
+    display: block;
+    width:100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.fname{
+    display: inline-block;
+    width: 50%;
+}
+.fname input{
+    width:80%;
+    box-sizing: border-box;
+    margin-left: 20px;
+}
+.empty{
+  outline: none;
+}
+.empty:focus{
+  border: 2px solid red;
+}
+.loader{
+  margin-top: -14%;;
+  float:left;
+}
+.lname{
+    width: 50%;
+    display: inline-block;
+}
+.lname input{
+    width: 80%;
+    box-sizing: border-box;
+    margin-left: 20px;
+}
+.phoneInput{
+    display: block;
+    width: 100%;
+}
+.phoneInput select{
+    padding: 10px;
+    display: inline-block;
+    background-color:rgb(13, 44, 94);
+    border-radius: 10px;
+    color:grey;
+    margin-left: 20px;
+}
+.phoneInput input{
+    width:71%;
+    box-sizing: border-box;
+    display: inline-block;
+}
+input[type="number"]::-webkit-inner-spin-button, input[type="button"]::-webkit-outer-spin-button{
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+.passwordInput{
+    width: 100%;
+}
+.epassword{
+    width: 45%;
+    display: inline-block;
+}
+.cpassword{
+    display: inline-block;
+    width: 49%;
+}
+.SigninPanel .message{
+    width: 100%;
+    color: rgb(229, 3, 3);
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    position: absolute;
+    top:-2%;
+    left: 0;
+    right: 0;
+    font-weight: bold;
+}
