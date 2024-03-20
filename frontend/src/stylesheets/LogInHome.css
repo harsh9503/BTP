@@ -1,0 +1,127 @@
+.btn-1{
+    color: white;
+    background-color: rgb(102, 51, 153);
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    transition: all ease-in 0.1s;
+    margin-top: 2.5%;
+}
+.btn-1:hover{
+    background-color: rgba(102, 51, 153,0.9);;
+}
+.btn-1:active{
+    background-color: rgba(102, 51, 153,0.7);
+}
+
+.site-motto{
+    display: flex;
+    color: white;
+    flex-direction: column;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    align-items: center;
+}
+
+.site-motto h1 > p{
+    display: inline-block;
+}
+.site-motto > p{
+    text-align: center;
+    color: rgb(214, 214, 214);
+}
+.img-dv{
+    height: 30%;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5%;
+}
+.img-dv img{
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    height: 40%;
+    width: 80%;
+    box-shadow: 0 0 50px rgb(169, 225, 222);
+}
+
+.designated{
+    margin-top: 0px;
+    margin-bottom: 0px;
+    background: linear-gradient(to right,rgb(19, 243, 255),rgba(19, 243, 255,1));
+    background-clip: text;
+    font-weight: 700;
+    -webkit-text-fill-color: transparent;
+}
+.btn-semisquare{
+    padding: 15px;
+    border-radius: 10px;
+    display: inline-block;
+    font-size: small;
+    font-weight: 600;
+}
+.btn{
+    margin: 10px 30px 30px 0px;
+    transition: all 0.25s;
+}
+.btn:hover{
+    filter: brightness(80%);
+}
+.btn:active{
+    filter:brightness(70%);
+}
+.yellow{
+    background-color: #f2d204;
+}
+.dv1{
+    display: flex;
+    width: 90%;
+    margin-top: 5%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.dv1-text{
+    color: white;
+    width: 50%;
+    display: block;
+}
+.dv1-text h1{
+    font-size: 40px;
+}
+
+.dv1-desc{
+    filter: brightness(70%);
+    line-height: 30px;
+    display: block;
+}
+.dv1 .btn-container{
+    display: flex;
+    width: 100%;
+    justify-content: baseline;
+}
+
+.dv1-code img{
+    width: 80%;
+    transform: scale(1);
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    opacity: 0;
+}
+.dv1-code{
+    display: block;
+    width: 50%;
+    margin-top: auto;
+    margin-bottom: auto;
+    -webkit-mask: radial-gradient(circle 70px, rgba(239, 222, 222, 0.404), transparent);
+}
+
+

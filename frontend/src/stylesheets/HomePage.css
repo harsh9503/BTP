@@ -1,0 +1,58 @@
+body{
+    background-color: black;
+}
+img{
+    display: inline-block;
+    height: 30%;
+    width: 30%;
+}
+
+.home-container{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.img-sign{
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.SignIn{
+    color: #fff;
+}
+.SignIn h2, h2+p{
+    text-align: center;
+}
+.SignIn p{
+    font-size: x-small;
+}
+.role-container{
+    width: fit-content;
+    background-color: rgb(13, 44, 94);
+    padding: 6px 10px;
+    border-radius: 30px;
+    margin-left: auto;
+    margin-right: auto;
+}
+input[type="radio"]{
+    position: absolute;
+    opacity: 0;
+}
+.role-container p{
+    display: inline-block;
+    margin: 0 0 0 0;
+    font-size: medium;
+    padding: 6px 12px;
+    border-radius: 20px;
+    transition: all 0.15s;
+    cursor: pointer;
+}
+.role-container p:hover{
+    background-color: black;
+}
+.role-container label:nth-child(1){
+    margin-right: 8px;
+}
+.role-container input:checked + p{
+    background-color: black;
+}
