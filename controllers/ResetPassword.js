@@ -3,6 +3,8 @@ const mailSender = require("../utils/mailSender");
 const bcrypt = require("bcryptjs");
 const crypto = require("crypto");
 
+//----------------------------------------------------------------------------------------------
+
 exports.resetPasswordToken = async (req, res) => {
 	try {
 		const email = req.body.email;
@@ -47,6 +49,7 @@ exports.resetPasswordToken = async (req, res) => {
 	}
 };
 
+//----------------------------------------------------------------------------------------------------
 exports.resetPassword = async (req, res) => {
 	try {
 		const { password, confirmPassword, token } = req.body;

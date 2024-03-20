@@ -1,7 +1,6 @@
-const { Mongoose } = require("mongoose");
 const Category = require("../models/Category");
 
-
+//------------------------------------------------------------------------------------
 exports.createCategory = async (req, res) => {
 	try {
 		const { name, description } = req.body;
@@ -26,6 +25,9 @@ exports.createCategory = async (req, res) => {
 		});
 	}
 };
+
+
+//---------------------------------------------------------------------------------
 
 exports.showAllCategories = async (req, res) => {
 	try {
