@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const mailSender = require("./utils/mailSender");
+const mailSender = require("../utils/mailSender");
 const emailTemplate = require("../mail/templates/emailVerificationTemplate");
 
 
@@ -31,7 +31,6 @@ async function sendVerificationEmail(email, otp) {
 	} 
     catch (error) {
 		console.log("Error occurred while sending email: ", error);
-		throw error;
 	}
 }
 

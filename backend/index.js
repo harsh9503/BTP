@@ -14,9 +14,7 @@ const {cloudinaryConnect } = require("./config/cloudinary");
 
 const userRoutes = require("./routes/User");
 const profileRoutes = require("./routes/Profile");
-const paymentRoutes = require("./routes/Payments");
 const courseRoutes = require("./routes/Course");
-const contactUsRoute = require("./routes/Contact");
 
 
 //database connect
@@ -44,16 +42,12 @@ cloudinaryConnect();
 app.use("/api/v1/auth", userRoutes);
 app.use("/api/v1/profile", profileRoutes);
 app.use("/api/v1/course", courseRoutes);
-app.use("/api/v1/payment", paymentRoutes);
-app.use("/api/v1/reach", contactUsRoute);
 
 //def route
 
 app.get("/", (req, res) => {
-	return res.json({
-		success:true,
-		message:'Server is running'
-	});
+    const htmlContent = "<h1>Welcome to My Server</h1><p>Server is running</p>";
+    return res.send(htmlContent);
 });
 
 app.listen(PORT, () => {
