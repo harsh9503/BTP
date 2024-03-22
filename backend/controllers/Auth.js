@@ -1,14 +1,19 @@
-const bcrypt = require("bcryptjs")
 const User = require("../models/User")
 const OTP = require("../models/OTP")
+const Profile = require("../models/Profile")
+
 const jwt = require("jsonwebtoken")
+const bcrypt = require("bcryptjs")
 const otpGenerator = require("otp-generator")
 const mailSender = require("../utils/mailSender")
+
 const { passwordUpdated } = require("../mail/templates/passwordUpdate")
-const Profile = require("../models/Profile")
+
 require("dotenv").config()
 
-// Signup Controller for Registering USers
+//-------------------------------------------------------------------------------------
+
+// Signup Controller
 
 exports.signup = async (req, res) => {
   try {
@@ -69,8 +74,6 @@ exports.signup = async (req, res) => {
     // Hash the password
     const hashedPassword = await bcrypt.hash(password, 10)
 
-   
-
     // Create the Additional Profile For User
     const profileDetails = await Profile.create({
       gender: null,
@@ -105,8 +108,9 @@ exports.signup = async (req, res) => {
     })
   }
 }
+//-----------------------------------------------------------------------------------
 
-// Login controller for authenticating users
+// Login controller
 exports.login = async (req, res) => {
   try {
     // Get email and password from request body
@@ -181,7 +185,7 @@ exports.login = async (req, res) => {
   }
 }
 
-
+//--------------------------------------------------------------------------------------
 // Send OTP For Email Verification
 exports.sendotp = async (req, res) => {
   try {
@@ -230,6 +234,7 @@ exports.sendotp = async (req, res) => {
   }
 }
 
+//----------------------------------------------------------------------------------
 // Controller for Changing Password
 exports.changePassword = async (req, res) => {
   try {

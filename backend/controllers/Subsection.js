@@ -2,6 +2,8 @@
 const Section = require("../models/Section")
 const SubSection = require("../models/SubSection")
 
+//-------------------------------------------------------------------------------------------
+
 exports.createSubSection = async (req, res) => {
     try {
        // Extract necessary information from the request body
@@ -53,6 +55,7 @@ exports.createSubSection = async (req, res) => {
     }
   }
   
+  //----------------------------------------------------------------------------------------------
   exports.updateSubSection = async (req, res) => {
     try {
       
@@ -107,6 +110,7 @@ exports.createSubSection = async (req, res) => {
     }
   }
   
+  //--------------------------------------------------------------------------------------------
   exports.deleteSubSection = async (req, res) => {
     try {
       const { subSectionId, sectionId } = req.body
