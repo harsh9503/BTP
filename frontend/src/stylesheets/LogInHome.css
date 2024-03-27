@@ -407,6 +407,7 @@ p > p{
 }
 .dv5-img{
     width: 50%;
+    position: relative;
 }
 .dv5-img img{
     width: 100%;
@@ -418,3 +419,63 @@ p > p{
     border-left: 2px dashed gray;
     margin: 10px 0px 10px 25px;
 }
+.img-info{
+    background-color: rgb(11, 67, 4);
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 75px;
+    width: 60%;
+    color: rgb(2, 147, 2);
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    bottom: 0px;
+}
+.img-info > *{
+    width: 40%;
+    height: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.img-info p{
+    font-size: small;
+    width: 50%;
+}
+.img-info bold{
+    color: white;
+    font-size: xx-large;
+}
+.vl{
+    width: 1px;
+    border-right: 2px solid chocolate;
+}
+.text-center{
+    text-align: center;
+}
+.dv6 p{
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.dv6 .imges{
+    display: flex;
+    justify-content: center;
+    width: fit-content;
+
+}
+.dv6 .imges :nth-child(-n+2){
+    margin-right: -5%;
+}
+@media  screen and (max-width: 800px) {
+    .dv6 .imges{
+        flex-direction: column;
+        margin-left: auto;
+        margin-right: auto;
+        flex-flow: column;
+        align-items: center;
+    }
+}   

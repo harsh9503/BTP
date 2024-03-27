@@ -4,6 +4,9 @@ import logo1 from "../Logo1.svg";
 import logo2 from "../Logo2.svg";
 import logo3 from "../Logo3.svg";
 import logo4 from "../Logo4.svg";
+import dv6_img1 from "../dv6-img1.png"
+import dv6_img2 from "../dv6-img2.png"
+import dv6_img3 from "../dv6-img3.png"
 import study_photo from "../study-photo.png";
 import { BsPeopleFill } from "react-icons/bs";
 import { MdPlayLesson } from "react-icons/md";
@@ -49,6 +52,9 @@ const LogInHome = ()=>{
         }
          return <p className={"l"+(idx+1)}>{jsx_code}</p>;
     })
+    const addCSS = ()=>{
+        console.log("HELLO");
+    }
     return (
     <div className="login-home">
         <button type="button" className="btn-1">
@@ -172,6 +178,20 @@ const LogInHome = ()=>{
                     </div>
                     <div className="dv5-img">
                         <img src={study_photo} alt="study-photo.png"></img>
+                        <div className="img-info">
+                            <div className="info-1"><bold>10</bold><p>YEARS EXPERIENCES</p></div>
+                            <div className="vl"></div>
+                            <div className="info-2"><bold>250</bold><p>TYPES OF COURSES</p></div>
+                        </div>
+                    </div>
+                </div>
+                <div className="dv6">
+                    <h1 className="text-center">Your swiss knife for <span className="designated">learning any language</span></h1>
+                    <p className="text-center">Using spin making learning multiple languages easy. With 20+ languages realistic voice-over, progress tracking, custom schedule and more.</p>
+                    <div className="imges">
+                        <img src={dv6_img1}></img>
+                        <img src={dv6_img2}></img>
+                        <img src={dv6_img3}></img>
                     </div>
                 </div>
             </div>
