@@ -83,7 +83,7 @@
     font-weight: 600;
 }
 .btn{
-    margin: 10px 30px 30px 0px;
+    margin: 20px 30px 0px 0px;
     transition: all 0.25s;
 }
 .btn:hover{
@@ -95,7 +95,7 @@
 .yellow{
     background-color: #f2d204;
 }
-.dv1,.dv2{
+.dv1,.dv2,.dv4{
     display: flex;
     width: 90%;
     margin-top: 5%;
@@ -113,16 +113,16 @@
     max-width: vmin;
     display: block;
 }
-.dv1-text h1, .dv2-text h1{
+.dv1-text h1, .dv2-text h1, .dv4-text h1{
     font-size: vmin;
 }
 
-.dv1-desc{
+.dv1-desc, .dv4-desc{
     filter: brightness(70%);
     line-height: 30px;
     display: block;
 }
-.dv1 .btn-container{
+.dv1 .btn-container, .dv4 .btn-container{
     display: flex;
     width: 100%;
     justify-content: baseline;
@@ -241,6 +241,7 @@ p > p{
     justify-content: space-between;
     padding: 0px 10%;
     margin-top: 5%;
+    z-index: 10;
 }
 .dv3 h1{
     margin-top: 10%;
@@ -311,10 +312,109 @@ p > p{
     position: absolute;
     background-color: #f2d204;
     top:0;
-    z-index: -10;
+    z-index: -1;
     left: 20px;
     top: 20px;
 }
+.dv3 .role-container{
+    color:white;
+    width: 50%;
+    display: flex;
+    justify-content: space-evenly;
+    border-radius: 10px;
+}
+.dv3 .role-container p{
+    font-size: 1.25vmax;
+    
+}
 .rect .course-info{
     border:none;
+}
+.new-dv{
+    width: 100%;
+    position: relative;
+    margin-top: -10%;
+    background-color: #ffffff;
+    z-index: -10;
+    height: 340px;
+    background-image: url("https://studynotion.tech/static/media/bghome.375fb56613960391899c.svg");
+}
+.btn-container{
+    width: fit-content;
+    height: fit-content;
+    box-sizing: border-box;
+}
+.btn-container :not(:nth-last-child(1)){
+    margin-right: 10px;
+}
+
+.new-dv-features{
+    width: fit-content;
+    top: 0;
+    bottom: 0;
+    margin: -10% auto;
+    left: 0;
+    right: 0;
+}
+.white-dv {
+    margin-top: 10%;
+    background-color: white;
+    height: fit-content;
+}
+
+.dv4{
+    height: 320px;
+    display: flex;
+}
+.dv4-text{
+    width: fit-content;
+    margin-top: 7.5%;
+}
+.dv4 h1{
+    margin: auto;
+}
+.dv4 .dv4-right{
+    margin-top: 7.5%;
+}
+.round{
+    height: 50px;
+    width: 50px;
+    display: flex;
+    border-radius: 100%;
+    background-color: #ffffff;
+    box-shadow: rgba(0, 0, 0, 0.2) 1px 1px 10px 1px;
+    justify-content: center;
+    align-items: center;
+    margin-right: 20px;
+}
+.flex-row img{
+    height: 50%;
+    width: 50%;
+}
+.row-desc{
+    width: auto;
+}
+.flex-row{
+    display: flex;
+    width: 450px;
+    justify-content: start;
+}
+.dv5{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.dv5-img{
+    width: 50%;
+}
+.dv5-img img{
+    width: 100%;
+    height: 100%;
+}
+.blank-dv{
+    width: 400px;
+    height: 50px;
+    border-left: 2px dashed gray;
+    margin: 10px 0px 10px 25px;
 }

@@ -1,6 +1,10 @@
 import "../stylesheets/LogInHome.css"
 import img from "../img-login.jpg"
-import img_code from "../code.png";
+import logo1 from "../Logo1.svg";
+import logo2 from "../Logo2.svg";
+import logo3 from "../Logo3.svg";
+import logo4 from "../Logo4.svg";
+import study_photo from "../study-photo.png";
 import { BsPeopleFill } from "react-icons/bs";
 import { MdPlayLesson } from "react-icons/md";
 import { IconContext } from "react-icons";
@@ -95,13 +99,81 @@ const LogInHome = ()=>{
                 <h1 className="white"> Unlock the <p className="designated inline">Power of Code</p></h1>
                 <p className="dv3 desc">Learn to Build Anything You Can Imagine</p>
             </div>
+            <div className="dv3 role-selector">
+                    <div className="role-container">
+                        <label htmlFor="Free"><input type="radio" id="Free" value="Free" name="type" ></input><p>Free</p></label>
+                        <label htmlFor="New to coding"><input type="radio" id="New to coding" value="New to coding" name="type" ></input><p>New to coding</p></label>
+                        <label htmlFor="Most popular"><input type="radio" id="Most popular" value="Most popular" name="type" ></input><p>Most popular</p></label>
+                        <label htmlFor="Skills paths"><input type="radio" id="Skills paths" value="Skills paths" name="type" ></input><p>Skills paths</p></label>
+                        <label htmlFor="Career Paths"><input type="radio" id="Career paths" value="Career paths" name="type" ></input><p>Career Paths</p></label>
+                    </div>
+                </div>
             <div className="dv3-cards">
                 <div className="dv3-designated">
-                <Card onclick={()=>console.log("HELLO;")} className="card1" heading="Learn HTML" description="This course covers the basic concepts of HTML including creating and structuring web pages, adding text, links, images, and more." level="Beginner" lessons="6"/>
+                <Card className="card1" heading="Learn HTML" description="This course covers the basic concepts of HTML including creating and structuring web pages, adding text, links, images, and more." level="Beginner" lessons="6"/>
                 <Card className="rect"/>
                 </div>
                 <Card className="card2" heading="Learn CSS" description="This course explores advanced topics in HTML5 and CSS3, including animation, transitions,and layout techniques." level="Beginner" lessons="6"/>
                 <Card className="card3" heading="Responsive Web design" description="This course teaches responsive web design techniques, allowing web pages to different devies and screen sizes." level="Beginner" lessons="6"/>
+            </div>
+            <div className="new-dv">
+            </div>
+            <div className="new-dv-features btn-container">
+                    <button type="button" className="btn btn-semisquare yellow">Explore full catalog &rarr;</button>
+                    <button type="button" className="btn btn-semisquare">Learn more</button>
+            </div>
+            <div className="white-dv">
+                <div className="dv4">
+                    <div className="dv4-text">
+                        <h1>Get the skills you need for a <span className="designated">job that is in demand.</span></h1>
+                    </div>
+                    <div className="dv4-right">
+                        <span className="dv4-desc">The modern StudyNotion is the dictation in its own terms. Today, to be a competitive specialist requires more than professional skills.</span>
+                        <div className="btn-container">
+                        <button className="btn btn-semisquare yellow">Learn More</button>
+                        </div>
+                    </div>
+                </div>
+                <div className="dv5">
+                    <div className="dv5-left">
+                        <div className="dv5-list">
+                            <div className="flex-row">
+                                <div className="round"><img src={logo1}></img></div>
+                                <div className="flex-column row-desc">
+                                    Leadership <br/>
+                                    Fully committed to the success company
+                                </div>
+                            </div>
+                            <div className="blank-dv"></div>
+                            <div className="flex-row">
+                                <div className="round"><img src={logo2}></img></div>
+                                <div className="flex-column row-desc">
+                                    Responsibility <br/>
+                                    Students will always be our top priority
+                                </div>
+                            </div>
+                            <div className="blank-dv"></div>
+                            <div className="flex-row">
+                                <div className="round"><img src={logo3}></img></div>
+                                <div className="flex-column row-desc">
+                                    Flexibility <br/>
+                                    The ability to switch is an important skills
+                                </div>
+                            </div>
+                            <div className="blank-dv"></div>
+                            <div className="flex-row">
+                                <div className="round"><img src={logo4}></img></div>
+                                <div className="flex-column row-desc">
+                                    Solve the problem <br/>
+                                    Code your way to a solution
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="dv5-img">
+                        <img src={study_photo} alt="study-photo.png"></img>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
