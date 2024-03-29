@@ -1,9 +1,13 @@
+body{
+    margin: 0;
+}
 .head{
     width: auto;
     background-color: rgb(9, 2, 58);
     display: flex;
+    position: sticky;
     justify-content: center;
-    height: 50px;
+    height: 60px;
     border-bottom: 1px solid rgba(245, 245, 245, 0.4);
 }
 #img-logo{
@@ -22,9 +26,11 @@
 
 .links button{
     color: white;
-    font-size: small;
+    font-size: medium;
     height: 100%;
-    padding: 18px;
+    display: inline-block;
+    box-sizing: border-box;
+    padding: 12px 25px;
     background-color: rgb(9, 2, 58);
     border: none;
 }
@@ -40,21 +46,32 @@
     height: 100%;
 }
 .features *{
-    margin: auto;
     display: inline-block;
-}
-.features *:hover{
-    color: white;
-    cursor: pointer;
+    margin: auto auto;
+    color: rgba(255, 249, 249,0.85);
 }
 
+.features svg{
+    display: block;
+    margin: auto auto;
+    color: inherit;
+}
+.features span{
+    height: 90%;
+    display: flex;
+}
+.features span:hover, .features span:hover > svg{
+    fill: white;
+    cursor: pointer;
+}
 .features button{
     padding: 10px;
-    color: grey;
     background-color: transparent;
-    border: 1px solid grey;
+    border: 1px solid rgba(255, 249, 249,0.85);
     border-radius: 10px;
 }
 .features button:hover{
     border: 1px solid white;
+    cursor: pointer;
+    color: white;
 }  

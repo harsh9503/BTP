@@ -8,13 +8,14 @@ import dv6_img1 from "../dv6-img1.png"
 import dv6_img2 from "../dv6-img2.png"
 import dv6_img3 from "../dv6-img3.png"
 import study_photo from "../study-photo.png";
+import dv7_img from "../dv7-img.png";
 import { BsPeopleFill } from "react-icons/bs";
 import { MdPlayLesson } from "react-icons/md";
+import { FaStar, FaRegStar } from "react-icons/fa";
 import { IconContext } from "react-icons";
-import { useEffect } from "react";
+import { useState,useEffect } from "react";
 const Card=(props)=>{
     useEffect(()=>{
-        console.log(document.getElementsByClassName(props.className));
         document.getElementsByClassName(props.className)[0].addEventListener("click",onclick);
     },[]);
     return(
@@ -33,7 +34,53 @@ const Card=(props)=>{
         </div>
     )
 }
+
+const ReviewCard = (props)=>{
+        const logoString = props.firstname && props.lastname?props.firstname.toUpperCase()[0] + props.lastname.toUpperCase()[0]:"";
+        const stars = [];
+        for(let i=1;i<=5;i++){
+            if(i <= props.stars) stars.push(<FaStar/>);
+            else stars.push(<FaRegStar/>)
+        }
+      return(
+        <div className="person-info">
+            <div className="div1">
+                <div className="person-name-logo">
+                    <div className="round">{logoString}</div>
+                </div>
+                <div className="person-data child-no-margin">
+                    <p className="reviews-name">{props.firstname+" "+props.lastname}</p>
+                    <p className="reviews-info">{props.description}</p>
+                </div>
+            </div>
+            <div className="review-content">
+                {props.review}
+            </div>
+            <div className="review-stars">
+                {props.stars}
+                <IconContext.Provider value={{size:"20px",style:{"display":"inline-block"}}}>
+                    {stars}
+                </IconContext.Provider>
+            </div>
+        </div>
+      )
+}
+let eidx = 4;
 const LogInHome = ()=>{
+    
+    const reviews = [
+    <ReviewCard firstname="Devarsh" lastname="Khare" description="SDE-III at Alphabet" review="It is the best course avaialable in the industry. Everyone should take its course for once at least." stars={4}/>,
+    <ReviewCard firstname="Dev" lastname="Kabra" description="SDE at Walmart" review="One of the best courses that I could find these days. Worth spending money on." stars={5}/>,
+    <ReviewCard firstname="Rishi" lastname="Pathak" description="Data anaylst @Wizzy.ai" review="It is the best course avaialable in the industry. Everyone should take its course for once at least." stars={4}/>,
+    <ReviewCard firstname="Chandan" lastname="Makwana" description="ML engineer at Kruskal" review="It is the best course avaialable in the industry. Everyone should take its course for once at least." stars={4}/>,
+    <ReviewCard firstname="Ritesh" lastname="Darji" description="SDE-III at Alphabet" review="It is the best course avaialable in the industry. Everyone should take its course for once at least." stars={5}/>,]
+    const [content, setContent] = useState(reviews);
+    useEffect(()=>{
+        //Slider
+        const slider = document.querySelector(".review-container");
+        const container = document.querySelector(".reviews");
+        container.appendChild(slider.cloneNode(true));
+    },[]);
     const keywords = ["using","namespace","std","return","int","template","typename","T"];
     const code = ["#include <iostream>","using namespace std;","template<typename> T;","T sum(T a, T b){","return a+b;","}","int main(){","int num1=1, num2=4;","int result = sum<int>(num1,num2);","return 0;","}"];
     const pcode = code.map((str,idx)=>{
@@ -52,9 +99,6 @@ const LogInHome = ()=>{
         }
          return <p className={"l"+(idx+1)}>{jsx_code}</p>;
     })
-    const addCSS = ()=>{
-        console.log("HELLO");
-    }
     return (
     <div className="login-home">
         <button type="button" className="btn-1">
@@ -122,6 +166,7 @@ const LogInHome = ()=>{
                 <Card className="card2" heading="Learn CSS" description="This course explores advanced topics in HTML5 and CSS3, including animation, transitions,and layout techniques." level="Beginner" lessons="6"/>
                 <Card className="card3" heading="Responsive Web design" description="This course teaches responsive web design techniques, allowing web pages to different devies and screen sizes." level="Beginner" lessons="6"/>
             </div>
+        </div>
             <div className="new-dv">
             </div>
             <div className="new-dv-features btn-container">
@@ -193,9 +238,26 @@ const LogInHome = ()=>{
                         <img src={dv6_img2}></img>
                         <img src={dv6_img3}></img>
                     </div>
+                    <button className="btn btn-semisquare yellow">Learn More</button>
                 </div>
             </div>
-        </div>
+            <div className="dv7 white">
+                <div className="dv7-img">
+                    <img src={dv7_img} alt="become instructor"></img>
+                </div>
+                <div>
+                    <h1>Become an <span className="designated">instructor</span></h1>
+                    <p>Instructors from around the world teach millions of students on StudyNotion. We provide the tools and skills to teach what you love.</p>
+                    <button className="btn btn-semisquare yellow">Start Teaching Today &rarr;</button>
+                </div>
+            </div>
+            <h1 className="text-center white margin-down-20px">Reviews from other learners</h1>
+            <div className="reviews">
+                <div className="review-container">
+                    {content}
+                    {content}
+                </div>
+            </div>
     </div>
     )
 }

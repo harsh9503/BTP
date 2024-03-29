@@ -16,8 +16,8 @@ const Header = (props)=>{
             </div>
             <div className="features">
                 <IconContext.Provider value={{color:"grey",size:"25px",className:"icons"}}>
-                <FaMagnifyingGlass/>
-                <MdOutlineShoppingCart/>
+                <span><FaMagnifyingGlass/></span>
+                <span><MdOutlineShoppingCart/></span>
                 </IconContext.Provider>
                 <button type="button">{props.page === "signin"?"Log In":"Sign In"}</button>
             </div>

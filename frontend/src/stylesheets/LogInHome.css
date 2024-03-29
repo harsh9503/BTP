@@ -80,14 +80,16 @@
     border-radius: 10px;
     display: inline-block;
     font-size: small;
-    font-weight: 600;
+    font-weight: 800;
 }
 .btn{
     margin: 20px 30px 0px 0px;
     transition: all 0.25s;
+    border: none;
 }
 .btn:hover{
-    filter: brightness(80%);
+    scale: 0.90;
+    cursor: pointer;
 }
 .btn:active{
     filter:brightness(70%);
@@ -397,9 +399,9 @@ p > p{
 .flex-row{
     display: flex;
     width: 450px;
-    justify-content: start;
+    justify-content: flex-start;
 }
-.dv5{
+.dv5,.dv7{
     width: 100%;
     display: flex;
     justify-content: center;
@@ -478,4 +480,94 @@ p > p{
         flex-flow: column;
         align-items: center;
     }
-}   
+}
+.dv7 > *{
+    width: 45%;
+}
+.dv7 img{
+    width: 80%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.dv7{
+    height: 600px;
+}
+.dv6 button{
+    margin: 20px auto 0px;
+    display: block;
+}
+.reviews{
+    height: auto;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: hidden;
+    white-space: nowrap;
+}
+@media  screen and (max-width:992px) {
+    .reviews{
+        flex-direction: column;
+        align-items: center;
+    }
+    .reviews .person-info{
+        margin: 20px;
+    }
+}
+.person-info{
+    width: 300px;
+    white-space: wrap;
+    height: fit-content;
+    max-height: fit-content;
+    color: #cee3fb;
+    background-color: #0f2136;
+    display: inline-block;
+    justify-content: space-evenly;
+    flex-direction: column;
+    padding: 10px;
+    margin: 0px 20px;
+    vertical-align: top;
+}
+.reviews{
+    display: flex;
+    margin-bottom: 3em;
+}
+.review-container{
+    display: block;
+    width: fit-content;
+    animation: slider 30s linear 0s infinite;
+}
+@keyframes slider {
+    from{transform: translateX(0%);}
+    to{transform: translateX(-100%);}
+}
+.person-info .div1{
+    display: flex;
+    align-items: center;
+}
+.div1 .round{
+    color: #00f;
+}
+.div1 .reviews-name{
+    font-size: small;
+}
+.div1 .reviews-info{
+    font-size: x-small;
+    color: #999;
+}
+.review-content{
+    font-weight: 300;
+    font-size: small;
+    margin: 20px 0px;
+}
+.review-stars :nth-child(1){
+    margin-left: 10px;
+}
+.review-stars{
+    display: flex;
+    align-items:center;
+    color: #f2d204;
+}
+.child-no-margin *{
+    margin: 0;
+}

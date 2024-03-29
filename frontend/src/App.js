@@ -4,6 +4,7 @@ import Header from './Pages/Header.js';
 import ForgotPassword from './Pages/ForgotPassword.js';
 import ChangePassword from './Pages/ChangePassword.js';
 import VerifyCard from './Pages/VerifyEmail.js';
+import CatalogMain from './Pages/Catalog.js';
 import {RouterProvider, createBrowserRouter} from "react-router-dom";
 import LogInHome from './Pages/LogInHome.js';
 const router = createBrowserRouter([
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
   {
     path:"/forgotpassword",
     element: <ForgotPassword/>
+  },
+  {
+    path:"/catalog/:course",
+    element: <CatalogMain/>
   }
 ])
 
