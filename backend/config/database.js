@@ -3,7 +3,7 @@ const mongoose= require("mongoose");
 require("dotenv").config();
 
 exports.connect= () =>{
-        mongoose.connect("mongodb+srv://Kadam:adminpass@cluster0.b5qwliy.mongodb.net/VirtuLearn?retryWrites=true&w=majority&appName=Cluster0")
+        mongoose.connect(process.env.MONGODB_URL)
         .then(()=>{
             console.log("DB CONNECTED SUCCESSFULLY")
         })
