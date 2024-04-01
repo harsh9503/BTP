@@ -9,57 +9,58 @@ const { convertSecondsToDuration } = require("../utils/secToDuration")
 
 
 //--------------------------------------------------------------------------------------------
-
 exports.updateProfile = async (req, res) => {
-    try {
+  try {
       const {
-        firstName = "",
-        lastName = "",
-        dateOfBirth = "",
-        about = "",
-        contactNumber = "",
-        gender = "",
-      } = req.body
-      const id = req.user.id
-  
+          firstName,
+          lastName,
+          dateOfBirth,
+          about,
+          contactNumber,
+          gender,
+      } = req.body;
+      const id = req.user.id;
+
       // Find the profile by id
-      const userDetails = await User.findById(id)
-      const profile = await Profile.findById(userDetails.additionalDetails)
-  
-      const user = await User.findByIdAndUpdate(id, {
-        firstName,
-        lastName,
-      })
-      await user.save()
-  
-      // Update the profile fields
-      profile.dateOfBirth = dateOfBirth
-      profile.about = about
-      profile.contactNumber = contactNumber
-      profile.gender = gender
-  
+      const userDetails = await User.findById(id);
+      const profile = await Profile.findById(userDetails.additionalDetails);
+
+      // Update user details
+      const updateFields = {};
+      if (firstName) updateFields.firstName = firstName;
+      if (lastName) updateFields.lastName = lastName;
+      const updatedUser = await User.findByIdAndUpdate(id, updateFields, {
+          new: true,
+      });
+
+      // Update profile fields
+      if (dateOfBirth) profile.dateOfBirth = dateOfBirth;
+      if (about) profile.about = about;
+      if (contactNumber) profile.contactNumber = contactNumber;
+      if (gender) profile.gender = gender;
+
       // Save the updated profile
-      await profile.save()
-  
+      await profile.save();
+
       // Find the updated user details
       const updatedUserDetails = await User.findById(id)
-        .populate("additionalDetails")
-        .exec()
-  
+          .populate("additionalDetails")
+          .exec();
+
       return res.json({
-        success: true,
-        message: "Profile updated successfully",
-        updatedUserDetails,
-      })
-    } catch (error) {
-      console.log(error)
+          success: true,
+          message: "Profile updated successfully",
+          updatedUserDetails,
+      });
+  } catch (error) {
+      console.log(error);
       return res.status(500).json({
-        success: false,
-        error: error.message,
-      })
-    }
+          success: false,
+          error: error.message,
+      });
   }
-  
+};
+
   //----------------------------------------------------------------------------------------
 
   exports.deleteAccount = async (req, res) => {
