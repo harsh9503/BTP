@@ -89,9 +89,8 @@ exports.signup = async (req, res) => {
       contactNumber,
       password: hashedPassword,
       accountType: accountType,
-      approved: approved,
       additionalDetails: profileDetails._id,
-      image: "",
+      image: `https://ui-avatars.com/api/?name=${firstName}+${lastName}`,
     })
 
     return res.status(200).json({
@@ -212,9 +211,8 @@ exports.sendotp = async (req, res) => {
     })
 
     const result = await OTP.findOne({ otp: otp })
-    console.log("Result is Generate OTP Func")
     console.log("OTP", otp)
-    console.log("Result", result)
+    console.log("Is reapeted ", result)
     while (result) {
       otp = otpGenerator.generate(6, {
         upperCaseAlphabets: false,
