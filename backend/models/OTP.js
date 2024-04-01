@@ -28,7 +28,7 @@ async function sendVerificationEmail(email, otp) {
 			"One Time Password Verification Email",
 			emailTemplate(otp)
 		);
-		console.log("Email sent successfully: ", mailResponse.response);
+		console.log("Email sent successfully: ", mailResponse);
 	} 
     catch (error) {
 		console.log("Error occurred while sending email: ", error);

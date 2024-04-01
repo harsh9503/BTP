@@ -1,11 +1,13 @@
 import {BarLoader} from 'react-spinners';
 import { useState,useRef } from 'react';
+import axios from "axios";
 import "../stylesheets/signinCard.css"
-function SignInCard(){
+function SignInCard(props){
     const [spin, setSpin] = useState(false);
     const [msg, setMsg] = useState("");
     const refs = useRef(new Array(6));
-    const HandleSignin=async()=>{
+    console.log(process.env.REACT_APP_BURL);
+    const HandleSignin=async()=>{ 
           for(let i=0;i<6;i++){
             if(refs.current[i].value === ""){
                 refs.current[i].className = 'empty';
@@ -20,9 +22,23 @@ function SignInCard(){
                 refs.current[5].focus();
             }
             setSpin(true);
-            //await fetch("http://localhost:3001/signin/");
+            localStorage.setItem("user-data",JSON.stringify({
+                "firstName":refs.current[0].value,
+                "lastName":refs.current[1].value,
+                "email":refs.current[2].value,
+                "contactNumber":refs.current[3].value,
+                "password":refs.current[4].value,
+                "accountType":props.role,
+                "confirmPassword":refs.current[5].value
+            }));
+            console.log(refs.current[2].value);
+            await axios.post(`${process.env.REACT_APP_BURL}/api/v1/auth/sendotp`,
+            {
+                email:refs.current[2].value
+            }).then(()=>{window.location.href = `/verify`}).catch((err)=>{
+                console.log(err);
+            });
             setSpin(false);
-            window.location.href = "/verify";
     }
     const checkCpass=()=>{
         if(refs.current[4].value !== refs.current[5].value){

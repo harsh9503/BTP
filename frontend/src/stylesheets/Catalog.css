@@ -1,0 +1,9 @@
+.catalog-head{
+    width: 100%;
+    height: fit-content;
+    max-height: 400px;
+    background-color: rgb(51, 39, 39);
+}
+.text-yellow{
+    color: yellow;
+}

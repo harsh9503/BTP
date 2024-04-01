@@ -1,14 +1,23 @@
 import {BarLoader} from 'react-spinners';
 import { useState } from 'react';
+import axios from 'axios';
 import "../stylesheets/VerifyEmail.css"
 function VerifyCard(){
     window.onload = () =>{
         document.getElementsByTagName("input")[0].focus();
     }
+    let code = new Array(6);
+
     const [spin, setSpin] = useState(false);
     const Verify=async()=>{
+          let int_code = code.join("");
           setSpin(true);
-          window.location.href = "/home";
+          axios.post(`${process.env.REACT_APP_BURL}/api/v1/auth/signup`,{
+            ...JSON.parse(localStorage.getItem("user-data")),...{otp:int_code}
+          }).then(()=>{
+            localStorage.removeItem("user-data");
+            window.location.href = "/home"
+          }).catch(err=>console.log(err));
           setSpin(false);
     }
     const handleCode = (event, idx)=>{
@@ -18,9 +27,9 @@ function VerifyCard(){
             return;
         }
         if(d.length > 1) event.target.value = event.nativeEvent.data;
+        code[idx] = event.target.value;
         if(idx < 5) document.getElementsByTagName("input")[idx+1].focus();
         else{
-            console.log(document.getElementsByTagName("button"));
             document.getElementsByTagName("button")[5].click();
         }
     }
@@ -38,7 +47,6 @@ function VerifyCard(){
                 <input type="text" placeholder="-" onChange={(event)=>handleCode(event,3)}></input>
                 <input type="text" placeholder="-" onChange={(event)=>handleCode(event,4)}></input>
                 <input type="text" placeholder="-" onChange={(event)=>handleCode(event,5)}></input>
-                
                 </div>
                 <button type="button" onClick={Verify}>Verify email</button>
             </div>

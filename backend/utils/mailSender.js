@@ -9,6 +9,9 @@ const mailSender = async (email, title, body) => {
                 auth:{
                     user: process.env.MAIL_USER,
                     pass: process.env.MAIL_PASS,
+                },
+                tls:{
+                    rejectUnauthorized: false
                 }
             })
 
@@ -20,9 +23,10 @@ const mailSender = async (email, title, body) => {
             })
             console.log(info);
             
-            return info;
+            return {"response":info};
     }
     catch(error) {
+        console.log("ERROR SENDING MAIL: ");
         console.log(error.message);
     }
 }

@@ -44,3 +44,26 @@ exports.showAllCategories = async (req, res) => {
 		});
 	}
 };
+
+exports.getCategoryInfo = async(req,res) =>{
+	try{
+		const {catalogId} = req.body;
+		if(!catalogId){
+			return res.status(403).json({
+				success: false,
+				message: "CatalogId undefined",
+			});
+		}
+		const category = await Category.findById(req.catalogId);
+		return res.status(200).json({
+			success:true,
+			data: category
+		})
+	}
+	catch(error){
+		return res.status(500).json({
+			success: false,
+			message: error.message,
+		});
+	}
+}

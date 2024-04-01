@@ -6,6 +6,7 @@ import ChangePassword from './Pages/ChangePassword.js';
 import VerifyCard from './Pages/VerifyEmail.js';
 import CatalogMain from './Pages/Catalog.js';
 import {RouterProvider, createBrowserRouter} from "react-router-dom";
+import CoursePage from './Pages/CoursePage.js';
 import LogInHome from './Pages/LogInHome.js';
 const router = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
   {
     path:"/catalog/:course",
     element: <CatalogMain/>
+  },
+  {
+    path:"/course/:courseId",
+    element: <CoursePage/>
   }
 ])
 
