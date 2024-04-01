@@ -301,3 +301,25 @@ exports.changePassword = async (req, res) => {
     })
   }
 }
+
+//----------------------------------------------------------------------------
+
+exports.logout = (req, res) => {
+  try {
+      // Clear the token from the user object
+      req.user.token = undefined;
+
+      // Clear the token cookie
+      res.clearCookie("token");
+
+      // Respond with a success message
+      return res.json({ success: true, message: "Logout successful" });
+  } catch (error) {
+      console.error(error);
+      return res.status(500).json({
+          success: false,
+          message: "Logout failure, please try again",
+      });
+  }
+};
+
