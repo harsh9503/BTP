@@ -18,8 +18,8 @@ exports.contactUsController = async (req, res) => {
       contactUsEmailadmin(email, firstname, lastname, message, phoneNo, countrycode)
     )
 
-    console.log("Email Res ", emailRes)
-    console.log("Email Res Admin", emailResadmin)
+    //console.log("Email Res ", emailRes)
+    //console.log("Email Res Admin", emailResadmin)
     return res.json({
       success: true,
       message: "Email send successfully",
