@@ -9,7 +9,6 @@ import CatalogMain from './Pages/Catalog.js';
 import {RouterProvider, createBrowserRouter} from "react-router-dom";
 import CoursePage from './Pages/CoursePage.js';
 import Home from './Pages/HomePage.js';
-import { useContext } from 'react';
 const router = createBrowserRouter([
   {
     path:"/signup",

@@ -19,11 +19,11 @@
     display: block;
     color: #fff;
     border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.3);
     padding: 10px;
     width: 100%;
     background-color: rgb(13, 44, 94);
     box-sizing:border-box;
-    margin-bottom: 1%;
   }
   .SigninMain p{
     display: block;
@@ -40,22 +40,12 @@
       transition: all 0.2s;
   }
   
-  .SigninPanel a{
-    font-size: x-small;
-    display: block;
-    position: relative;
-    left:65%;
-    text-decoration: none;
-    margin-top: 3px;
-  }
+
   .SigninPanel h1{
     display: block;
     margin-top: -50px;
     margin-bottom: 50px;
     text-align: center;
-  }
-  .SigninPanel a:hover{
-    text-decoration: underline;
   }
   .SigninPanel button:hover{
       cursor:pointer;
@@ -72,13 +62,12 @@
 }
 .nameInput > *{
   width: 45%;
-
 }
 .empty{
   outline: none;
 }
 .empty:focus{
-  border: 2px solid red;
+  border: 1px solid red;
 }
 .loader{
   float:left;
@@ -118,9 +107,6 @@ input[type="number"]::-webkit-inner-spin-button, input[type="button"]::-webkit-o
     text-align: center;
     margin-left: auto;
     margin-right: auto;
-    position: absolute;
-    top:-2%;
-    left: 0;
-    right: 0;
+    display: block;
     font-weight: bold;
 }

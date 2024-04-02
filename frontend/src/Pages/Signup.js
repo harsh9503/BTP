@@ -11,7 +11,7 @@ const SignupPage = (props)=>{
                 <p>Build Skills for today, tomorrow, and beyond. Education to future-proof your career.</p>
                 <div className="role-selector">
                     <div className="role-container">
-                        <label htmlFor="student"><input type="radio" id="student" value="student" name="role" onChange={()=> setRole("Student")}></input><p>Student</p></label>
+                        <label htmlFor="student"><input type="radio" id="student" value="student" name="role" onChange={()=> setRole("Student")} defaultChecked></input><p>Student</p></label>
                         <label htmlFor="instructor"><input type="radio" id="instructor" value="instructor" name="role" onChange={()=> setRole("Instructor")}></input><p>Instructor</p></label>
                     </div>
                 </div>

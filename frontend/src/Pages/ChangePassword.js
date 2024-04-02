@@ -64,7 +64,6 @@ function ChangePassword(){
             }
           }
         if(count == 6){
-            console.log("GO");
             const ele = document.getElementsByClassName("btn")[0];
             ele.disabled = false;
             ele.addEventListener("click",HandleSubmit);

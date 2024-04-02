@@ -2,11 +2,14 @@ import {BarLoader} from 'react-spinners';
 import { useState,useRef } from 'react';
 import axios from "axios";
 import "../stylesheets/signinCard.css"
+import { GoCheckCircleFill } from "react-icons/go";
+import { GoXCircleFill } from "react-icons/go";
+import { IconContext } from 'react-icons';
 function SignInCard(props){
     const [spin, setSpin] = useState(false);
-    const [msg, setMsg] = useState("");
     const refs = useRef(new Array(6));
-    console.log(process.env.REACT_APP_BURL);
+    const ch = useRef(new Array(6));
+    let err = 0;
     const HandleSignin=async()=>{ 
           for(let i=0;i<6;i++){
             if(refs.current[i].value === ""){
@@ -16,10 +19,13 @@ function SignInCard(props){
                 return;
                 }
             }
-            if(refs.current[4].value !== refs.current[5].value){
-                setMsg("Both passwords do not match!");
-                refs.current[5].className = 'empty';
+            if(err < 5){
+                refs.current[4].focus();
+                return;
+            }
+            else if(err == 5){
                 refs.current[5].focus();
+                return;
             }
             setSpin(true);
             localStorage.setItem("user-data",JSON.stringify({
@@ -31,7 +37,6 @@ function SignInCard(props){
                 "accountType":props.role,
                 "confirmPassword":refs.current[5].value
             }));
-            console.log(refs.current[2].value);
             await axios.post(`${process.env.REACT_APP_BURL}/api/v1/auth/sendotp`,
             {
                 email:refs.current[2].value
@@ -40,13 +45,41 @@ function SignInCard(props){
             });
             setSpin(false);
     }
-    const checkCpass=()=>{
-        if(refs.current[4].value !== refs.current[5].value){
-            setMsg("Both passwords do not match!");
+    const check = () =>{
+        const pass = refs.current[4].value;
+         let b = new Array(6);
+         let format = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+          for(let i=0;i<pass.length;i++){
+             if(/[a-z]/.test(pass[i])){
+                b[0]=true;
+             }
+             else if(/[A-Z]/.test(pass[i])){
+                b[2]=true;
+             }
+             else if(format.test(pass[i])){
+                b[1]=true;
+             }
+             else if(/[1-9]/.test(pass[i])){
+                b[4]=true;
+             }
+          }
+          if(pass.length >= 8) b[3] = true;
+          let count = 0;
+          if(pass.length>0 && pass === refs.current[5].value) b[5] = true;
+          for(let i=0;i<6;i++){
+            if(b[i] === true){
+                count++;
+                ch.current[i].setAttribute("aria-satisfied","true");
+            }
+            else{
+                err = i;
+                ch.current[i].setAttribute("aria-satisfied","false");
+            }
+          }
+        if(count == 6){
+            err = 6;
         }
-        else{
-            setMsg("");
-        }
+
     }
     return (
         <>
@@ -76,13 +109,46 @@ function SignInCard(props){
                 <div className='passwordInput'>
                 <div className='epassword'>
                 <p>Create Password *</p> 
-                <input type="password" placeholder="Enter Password" ref={(element)=>refs.current[4]=(element)}></input>
+                <input type="password" placeholder="Enter Password" onChange={check} ref={(element)=>refs.current[4]=(element)}></input>
                 </div>
                 <div className='cpassword'>
                 <p>Confirm Password *</p>
-                <input type="password" onChange={checkCpass} placeholder="Enter Password" ref={(element)=>refs.current[5]=(element)}></input>
+                <input type="password" onChange={()=>{check()}} placeholder="Enter Password" ref={(element)=>refs.current[5]=(element)}></input>
                 </div>
-                <p className='message'>{msg}</p>
+                </div>
+                <div className='checks'>
+                    <IconContext.Provider value={{className:'ic'}}>
+                    <div className='1' aria-satisfied="false" ref={(element)=>ch.current[0]=element}>
+                        <GoCheckCircleFill/>
+                        <GoXCircleFill/>
+                        <p>One lowercase character</p>
+                    </div>
+                    <div className='2' aria-satisfied="false" ref={(element)=>ch.current[1]=element}>
+                        <GoCheckCircleFill/>
+                        <GoXCircleFill/>
+                        <p>One special character</p>
+                    </div>
+                    <div className='3' aria-satisfied="false" ref={(element)=>ch.current[2]=element}>
+                        <GoCheckCircleFill/>
+                        <GoXCircleFill/>
+                        <p>One uppercase character</p>
+                    </div>
+                    <div className='4' aria-satisfied="false" ref={(element)=>ch.current[3]=element}>
+                        <GoCheckCircleFill/>
+                        <GoXCircleFill/>
+                        <p>8 character minimum</p>
+                    </div>
+                    <div className='5' aria-satisfied="false" ref={(element)=>ch.current[4]=element}>
+                        <GoCheckCircleFill/>
+                        <GoXCircleFill/>
+                        <p>One number</p>
+                    </div>
+                    <div className='6' aria-satisfied="false" ref={(element)=>ch.current[5]=element}>
+                        <GoCheckCircleFill/>
+                        <GoXCircleFill/>
+                        <p>Password matching</p>
+                    </div>
+                    </IconContext.Provider>
                 </div>
                 <button type="button" onClick={HandleSignin}>Create Account</button>
             </div>
