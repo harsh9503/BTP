@@ -11,8 +11,11 @@ body{
     border-bottom: 1px solid rgba(245, 245, 245, 0.4);
 }
 #img-logo{
-    height: auto;
-    width: auto;
+    height: 220px;
+    width: 15%;
+    background: transparent;
+    margin-top: -80px;
+    margin-left: 30px;
 }
 .links{
     position: relative;
