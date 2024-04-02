@@ -1,9 +1,7 @@
 .SigninMain{
     width: 100%;
     background: transparent;
-    color: #fff;
     position: relative;
-    padding: 10px 0 10px 0; 
     border-radius: 30px;
     display: inline-block;
   }
@@ -13,10 +11,8 @@
   }
   .SigninPanel{
     display: block;
-    width:90%;
+    width:80%;
     height: inherit;
-    margin-left: auto;
-    margin-right: auto;
   }
   
   .SigninPanel input{
@@ -24,24 +20,20 @@
     color: #fff;
     border-radius: 10px;
     padding: 10px;
-    width: 90%;
+    width: 100%;
     background-color: rgb(13, 44, 94);
     box-sizing:border-box;
     margin-bottom: 1%;
-    margin-left: 20px;
   }
   .SigninMain p{
     display: block;
     font-size: x-small;
     margin-bottom: 4px;
-    margin-left:20px;
   }
   .SigninPanel button{
-      width:75%;
+      width:100%;
       padding: 10px;
       margin-top:20px;
-      margin-left: auto;
-      margin-right: auto;
       display: block;
       background-color:#f2d204;
       border-radius: 8px;
@@ -74,19 +66,13 @@
   }
 
 .nameInput{
-    display: block;
+    display: flex;
+    justify-content: space-between;
     width:100%;
-    margin-left: auto;
-    margin-right: auto;
 }
-.fname{
-    display: inline-block;
-    width: 50%;
-}
-.fname input{
-    width:80%;
-    box-sizing: border-box;
-    margin-left: 20px;
+.nameInput > *{
+  width: 45%;
+
 }
 .empty{
   outline: none;
@@ -95,32 +81,22 @@
   border: 2px solid red;
 }
 .loader{
-  margin-top: -14%;;
   float:left;
 }
-.lname{
-    width: 50%;
-    display: inline-block;
-}
-.lname input{
-    width: 80%;
-    box-sizing: border-box;
-    margin-left: 20px;
-}
 .phoneInput{
-    display: block;
+    display: flex;
     width: 100%;
+    justify-content: space-between;
 }
 .phoneInput select{
     padding: 10px;
     display: inline-block;
     background-color:rgb(13, 44, 94);
     border-radius: 10px;
-    color:grey;
-    margin-left: 20px;
+    color: inherit;
 }
 .phoneInput input{
-    width:71%;
+    width:80%;
     box-sizing: border-box;
     display: inline-block;
 }
@@ -129,15 +105,12 @@ input[type="number"]::-webkit-inner-spin-button, input[type="button"]::-webkit-o
   -moz-appearance: none;
 }
 .passwordInput{
+  display: flex;
     width: 100%;
+    justify-content: space-between;
 }
-.epassword{
-    width: 45%;
-    display: inline-block;
-}
-.cpassword{
-    display: inline-block;
-    width: 49%;
+.passwordInput > *{
+  width: 45%;
 }
 .SigninPanel .message{
     width: 100%;

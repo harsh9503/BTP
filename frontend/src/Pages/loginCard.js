@@ -12,7 +12,6 @@ function LoginCard(){
         {spin &&<BarLoader color="#36d7b7" width={"100%"}/>}
         <div className="loginMain">
             <div className="loginPanel">
-                <h1>Login</h1>
                 <p>Email Address: *</p>
                 <input type="text" placeholder="Enter Email Address"></input>
                 <p>Password: *</p>

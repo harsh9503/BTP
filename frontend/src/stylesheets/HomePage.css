@@ -10,29 +10,33 @@ img{
 .home-container{
     width: 100%;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
+    padding-top: 5vh;
 }
-
+.home-container > *{
+    width: 40%;
+}
 .img-sign{
     margin-top: auto;
     margin-bottom: auto;
 }
 .SignIn{
-    color: #fff;
-}
-.SignIn h2, h2+p{
-    text-align: center;
+    color: #cbeef9;
 }
 .SignIn p{
-    font-size: x-small;
+    font-size: 15px;
+}
+.SignIn > h1{
+    margin: 0px 0px;
+    font-size: 30px;
+    font-weight: bos;
 }
 .role-container{
     width: fit-content;
     background-color: rgb(13, 44, 94);
-    padding: 6px 10px;
+    padding: 3px 4px;
     border-radius: 30px;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 20px 0px;
 }
 input[type="radio"]{
     position: absolute;
@@ -40,9 +44,9 @@ input[type="radio"]{
 }
 .role-container p{
     display: inline-block;
-    margin: 0 0 0 0;
+    margin: 0;
     font-size: medium;
-    padding: 6px 12px;
+    padding: 6px 18px;
     border-radius: 20px;
     transition: all 0.15s;
     cursor: pointer;

@@ -1,5 +1,6 @@
 import './App.css';
-import HomePage from './Pages/HomePage.js';
+import LoginPage from './Pages/LogIn.js';
+import SignupPage from './Pages/Signup.js';
 import Header from './Pages/Header.js';
 import ForgotPassword from './Pages/ForgotPassword.js';
 import ChangePassword from './Pages/ChangePassword.js';
@@ -7,12 +8,18 @@ import VerifyCard from './Pages/VerifyEmail.js';
 import CatalogMain from './Pages/Catalog.js';
 import {RouterProvider, createBrowserRouter} from "react-router-dom";
 import CoursePage from './Pages/CoursePage.js';
-import LogInHome from './Pages/LogInHome.js';
+import Home from './Pages/HomePage.js';
+import { useContext } from 'react';
 const router = createBrowserRouter([
   {
-    path:"/",
-    element:<HomePage/>,
+    path:"/signup",
+    element:<SignupPage request="signup"/>
   },
+  {
+    path:"/login",
+    element:<LoginPage request="login"/>
+  }
+  ,
   {
     path:"/verify",
     element: <VerifyCard/>
@@ -22,8 +29,8 @@ const router = createBrowserRouter([
     element:<ChangePassword/>
   },
   {
-    path:"/home",
-    element:<LogInHome/>
+    path:"/",
+    element:<Home/>
   },
   {
     path:"/forgotpassword",
@@ -38,7 +45,14 @@ const router = createBrowserRouter([
     element: <CoursePage/>
   }
 ])
-
+const HeaderRouter = createBrowserRouter([
+    {
+      element: <Header page="signin"/>
+    },
+    {
+      path: "/signin"
+    }
+])
 function App() {
   return (
     <div className="App">
