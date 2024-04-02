@@ -70,7 +70,7 @@ exports.getCategoryInfo = async(req,res) =>{
 	}
 }
 
-//-----------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------
 
 exports.categoryPageDetails = async (req, res) => {
     try {
@@ -106,6 +106,55 @@ exports.categoryPageDetails = async (req, res) => {
         })
       }
       
+	  res.status(200).json({
+        success: true,
+        data: selectedCategory,
+      })
+
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        message: "Internal server error",
+        error: error.message,
+      })
+    }
+  }
+
+  //------------------------------------------------------------------------------------------------
+
+  exports.topSellingcouses = async (req, res) => {
+    try {
+		const allCategories = await Category.find()
+        .populate({
+          path: "courses",
+          match: { status: "Published" },
+          populate: {
+            path: "instructor",
+        },
+        })
+        .exec()
+
+		const allCourses = allCategories.flatMap((category) => category.courses)
+		// Calculate number of units sold for each course
+		const coursesWithSoldCount = allCourses.map(course => {
+					return {
+						...course.toObject(),
+						sold: course.studentsEnrolled.length  // Number of enrolled students indicates units sold
+					};
+		});
+		
+		// Sort courses based on units sold
+		const mostSellingCourses = coursesWithSoldCount
+			.sort((a, b) => b.sold - a.sold)
+			.slice(0, 10);
+		
+		// Return the most selling courses
+		res.status(200).json({
+			success: true,
+			message: "Top selling courses retrieved successfully",
+			courses: mostSellingCourses
+		});
+		
     } catch (error) {
       return res.status(500).json({
         success: false,
