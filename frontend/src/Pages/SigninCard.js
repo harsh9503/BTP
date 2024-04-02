@@ -34,7 +34,7 @@ function SignInCard(props){
                 "email":refs.current[2].value,
                 "contactNumber":refs.current[3].value,
                 "password":refs.current[4].value,
-                "accountType":props.role,
+                "accountType":props.role?props.role:"Student",
                 "confirmPassword":refs.current[5].value
             }));
             await axios.post(`${process.env.REACT_APP_BURL}/api/v1/auth/sendotp`,

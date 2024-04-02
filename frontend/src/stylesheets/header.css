@@ -3,7 +3,7 @@ body{
 }
 .head{
     width: auto;
-    background-color: rgb(9, 2, 58);
+    background-color: rgba(28, 25, 41, 0.992);
     display: flex;
     position: sticky;
     justify-content: center;
@@ -31,7 +31,7 @@ body{
     display: inline-block;
     box-sizing: border-box;
     padding: 12px 25px;
-    background-color: rgb(9, 2, 58);
+    background: transparent;
     border: none;
 }
 .links button:hover{
@@ -69,6 +69,24 @@ body{
     background-color: transparent;
     border: 1px solid rgba(255, 249, 249,0.85);
     border-radius: 10px;
+}
+.features .user-profile img{
+    width: 70%;
+    border-radius: 30px;
+    display: block;
+    margin-top: auto;
+    margin-bottom: auto;
+    border: 1px solid transparent;
+}
+.features .user-profile{
+    border: none;
+    padding: 0px;
+}
+.user-profile:hover img{
+    border: 1px solid white;
+}
+.features .user-profile:hover{
+    border: none;
 }
 .features button:hover{
     border: 1px solid white;

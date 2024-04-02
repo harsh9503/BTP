@@ -46,16 +46,18 @@ const router = createBrowserRouter([
 ])
 const HeaderRouter = createBrowserRouter([
     {
-      element: <Header page="signin"/>
+      path:"*",
+      element: <Header page="login"/>
     },
     {
-      path: "/signin"
+      path: "/signup",
+      element: <Header page="signup"/>
     }
 ])
 function App() {
   return (
     <div className="App">
-      <Header/>
+      <RouterProvider router={HeaderRouter}/>
       <RouterProvider router={router}/>
     </div>
   );

@@ -1,6 +1,5 @@
 .loginMain{
     width: 100%;
-    background: black;
     color: #fff;
     display: flex;
     flex-direction: row;
@@ -18,15 +17,22 @@
   .loginPanel input{
     display: block;
     color: #fff;
+    border: none;
+    border-bottom: 1px solid var(--border-bottom-color);
     border-radius: 10px;
     padding: 10px;
     width: 100%;
     margin-left: auto;
     margin-right: auto;
     box-sizing: border-box;
-    background-color: rgb(13, 44, 94);
+    background-color: var(--background-color);
   }
   
+  .loginPanel input:focus{
+    outline: none;
+    border-bottom: 1px solid var(--border-bottom-hover);
+  }
+
   .loginPanel button{
       width:100%;
       padding: 10px;

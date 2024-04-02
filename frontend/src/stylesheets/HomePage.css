@@ -1,5 +1,7 @@
-body{
-    background-color: black;
+:root{
+    --border-bottom-color:rgba(255,255,255,0.3);
+    --border-bottom-hover: rgba(255,255,255,0.8);
+    --background-color: rgb(30, 30, 52); 
 }
 img{
     display: inline-block;
@@ -10,17 +12,23 @@ img{
 .home-container{
     width: 100%;
     display: flex;
+    position: relative;
     justify-content: center;
     padding-top: 5vh;
 }
+.loader{
+    position: absolute !important;
+    left: 0;
+    top: 0;
+  }
 .home-container > *{
     width: 40%;
 }
 .img-sign{
-    margin-top: 10%;
+    margin-top: 5%;
 }
 .SignIn{
-    color: #cbeef9;
+    color: white;
 }
 .SignIn p{
     font-size: 15px;
@@ -32,8 +40,9 @@ img{
 }
 .role-container{
     width: fit-content;
-    background-color: rgb(13, 44, 94);
+    background-color: var(--background-color);
     padding: 3px 4px;
+    border-bottom: 1px solid var(--border-bottom-color);
     border-radius: 30px;
     margin: 20px 0px;
 }

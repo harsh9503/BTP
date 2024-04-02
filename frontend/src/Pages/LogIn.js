@@ -1,9 +1,8 @@
 
 import LoginCard from "./loginCard";
 import "../stylesheets/HomePage.css"
-import img from "../study-photo.jpg"
+import img from "../img-log.jpg"
 import { useState } from "react";
-import { none } from "ramda";
 const LoginPage = ()=>{
     const [role, setRole] = useState("");
     return (
@@ -18,7 +17,7 @@ const LoginPage = ()=>{
                     </div>
                 </div><LoginCard role={role}/>
             </div>
-            <img src={img} alt="" className="img-sign"></img>
+            <img src={img} alt="" className="img-login"></img>
         </div>
     )
 }
