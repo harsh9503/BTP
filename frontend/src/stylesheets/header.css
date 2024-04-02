@@ -38,9 +38,33 @@ body{
     cursor: pointer;
     background-color: rgb(8, 2, 44);
 }
-
+.dropdown{
+    display: inline-block;
+    position: relative;
+}
+.dropdown-content{
+    display: none;
+    position: absolute;
+    left: -50px;
+    width: 270px;
+    height: auto;
+    text-align: center;
+    background-color:white;
+    border-radius: 10px;
+}
+.dropdown-content button{
+    width: 100%;
+    color: black;
+    border-radius: 10px;
+}
+.dropdown-content button:hover{
+    background-color:rgba(51, 43, 43, 0.167);
+}
+.dropdown:hover .dropdown-content{
+    display: block;
+} 
 .features{
-    width:150px;
+    width: 150px;
     margin-right: 5%;
     display: flex;
     height: 100%;

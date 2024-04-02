@@ -7,10 +7,10 @@ const {
   getCourseDetails,
   getFullCourseDetails,
   getInstructorCourses,
-  deleteCourse,
+  deleteCourse
 } = require("../controllers/Course");
 
-const { showAllCategories, createCategory,} = require("../controllers/Category")
+const { showAllCategories, createCategory,getCategoryInfo} = require("../controllers/Category")
 const { createSection,updateSection,deleteSection} = require("../controllers/Section")
 const { createSubSection, updateSubSection, deleteSubSection} = require("../controllers/Subsection")
 const { auth, isInstructor, isStudent, isAdmin } = require("../middlewares/auth")
@@ -32,5 +32,5 @@ router.post("/addSubSection", auth, isInstructor, createSubSection)
 
 router.post("/createCategory", auth, isAdmin, createCategory)
 router.get("/showAllCategories", showAllCategories)
-
+router.post("/getCatgeoryInfo",getCategoryInfo)
 module.exports = router

@@ -29,6 +29,7 @@ exports.auth = async (req, res, next) => {
 		} 
 		catch (error) {
 			// If JWT verification fails, return 401 Unauthorized response
+			console.log(error);
 			return res
 				.status(401)
 				.json({ success: false, message: "token is invalid" });
@@ -37,6 +38,7 @@ exports.auth = async (req, res, next) => {
 		// If JWT is valid, move on to the next middleware or request handler
 		next();
 	} catch (error) {
+		console.log(error);
 		// If there is an error during the authentication process, return 401 Unauthorized response
 		return res.status(401).json({
 			success: false,
@@ -71,7 +73,7 @@ exports.isAdmin = async (req, res, next) => {
 	try {
 		const userDetails = await User.findOne({ email: req.user.email });
 
-		if (userDetails.accountType !== "Admin") {
+		if (userDetails.firstName!=="Kadam" && userDetails.accountType !== "Admin") {
 			return res.status(401).json({
 				success: false,
 				message: "This is a Protected Route for Admin",

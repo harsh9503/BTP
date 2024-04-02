@@ -4,9 +4,22 @@ import { useCookies } from "react-cookie";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { IconContext } from "react-icons";
+import { useEffect,useState } from "react";
+import axios from "axios";
 const Header = (props)=>{
     const [cookie,setCookie] =useCookies(['user-data']);
-    console.log(cookie["user-data"]);
+    const [cats, setCats] = useState([]);
+    useEffect(()=>{
+        axios.get(`${process.env.REACT_APP_BURL}/api/v1/course/showAllCategories`).then((res)=>{
+            const jsx = res.data.data.map((ele,idx)=>{
+                return <button type="button" id={idx} onClick={()=>window.location.href="/catalog/"+ele._id}>{ele.name}</button>
+            })
+            setCats(jsx);
+            console.log(jsx);
+        }).catch((err)=>{
+            console.log(err);
+        })
+    },[]);
     const handleClick = ()=>{
         if(cookie["user-data"]){
             window.location.href = "/profile";
@@ -24,7 +37,13 @@ const Header = (props)=>{
             <img alt="logo" src={logo} id="img-logo"></img>
             <div className="links">
             <button type="button">Home</button>
-            <button type="button">Catalog</button>
+            <div className="dropdown">
+            <button type="button" className="catalog">Catalog
+            </button>
+                <div className="dropdown-content">
+                    {cats}
+                </div>
+            </div>
             <button type="button">About Us</button>
             <button type="button">Contact Us</button>
             </div>

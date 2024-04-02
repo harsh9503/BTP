@@ -54,7 +54,7 @@ exports.getCategoryInfo = async(req,res) =>{
 				message: "CatalogId undefined",
 			});
 		}
-		const category = await Category.findById(req.catalogId);
+		const category = await Category.findById(catalogId);
 		return res.status(200).json({
 			success:true,
 			data: category
