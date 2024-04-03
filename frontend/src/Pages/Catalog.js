@@ -1,21 +1,50 @@
+import { useEffect, useState } from "react";
 import "../stylesheets/Catalog.css";
 import {useParams} from "react-router-dom";
+import CourseCard from "./Coursecard";
+import axios from "axios";
 const CatalogMain=()=>{
-        const {course} = useParams();
-        
+        const {catalogId} = useParams();
+        const [course,setCourse] = useState("");
+        const [desc, setDesc] = useState("");
+        useEffect(()=>{
+            axios.post(`${process.env.REACT_APP_BURL}/api/v1/course/getCategoryInfo`,{
+                catalogId:catalogId
+            }).then((res)=>{
+                setCourse(res.data.data.name);
+                setDesc(res.data.data.description);
+            }).catch((err)=>{
+                console.log(err);
+            })
+        },[]);
     return (
         <>
-
         <div className="catalog-head">
             <div className="catalog-head-desc">
                 <div className="div-path white">
-                    {`Home / Catalog / `}<span className="text-yellow">{course[0].toUpperCase() +course.slice(1)}</span>
+                    {`Home / Catalog / `}<span className="text-yellow">{course?course[0].toUpperCase() +course.slice(1):""}</span>
                 </div>
                 <h2 className="white">{course}</h2>
-                <p></p>
+                <p className="catalog-description">{desc}</p>
             </div>
             <div className="catalog-head-related">
-
+            </div>
+        </div>
+        <div className="catalog-main">
+            <h2>Courses to get you started</h2>
+            <div className="course-category">
+                <input type="radio" id="Most-popular" name="course-category" value="Most-popular" defaultChecked></input><label htmlFor="Most-popular"><p>Most Popular</p></label>
+                <input type="radio" id="New" name="course-category" value="New"></input><label htmlFor="New"><p>New</p></label>
+                <input type="radio" id="Trending" name="course-category" value="Trending"></input><label htmlFor="Trending"><p>Trending</p></label>
+                <hr></hr>
+            </div>
+            <div className="courses">
+            <CourseCard thumbnail="https://platinumlist.net/guide/wp-content/uploads/2023/03/IMG-worlds-of-adventure.webp" coursename="Complete C++ Placement series with Love Babbar fully free" instructor="Kadam Darji" stars={5} price={2000}/>
+            <CourseCard thumbnail="https://platinumlist.net/guide/wp-content/uploads/2023/03/IMG-worlds-of-adventure.webp" coursename="Complete C++ Placement series" instructor="Kadam Darji" stars={4} price={2000}/>
+            <CourseCard thumbnail="https://platinumlist.net/guide/wp-content/uploads/2023/03/IMG-worlds-of-adventure.webp" coursename="Complete C++ Placement series" instructor="Kadam Darji" stars={3} price={2000}/>
+            <CourseCard thumbnail="https://platinumlist.net/guide/wp-content/uploads/2023/03/IMG-worlds-of-adventure.webp" coursename="Complete C++ Placement series" instructor="Kadam Darji" stars={2} price={2000}/>
+            <CourseCard thumbnail="https://platinumlist.net/guide/wp-content/uploads/2023/03/IMG-worlds-of-adventure.webp" coursename="Complete C++ Placement series" instructor="Kadam Darji" stars={1} price={2000}/>
+            <CourseCard thumbnail="https://platinumlist.net/guide/wp-content/uploads/2023/03/IMG-worlds-of-adventure.webp" coursename="Complete C++ Placement series" instructor="Kadam Darji" stars={1} price={2000}/>
             </div>
         </div>
         </>

@@ -32,5 +32,5 @@ router.post("/addSubSection", auth, isInstructor, createSubSection)
 
 router.post("/createCategory", auth, isAdmin, createCategory)
 router.get("/showAllCategories", showAllCategories)
-router.post("/getCatgeoryInfo",getCategoryInfo)
+router.post("/getCategoryInfo",getCategoryInfo)
 module.exports = router

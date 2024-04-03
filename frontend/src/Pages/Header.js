@@ -15,7 +15,6 @@ const Header = (props)=>{
                 return <button type="button" id={idx} onClick={()=>window.location.href="/catalog/"+ele._id}>{ele.name}</button>
             })
             setCats(jsx);
-            console.log(jsx);
         }).catch((err)=>{
             console.log(err);
         })
