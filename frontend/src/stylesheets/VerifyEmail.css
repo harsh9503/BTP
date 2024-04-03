@@ -10,7 +10,7 @@
     top: 100px;
     display: flex;
     flex-direction: row;
-    padding: 100px 0 100px 0; 
+    padding: 100px 30px 100px 30px; 
     border-radius: 30px;
   }
   
@@ -45,6 +45,7 @@
       background-color:#f2d204;
       border-radius: 10px;
       transition: all 0.2s;
+      font-size: smaller;
   }
   
   .verifyPanel a{
@@ -74,7 +75,7 @@
   
   .verifyPanel p{
     display: inline-block;
-    font-size: small;
+    font-size:medium;
     margin-left: auto;
     margin-right: auto;
   }

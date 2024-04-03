@@ -106,7 +106,7 @@ const Home = ()=>{
         </button>
         <div className="site-motto">
             <h1>Empower Your Future with <p className="designated">Coding Skills</p></h1>
-            <p>With our coding courses, you can learn at your own pace, from anywhere in the world, and get access to a wealth of resources, including hands-on projects, quizzes, and personalized  feerback from instructors.</p>
+            <p>With our coding courses, you can learn at your own pace, from anywhere in the world, and get access to a wealth of resources, including hands-on projects, quizzes, and personalized  feedcback from instructors.</p>
             <div className="btn-box"><button type="button" className="btn btn-semisquare yellow">Learn More</button>
             <button type="button" className="btn btn-semisquare">Book a Demo</button></div>
         </div>
@@ -179,7 +179,7 @@ const Home = ()=>{
                         <h1>Get the skills you need for a <span className="designated">job that is in demand.</span></h1>
                     </div>
                     <div className="dv4-right">
-                        <span className="dv4-desc">The modern StudyNotion is the dictation in its own terms. Today, to be a competitive specialist requires more than professional skills.</span>
+                        <span className="dv4-desc">The modern VirtuLearn is the dictation in its own terms. Today, to be a competitive specialist requires more than professional skills.</span>
                         <div className="btn-container">
                         <button className="btn btn-semisquare yellow">Learn More</button>
                         </div>
@@ -247,7 +247,7 @@ const Home = ()=>{
                 </div>
                 <div>
                     <h1>Become an <span className="designated">instructor</span></h1>
-                    <p>Instructors from around the world teach millions of students on StudyNotion. We provide the tools and skills to teach what you love.</p>
+                    <p>Instructors from around the world teach millions of students on VirtuLearn. We provide the tools and skills to teach what you love.</p>
                     <button className="btn btn-semisquare yellow">Start Teaching Today &rarr;</button>
                 </div>
             </div>

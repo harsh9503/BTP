@@ -47,7 +47,7 @@ function ForgotPassword(){
         <div className="ForgotMain">
             <div className="ForgotPanel">
                 <h2>Reset your password</h2>
-                <p>Have no fear. We'll email you instructions to reset <br/> your password. If you don't have access to your <br/> email we can try account recovery</p>
+                <p>Have no fear. We'll email you instructions to reset your password. <br/> If you don't have access to your email we can try account recovery</p>
                 <p>Email Address: *</p>
                 <input type="text" placeholder="Enter Email Address" ref={email}></input>
                 <button type="button" onClick={HandleSubmit}>Sign in</button>

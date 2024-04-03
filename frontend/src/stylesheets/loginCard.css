@@ -26,6 +26,7 @@
     margin-right: auto;
     box-sizing: border-box;
     background-color: var(--background-color);
+    font-size: smaller;
   }
   
   .loginPanel input:focus{
@@ -43,10 +44,11 @@
       background-color:#f2d204;
       border-radius: 10px;
       transition: all 0.2s;
+      font-size: smaller;
   }
   
   .loginPanel a{
-    font-size: x-small;
+    font-size: smaller;
     display: block;
     margin-left: auto;
     width: fit-content;
@@ -70,7 +72,7 @@
   
   .loginPanel p{
     display: inline-block;
-    font-size: x-small;
+    font-size:smaller;
     margin-bottom: 2px;
   }
   

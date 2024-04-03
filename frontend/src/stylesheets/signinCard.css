@@ -31,13 +31,13 @@
   }
   .SigninMain p{
     display: block;
-    font-size: x-small;
+    font-size:smaller;
     margin-bottom: 4px;
   }
   .SigninPanel button{
       width:100%;
       padding: 10px;
-      margin-top:20px;
+      margin-top:15px;
       display: block;
       background-color:#f2d204;
       border-radius: 8px;
