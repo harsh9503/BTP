@@ -444,7 +444,6 @@ exports.updateCourseProgress = async (req, res) => {
   const userId = req.user.id
 
   try {
-
     const subsection = await SubSection.findById(subsectionId)
     if (!subsection) {
       return res.status(404).json({ 
