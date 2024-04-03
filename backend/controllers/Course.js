@@ -76,12 +76,6 @@ exports.createCourse = async (req, res) => {
                 thumbnail,
                 process.env.FOLDER_NAME
               )
-              console.log(thumbnailImage);
-                // Create a new course with the given details
-              res.status(200).json({
-                "hello":"World"
-              });
-              return;
               const newCourse = await Course.create({
                 courseName,
                 courseDescription,

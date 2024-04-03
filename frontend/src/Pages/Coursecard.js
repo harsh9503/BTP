@@ -1,12 +1,16 @@
 import { FaStar, FaRegStar } from "react-icons/fa";
 import { IconContext } from "react-icons";
 import "../stylesheets/Coursecard.css"
+import { useEffect } from "react";
 const CourseCard = (props)=>{
     const stars = [];
     for(let i=1;i<=5;i++){
         if(i <= props.stars) stars.push(<FaStar/>);
         else stars.push(<FaRegStar/>)
     }
+    useEffect(()=>{
+        document.getElementsByClassName("course-main")[props.index].addEventListener("click",props.onclick);
+    },[]);
     return(
         <div className="course-main">
             <div className="div-thumbnail">

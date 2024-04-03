@@ -14,8 +14,8 @@ const CatalogMain=()=>{
             }).then((res)=>{
                 setCatalog(res.data.data.name);
                 setDesc(res.data.data.description);
-                setCourse(res.data.data.courses.map((c)=>{
-                    return <CourseCard thumbnail={c.thumbnail} coursename={c.courseName} instructor={c.instructor.firstName+" "+c.instructor.lastName} price={c.price} />
+                setCourse(res.data.data.courses.map((c,idx)=>{
+                    return <CourseCard index={idx} onclick={()=>{window.location.href = "/course/"+c._id}} thumbnail={c.thumbnail} coursename={c.courseName} instructor={c.instructor.firstName+" "+c.instructor.lastName} price={c.price} />
                 }))
             }).catch((err)=>{
                 console.log(err);
