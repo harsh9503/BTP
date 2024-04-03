@@ -8,6 +8,7 @@ const CatalogMain=()=>{
         const [catalog,setCatalog] = useState("");
         const [desc,setDesc] = useState("");
         const [course,setCourse] = useState([]);
+        const [ratings, setRatings] = useState([]);
         useEffect(()=>{
             axios.post(`${process.env.REACT_APP_BURL}/api/v1/course/getCategoryInfo`,{
                 catalogId:catalogId
@@ -15,11 +16,23 @@ const CatalogMain=()=>{
                 setCatalog(res.data.data.name);
                 setDesc(res.data.data.description);
                 setCourse(res.data.data.courses.map((c,idx)=>{
-                    return <CourseCard index={idx} onclick={()=>{window.location.href = "/course/"+c._id}} thumbnail={c.thumbnail} coursename={c.courseName} instructor={c.instructor.firstName+" "+c.instructor.lastName} price={c.price} />
+                    return <CourseCard stars={idx<ratings.length?ratings[idx]:0} index={idx} onclick={()=>{window.location.href = "/course/"+c._id}} thumbnail={c.thumbnail} coursename={c.courseName} instructor={c.instructor.firstName+" "+c.instructor.lastName} price={c.price} />
                 }))
             }).catch((err)=>{
                 console.log(err);
             })
+            const requests = new Array(course.length);
+            for(let i=0;i<course.length;i++){
+                requests[i] = axios.get(`${process.env.REACT_APP_BURL}/api/v1/course/getAverageRating`,{
+                    courseId : course[i]._id
+                }).then((res)=>{
+                    const fetched = ratings.length?ratings:new Array(course.length);
+                    fetched[i] = res.data.averageRating;
+                    console.log(fetched);
+                    setRatings(fetched);
+                })
+            }
+            Promise.all(requests);
         },[]);
     return (
         <>
