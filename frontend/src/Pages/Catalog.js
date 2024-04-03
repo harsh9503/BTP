@@ -5,14 +5,18 @@ import CourseCard from "./Coursecard";
 import axios from "axios";
 const CatalogMain=()=>{
         const {catalogId} = useParams();
-        const [course,setCourse] = useState("");
-        const [desc, setDesc] = useState("");
+        const [catalog,setCatalog] = useState("");
+        const [desc,setDesc] = useState("");
+        const [course,setCourse] = useState([]);
         useEffect(()=>{
             axios.post(`${process.env.REACT_APP_BURL}/api/v1/course/getCategoryInfo`,{
                 catalogId:catalogId
             }).then((res)=>{
-                setCourse(res.data.data.name);
+                setCatalog(res.data.data.name);
                 setDesc(res.data.data.description);
+                setCourse(res.data.data.courses.map((c)=>{
+                    return <CourseCard thumbnail={c.thumbnail} coursename={c.courseName} instructor={c.instructor.firstName+" "+c.instructor.lastName} price={c.price} />
+                }))
             }).catch((err)=>{
                 console.log(err);
             })
@@ -22,9 +26,9 @@ const CatalogMain=()=>{
         <div className="catalog-head">
             <div className="catalog-head-desc">
                 <div className="div-path white">
-                    {`Home / Catalog / `}<span className="text-yellow">{course?course[0].toUpperCase() +course.slice(1):""}</span>
+                    {`Home / Catalog / `}<span className="text-yellow">{catalog?catalog[0].toUpperCase() +catalog.slice(1):""}</span>
                 </div>
-                <h2 className="white">{course}</h2>
+                <h2 className="white">{catalog}</h2>
                 <p className="catalog-description">{desc}</p>
             </div>
             <div className="catalog-head-related">
@@ -39,12 +43,7 @@ const CatalogMain=()=>{
                 <hr></hr>
             </div>
             <div className="courses">
-            <CourseCard thumbnail="https://platinumlist.net/guide/wp-content/uploads/2023/03/IMG-worlds-of-adventure.webp" coursename="Complete C++ Placement series with Love Babbar fully free" instructor="Kadam Darji" stars={5} price={2000}/>
-            <CourseCard thumbnail="https://platinumlist.net/guide/wp-content/uploads/2023/03/IMG-worlds-of-adventure.webp" coursename="Complete C++ Placement series" instructor="Kadam Darji" stars={4} price={2000}/>
-            <CourseCard thumbnail="https://platinumlist.net/guide/wp-content/uploads/2023/03/IMG-worlds-of-adventure.webp" coursename="Complete C++ Placement series" instructor="Kadam Darji" stars={3} price={2000}/>
-            <CourseCard thumbnail="https://platinumlist.net/guide/wp-content/uploads/2023/03/IMG-worlds-of-adventure.webp" coursename="Complete C++ Placement series" instructor="Kadam Darji" stars={2} price={2000}/>
-            <CourseCard thumbnail="https://platinumlist.net/guide/wp-content/uploads/2023/03/IMG-worlds-of-adventure.webp" coursename="Complete C++ Placement series" instructor="Kadam Darji" stars={1} price={2000}/>
-            <CourseCard thumbnail="https://platinumlist.net/guide/wp-content/uploads/2023/03/IMG-worlds-of-adventure.webp" coursename="Complete C++ Placement series" instructor="Kadam Darji" stars={1} price={2000}/>
+            {course}
             </div>
         </div>
         </>

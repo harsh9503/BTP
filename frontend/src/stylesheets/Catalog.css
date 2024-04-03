@@ -6,6 +6,7 @@
     margin-left: auto;
     margin-right: auto;
     height: fit-content;
+    min-height: 200px;
     max-height: 400px;
     display: flex;
     background-color: rgb(23, 24, 50);

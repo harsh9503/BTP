@@ -11,7 +11,6 @@ const { convertSecondsToDuration } = require("../utils/secToDuration")
 //--------------------------------------------------------------------------------------
 exports.createCourse = async (req, res) => {
         try{
-            
           const userId = req.user.id
             
           let {
@@ -26,8 +25,7 @@ exports.createCourse = async (req, res) => {
           } = req.body
 
           // Get thumbnail image from request files
-          const thumbnail = req.files.thumbnailImage
-
+          const thumbnail = req.files.thumbnailImage;
           const tag = JSON.parse(_tag)
           const instructions = JSON.parse(_instructions)
 
@@ -37,11 +35,12 @@ exports.createCourse = async (req, res) => {
               !courseDescription ||
               !whatYouWillLearn ||
               !price ||
-              !tag.length ||
+              !tag ||
               !thumbnail ||
               !category ||
-              !instructions.length
+              !instructions
             ) {
+              console.log(req.body);
               return res.status(400).json({
                 success: false,
                 message: "All Fields are Mandatory",
@@ -71,14 +70,18 @@ exports.createCourse = async (req, res) => {
                 message: "Category Details Not Found",
               })
             }
-
+            
               // Upload the Thumbnail to Cloudinary
               const thumbnailImage = await uploadImageToCloudinary(
                 thumbnail,
                 process.env.FOLDER_NAME
               )
-
+              console.log(thumbnailImage);
                 // Create a new course with the given details
+              res.status(200).json({
+                "hello":"World"
+              });
+              return;
               const newCourse = await Course.create({
                 courseName,
                 courseDescription,
@@ -87,7 +90,7 @@ exports.createCourse = async (req, res) => {
                 price,
                 tag,
                 category: categoryDetails._id,
-                thumbnail: thumbnailImage.secure_url,
+                thumbnail: thumbnailImage,
                 status: status,
                 instructions,
               })
@@ -126,7 +129,7 @@ exports.createCourse = async (req, res) => {
             })
 
         }
-        catch{
+        catch(error){
             console.error(error)
             res.status(500).json({
               success: false,

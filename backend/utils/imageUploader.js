@@ -1,5 +1,5 @@
-const cloudinary = require('cloudinary').v2
-
+const cloudinary = require('cloudinary')
+require('dotenv').config();
 
 exports.uploadImageToCloudinary  = async (file, folder, height, quality) => {
     const options = {folder};
@@ -9,7 +9,18 @@ exports.uploadImageToCloudinary  = async (file, folder, height, quality) => {
     if(quality) {
         options.quality = quality;
     }
+    options.timeout = 60000;
     options.resource_type = "auto";
-
-    return await cloudinary.uploader.upload(file.tempFilePath, options);
+    cloudinary.config({
+        cloud_name: process.env.CLOUD_NAME,
+        api_secret: process.env.API_SECRET,
+        api_key: 6699345876422
+    })
+    try {
+        await cloudinary.uploader.upload(file.tempFilePath,options);
+    return result.secure_url
+    }
+    catch(err){
+        console.log(err);
+    }
 }

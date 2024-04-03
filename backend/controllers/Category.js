@@ -56,7 +56,7 @@ exports.getCategoryInfo = async(req,res) =>{
 				message: "CatalogId undefined",
 			});
 		}
-		const category = await Category.findById(catalogId);
+		const category = await Category.findById(catalogId).populate({path:"courses",populate:{path:"instructor"}});
 		return res.status(200).json({
 			success:true,
 			data: category

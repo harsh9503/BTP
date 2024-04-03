@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-
+const net = require("net");
 const fileUpload = require("express-fileupload");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
@@ -16,7 +16,7 @@ const userRoutes = require("./routes/User");
 const profileRoutes = require("./routes/Profile");
 const courseRoutes = require("./routes/Course");
 
-
+net.setDefaultAutoSelectFamily(false);
 //database connect
 database.connect();
 //middlewares
@@ -49,7 +49,6 @@ app.get("/", (req, res) => {
     const htmlContent = "<h1>Welcome to My Server</h1><p>Server is running</p>";
     return res.send(htmlContent);
 });
-
 app.listen(PORT, () => {
 	console.log(`App is running at ${PORT}`)
 })
