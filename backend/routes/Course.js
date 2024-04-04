@@ -7,10 +7,12 @@ const {
   getCourseDetails,
   getFullCourseDetails,
   getInstructorCourses,
-  deleteCourse
+  deleteCourse,
+  editCourse,
+  updateCourseProgress
 } = require("../controllers/Course");
 
-const { showAllCategories, createCategory,getCategoryInfo} = require("../controllers/Category")
+const { showAllCategories, createCategory,getCategoryInfo,categoryPageDetails,topSellingcouses} = require("../controllers/Category")
 const { createSection,updateSection,deleteSection} = require("../controllers/Section")
 const { createSubSection, updateSubSection, deleteSubSection} = require("../controllers/Subsection")
 const { auth, isInstructor, isStudent, isAdmin } = require("../middlewares/auth")
@@ -18,10 +20,12 @@ const {getAverageRating, createRating, getAllRating} = require("../controllers/R
 
 router.post("/createCourse", auth, isInstructor, createCourse)
 router.get("/getAllCourses", getAllCourses)
-router.post("/getCourseDetails", getCourseDetails)
-router.post("/getFullCourseDetails", auth, getFullCourseDetails)
+router.get("/getCourseDetails", getCourseDetails)
+router.get("/getFullCourseDetails", auth, getFullCourseDetails)
 router.get("/getInstructorCourses", auth, isInstructor, getInstructorCourses)
-router.delete("/deleteCourse", deleteCourse)
+router.delete("/deleteCourse",auth, deleteCourse)
+router.put("/editCourse", auth, isInstructor, editCourse)
+router.put("/updateCourseProgress",auth,updateCourseProgress)
 
 router.post("/addSection", auth, isInstructor, createSection)
 router.post("/updateSection", auth, isInstructor, updateSection)
@@ -34,8 +38,9 @@ router.post("/addSubSection", auth, isInstructor, createSubSection)
 router.post("/createCategory", auth, isAdmin, createCategory)
 router.get("/showAllCategories", showAllCategories)
 router.post("/getCategoryInfo",getCategoryInfo)
+router.get("/topselling",topSellingcouses)
+router.get("/getCategoryPageDetails",categoryPageDetails)
 
 router.post("/getAverageRating",getAverageRating)
 router.post("/createRating",auth,createRating)
-router.get("/getAllRatings",getAllRating);
 module.exports = router

@@ -286,7 +286,7 @@ exports.getFullCourseDetails = async (req, res) => {
   }
 }
 
-//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------
 exports.getInstructorCourses = async (req, res) => {
   try {
     // Get the instructor ID from the authenticated user or request body
@@ -367,7 +367,7 @@ exports.deleteCourse = async (req, res) => {
   }
 }
 
-//--------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------
 exports.editCourse = async (req, res) => {
   try {
     const { courseId } = req.body
@@ -382,7 +382,6 @@ exports.editCourse = async (req, res) => {
 
     // If Thumbnail Image is found, update it
     if (req.files) {
-      console.log("thumbnail update")
       const thumbnail = req.files.thumbnailImage
       const thumbnailImage = await uploadImageToCloudinary(
         thumbnail,
@@ -434,6 +433,54 @@ exports.editCourse = async (req, res) => {
       success: false,
       message: "Internal server error",
       error: error.message,
+    })
+  }
+}
+
+//-------------------------------------------------------------------------------------
+
+exports.updateCourseProgress = async (req, res) => {
+  const { courseId, subsectionId } = req.body
+  const userId = req.user.id
+
+  try {
+    const subsection = await SubSection.findById(subsectionId)
+    if (!subsection) {
+      return res.status(404).json({ 
+        error: "Invalid subsection" 
+      })
+    }
+
+    let courseProgress = await CourseProgress.findOne({
+      courseID: courseId,
+      userId: userId,
+    })
+
+    if (!courseProgress) {
+      return res.status(404).json({
+        success: false,
+        message: "Course progress Does Not Exist",
+      })
+    } else {
+      if (courseProgress.completedVideos.includes(subsectionId)) {
+        return res.status(400).json({ 
+          error: "Subsection already completed" 
+        })
+      }
+
+      courseProgress.completedVideos.push(subsectionId)
+    }
+
+    await courseProgress.save()
+
+    return res.status(200).json({ 
+      message: "Course progress updated" 
+    })
+
+  } catch (error) { 
+    console.error(error)
+    return res.status(500).json({ 
+      error: "Internal server error" 
     })
   }
 }

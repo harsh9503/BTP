@@ -9,7 +9,7 @@ exports.uploadImageToCloudinary  = async (file, folder, height, quality) => {
     if(quality) {
         options.quality = quality;
     }
-    options.timeout = 60000;
+    //options.timeout = 60000;
     options.resource_type = "auto";
     try {
         const result = await cloudinary.uploader.upload(file.tempFilePath,options);
