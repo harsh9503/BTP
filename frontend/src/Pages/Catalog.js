@@ -8,7 +8,6 @@ const CatalogMain=()=>{
         const [catalog,setCatalog] = useState("");
         const [desc,setDesc] = useState("");
         const [course,setCourse] = useState([]);
-        const [ratings, setRatings] = useState([]);
         useEffect(async ()=>{
             const res = await axios.post(`${process.env.REACT_APP_BURL}/api/v1/course/getCategoryInfo`,{
                 catalogId:catalogId
@@ -18,18 +17,11 @@ const CatalogMain=()=>{
             setCatalog(res.data.data.name);
             setDesc(res.data.data.description);
             const temp = res.data.data.courses.map((c,idx)=>{
-                return <CourseCard _id={c._id} price={c.price} index={idx} coursename={c.courseName} thumbnail={c.thumbnail} instructor={c.instructor.firstName+" "+c.instructor.lastName}/>
+                console.log(c);
+                return <CourseCard rcount={c.ratingAndReviews.length} _id={c._id} price={c.price} index={idx} coursename={c.courseName} thumbnail={c.thumbnail} instructor={c.instructor.firstName+" "+c.instructor.lastName}/>
             });
+            console.log(temp);
             setCourse(temp);
-            // const fetchedCourses = res.data.data.courses;
-            // const requests = new Array(fetchedCourses.length);
-            // for(let i=0;i<fetchedCourses.length;i++){
-            //     requests[i] = new Promise(async(res,rej)=>{
-            //     })
-            // }
-            // Promise.all(requests).then((res)=>{
-            //     console.log(res);
-            // });
         },[]);
     return (
         <>

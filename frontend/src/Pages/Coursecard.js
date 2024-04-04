@@ -5,13 +5,15 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 const CourseCard = (props)=>{
     const stars = [];
-    const [rating, setRating] = useState(0);
+    const [rating, setRating] = useState(undefined);
      for(let i=1;i<=5;i++){
         if(i <= rating) stars.push(<FaStar/>);
         else stars.push(<FaRegStar/>)
     }
     useEffect(()=>{
-        document.getElementsByClassName("course-main")[props.index].addEventListener("click",props.onclick);
+        document.getElementsByClassName("course-main")[props.index].addEventListener("click",()=>{
+            window.location.href = "/courses/"+props._id;
+        });
         axios.post(`${process.env.REACT_APP_BURL}/api/v1/course/getAverageRating`,{
             courseId : props._id
         }).then((result)=>{
@@ -27,10 +29,11 @@ const CourseCard = (props)=>{
                 <p className="course-name">{props.coursename}</p>
                 <p className="instructor-name">{props.instructor}</p>
                 <div className="review-stars">
-                <p>{rating}</p>
+                <p>{rating||"No reviews"}</p>
                 <IconContext.Provider value={{size:"20px",style:{"display":"inline-block",marginRight:"5px"}}}>
-                    {stars}
+                    {rating?stars:""}
                 </IconContext.Provider>
+                <p>{`(${props.rcount})`}</p>
                 </div>
                 <div className="course-price">{"Rs. "+props.price.toLocaleString('en-US')}</div>
             </div>

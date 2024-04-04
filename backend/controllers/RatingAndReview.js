@@ -81,6 +81,12 @@ exports.getAverageRating = async (req, res) => {
                     }
                 }
             ])
+            //Lag testing
+            await new Promise((res)=>{
+                setTimeout(()=>{
+                    res();
+                },2000);
+            });
             if(result.length > 0) {
 
                 return res.status(200).json({
