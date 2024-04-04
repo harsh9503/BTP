@@ -1,15 +1,22 @@
 import { FaStar, FaRegStar } from "react-icons/fa";
 import { IconContext } from "react-icons";
 import "../stylesheets/Coursecard.css"
-import { useEffect } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 const CourseCard = (props)=>{
     const stars = [];
-    for(let i=1;i<=5;i++){
-        if(i <= props.stars) stars.push(<FaStar/>);
+    const [rating, setRating] = useState(0);
+     for(let i=1;i<=5;i++){
+        if(i <= rating) stars.push(<FaStar/>);
         else stars.push(<FaRegStar/>)
     }
     useEffect(()=>{
         document.getElementsByClassName("course-main")[props.index].addEventListener("click",props.onclick);
+        axios.post(`${process.env.REACT_APP_BURL}/api/v1/course/getAverageRating`,{
+            courseId : props._id
+        }).then((result)=>{
+            setRating(result.data.averageRating);
+        })
     },[]);
     return(
         <div className="course-main">
@@ -20,7 +27,7 @@ const CourseCard = (props)=>{
                 <p className="course-name">{props.coursename}</p>
                 <p className="instructor-name">{props.instructor}</p>
                 <div className="review-stars">
-                <p>{props.stars}</p>
+                <p>{rating}</p>
                 <IconContext.Provider value={{size:"20px",style:{"display":"inline-block",marginRight:"5px"}}}>
                     {stars}
                 </IconContext.Provider>

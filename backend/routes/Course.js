@@ -14,7 +14,7 @@ const { showAllCategories, createCategory,getCategoryInfo} = require("../control
 const { createSection,updateSection,deleteSection} = require("../controllers/Section")
 const { createSubSection, updateSubSection, deleteSubSection} = require("../controllers/Subsection")
 const { auth, isInstructor, isStudent, isAdmin } = require("../middlewares/auth")
-const {getAverageRating, createRating} = require("../controllers/RatingAndReview");
+const {getAverageRating, createRating, getAllRating} = require("../controllers/RatingAndReview");
 
 router.post("/createCourse", auth, isInstructor, createCourse)
 router.get("/getAllCourses", getAllCourses)
@@ -35,6 +35,7 @@ router.post("/createCategory", auth, isAdmin, createCategory)
 router.get("/showAllCategories", showAllCategories)
 router.post("/getCategoryInfo",getCategoryInfo)
 
-router.get("/getAverageRating",getAverageRating)
+router.post("/getAverageRating",getAverageRating)
 router.post("/createRating",auth,createRating)
+router.get("/getAllRatings",getAllRating);
 module.exports = router
