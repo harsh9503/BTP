@@ -17,7 +17,7 @@ const coursesSchema = new mongoose.Schema({
 	},
 
 	whatYouWillLearn: {
-		type: String,
+		type: [String],
 	},
 
 	courseContent: [
