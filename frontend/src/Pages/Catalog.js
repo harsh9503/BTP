@@ -17,10 +17,8 @@ const CatalogMain=()=>{
             setCatalog(res.data.data.name);
             setDesc(res.data.data.description);
             const temp = res.data.data.courses.map((c,idx)=>{
-                console.log(c);
                 return <CourseCard rcount={c.ratingAndReviews.length} _id={c._id} price={c.price} index={idx} coursename={c.courseName} thumbnail={c.thumbnail} instructor={c.instructor.firstName+" "+c.instructor.lastName}/>
             });
-            console.log(temp);
             setCourse(temp);
         },[]);
     return (
@@ -45,7 +43,7 @@ const CatalogMain=()=>{
                 <hr></hr>
             </div>
             <div className="courses">
-            {course}
+            {course}{course}{course}
             </div>
         </div>
         </>

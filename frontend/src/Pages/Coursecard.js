@@ -12,7 +12,7 @@ const CourseCard = (props)=>{
     }
     useEffect(()=>{
         document.getElementsByClassName("course-main")[props.index].addEventListener("click",()=>{
-            window.location.href = "/courses/"+props._id;
+            window.location.href = "/course/"+props._id;
         });
         axios.post(`${process.env.REACT_APP_BURL}/api/v1/course/getAverageRating`,{
             courseId : props._id

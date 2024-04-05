@@ -269,7 +269,7 @@ exports.getFullCourseDetails = async (req, res) => {
     })
 
     const totalDuration = convertSecondsToDuration(totalDurationInSeconds)
-
+    console.log(courseDetails);
     return res.status(200).json({
       success: true,
       data: {

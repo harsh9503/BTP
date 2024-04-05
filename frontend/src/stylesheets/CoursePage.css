@@ -1,0 +1,131 @@
+:root{
+    --text-color:rgba(255, 255, 255, 0.8)
+}
+.course-page-top{
+    width: auto;
+    padding: 50px 120px;
+    height: auto;
+    max-height: 300px;
+    background-color: rgb(23, 24, 50);
+    color: var(--text-color);
+}
+.course-page-top >*{
+    max-width: 65%;
+}
+.course-desc{
+    color: rgba(255, 255, 255, 0.8);
+}
+.course-stars{
+    width: auto;
+    display: flex;
+    align-items: center;
+    color: yellow;
+    margin-top: 10px;
+}
+.course-stars :nth-child(1){
+    margin-left: 5px;
+}
+
+.course-stars .course-enrolled{
+    width: auto;
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+    color: rgba(255, 255, 255, 0.8);
+}
+.course-data{
+    display: flex;
+    align-items: center;
+    width: 300px;
+    margin-top: 10px;
+}
+.course-data :not(:nth-child(1)){
+    margin-left: 20px;
+}
+
+.course-will-learn{
+    display: block;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    max-width: 50%;
+    height: fit-content;
+    width: auto;
+    color: var(--text-color);
+    margin: 40px 0px 40px 120px;
+    padding: 30px 30px;
+}
+.course-will-learn h2{
+    color: white;
+    margin: 0 0 10px 0;
+}
+.course-content{
+    padding: 10px 0px 0px 120px;
+    background-color: rgb(23, 24, 50);
+    height: auto;
+    color: white;
+}
+.section{
+    display: block;
+    height: auto;
+    min-height: 10vh;
+    width: 60vw;
+    border: 1px solid rgba(255, 255, 255, 0.105);
+    background-color: rgb(66, 72, 86);
+}
+
+.section:hover{
+    cursor: pointer;
+}
+.subsection{
+    height: auto;
+    padding: 10px 50px;
+    display: block;
+    background-color: rgb(23, 24, 50);
+    width: auto;
+}
+.subsection-main{
+    width: 100%;
+    display:flex;
+    align-items: center;
+}
+.subsection-main *{
+    margin: 0;
+}
+.subsection .duration{
+    margin-left: auto;
+}
+.section[active] .subsections{
+    max-height: 100vh;
+    transition: max-height 0.5s ease-in-out;
+}
+.section[active] .section-name svg{
+    transform: rotate(180deg)
+}
+.subsections{
+    height: auto;
+    max-height: 0px;
+    width: auto;
+    overflow: hidden;
+    border: 2px solid rgb(79, 86, 103);
+    border-top:none;
+}
+.section-name{
+    display: flex;
+    height: 100%;
+    padding: 4vh 50px;
+    align-items: center;
+}
+.section-info{
+    margin-left: auto;
+}
+.subsection-description{
+    display: none;
+    font-size: small;
+    width: fit-content;
+    margin: 2px 0 0 1.5vw;
+}
+.subsection-main[active] :nth-child(3){
+    transform: rotate(180deg);
+}
+.subsection-main[active] + .subsection-description{
+    display: block;
+}

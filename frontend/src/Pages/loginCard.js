@@ -1,20 +1,19 @@
 import {BarLoader} from 'react-spinners';
 import { useRef, useState } from 'react';
-import {useCookies} from "react-cookie";
 import axios from "axios";
 import "../stylesheets/loginCard.css"
 function LoginCard(){
     const [spin, setSpin] = useState(false);
     const email = useRef("");
     const password = useRef("");
-    const [cookie,setCookie,removeCookie] = useCookies(['user-data']);
     const HandleLogin=async()=>{
           setSpin(true);
           await axios.post(`${process.env.REACT_APP_BURL}/api/v1/auth/login`,{
             email:email.current.value,
             password:password.current.value
+          },{
+            withCredentials:true
           }).then((res)=>{
-             setCookie("user-data",res.data.user,{maxAge: 60*60*60});
              window.location.href = "/";
           }).catch((err)=>{
             console.log(err);
