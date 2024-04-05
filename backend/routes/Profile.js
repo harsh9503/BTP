@@ -9,7 +9,7 @@ router.delete("/deleteProfile", auth, deleteAccount)
 router.put("/updateProfile", auth, updateProfile)
 router.get("/getUserDetails", auth, getAllUserDetails)
 router.put("/updateDisplayPicture",auth,updateDisplayPicture)
-router.get("/instructordashboard", auth, isAdmin, adminDashboard)
-router.get("/admindashboard", auth, isInstructor, instructorDashboard)
+router.get("/admindashboard", auth, isAdmin, adminDashboard)
+router.get("/instructordashboard", auth, isInstructor, instructorDashboard)
 
 module.exports = router
