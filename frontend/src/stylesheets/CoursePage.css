@@ -1,16 +1,62 @@
 :root{
     --text-color:rgba(255, 255, 255, 0.8)
 }
+.course-right-div{
+    display: inline-block;
+    width: 350px;
+    height: fit-content;
+    background-color: rgb(35, 61, 88);
+    border-radius: 20px;
+    margin-left: 4rem;
+}
+
+.course-right-div img{
+    width: 100%;
+    border-radius: 20px;
+}
+.no-margin{
+    margin: 0;
+}
+.course-right-div button{
+    width:80%;
+    padding: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+    display: block;
+    color: white;
+    border-radius: 10px;
+    transition: all 0.2s;
+    font-size: smaller;
+}
+.bgcolor{
+    background-color: var(--background-color);
+}
+.course-right-div p{
+    font-size: smaller;
+}
+.instruction{
+    color:aquamarine;
+}
+.course-right-div p, .course-right-div h2{
+    padding: 0px 2rem;
+}
+.course-info{
+    display: inline-block;
+    margin-top: 0;
+    vertical-align: top;
+}
 .course-page-top{
     width: auto;
-    padding: 50px 120px;
+    padding: 50px 0px 50px 120px;
     height: auto;
     max-height: 300px;
     background-color: rgb(23, 24, 50);
     color: var(--text-color);
+
 }
 .course-page-top >*{
-    max-width: 65%;
+    max-width: 60%;
 }
 .course-desc{
     color: rgba(255, 255, 255, 0.8);
@@ -25,7 +71,6 @@
 .course-stars :nth-child(1){
     margin-left: 5px;
 }
-
 .course-stars .course-enrolled{
     width: auto;
     margin-left: 10px;
@@ -58,11 +103,13 @@
     margin: 0 0 10px 0;
 }
 .course-content{
-    padding: 10px 0px 0px 120px;
+    padding: 10px 0px 100px 120px;
     background-color: rgb(23, 24, 50);
     height: auto;
+    min-height: fit-content;
     color: white;
 }
+
 .section{
     display: block;
     height: auto;
@@ -128,4 +175,24 @@
 }
 .subsection-main[active] + .subsection-description{
     display: block;
+}
+.course-author{
+    padding: 50px 120px;
+}
+.author-info{
+    display: flex;
+    align-items: center;
+}
+.course-author img{
+    width: 60px;
+    border-radius:30px;
+    border: 2px solid white;
+}
+
+.course-reviews{
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
 }
