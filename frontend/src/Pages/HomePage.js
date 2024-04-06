@@ -34,8 +34,8 @@ const Card=(props)=>{
         </div>
     )
 }
-
-const ReviewCard = (props)=>{
+//@params
+export const ReviewCard = (props)=>{
         const logoString = props.firstname && props.lastname?props.firstname.toUpperCase()[0] + props.lastname.toUpperCase()[0]:"";
         const stars = [];
         for(let i=1;i<=5;i++){
