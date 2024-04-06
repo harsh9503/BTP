@@ -56,7 +56,7 @@ const coursesSchema = new mongoose.Schema({
 	studentsEnrolled: [
 		{
 			type: mongoose.Schema.Types.ObjectId,
-			required: true,
+			//required: true,
 			ref: "user",
 		},
 	],
@@ -68,6 +68,7 @@ const coursesSchema = new mongoose.Schema({
 	status: {
 		type: String,
 		enum: ["Draft", "Published"],
+		default: "Published",
 	},
     
 	createdAt: {

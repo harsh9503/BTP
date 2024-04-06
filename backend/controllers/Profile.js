@@ -50,7 +50,7 @@ exports.updateProfile = async (req, res) => {
       return res.json({
           success: true,
           message: "Profile updated successfully",
-          updatedUserDetails,
+          updatedUser,
       });
   } catch (error) {
       console.log(error);
@@ -137,10 +137,11 @@ exports.updateProfile = async (req, res) => {
         1000,
         1000
       )
-   
+      console.log("updated image link:", image);
+
       const updatedProfile = await User.findByIdAndUpdate(
         { _id: userId },
-        { image: image.secure_url },
+        { image: image },
         { new: true }
       )
 

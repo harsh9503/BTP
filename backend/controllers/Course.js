@@ -16,9 +16,9 @@ exports.createCourse = async (req, res) => {
           let {
             courseName,
             courseDescription,
-            whatYouWillLearn,
+            whatYouWillLearn:_whatYouWillLearn,
             price,
-            tag: _tag,
+            tag:_tag,
             category,
             status,
             instructions: _instructions,
@@ -27,8 +27,8 @@ exports.createCourse = async (req, res) => {
           // Get thumbnail image from request files
           const thumbnail = req.files.thumbnailImage;
           const tag = JSON.parse(_tag)
-          const instructions = JSON.parse(_instructions)
-
+         const instructions = JSON.parse(_instructions)
+          const whatYouWillLearn =JSON.parse(_whatYouWillLearn)
             // Check if any of the required fields are missing
             if (
               !courseName ||
@@ -47,9 +47,9 @@ exports.createCourse = async (req, res) => {
               })
             }
 
-            if (!status || status === undefined) {
-              status = "Draft"
-            }
+            //if (!status || status === undefined) {
+              status = "Published"
+            //}
             // Check if the user is an instructor
             const instructorDetails = await User.findById(userId, {
               accountType: "Instructor",
@@ -84,7 +84,7 @@ exports.createCourse = async (req, res) => {
                 price,
                 tag,
                 category: categoryDetails._id,
-                thumbnail: thumbnailImage,
+                thumbnail: thumbnailImage.secure_url,
                 status: status,
                 instructions,
               })
@@ -333,7 +333,7 @@ exports.deleteCourse = async (req, res) => {
     }
 
     // Unenroll students from the course
-    const studentsEnrolled = course.studentsEnroled
+    const studentsEnrolled = course.studentsEnrolled
     for (const studentId of studentsEnrolled) {
       await User.findByIdAndUpdate(studentId, {
         $pull: { courses: courseId },
