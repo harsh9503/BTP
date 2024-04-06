@@ -84,7 +84,7 @@ exports.createSubSection = async (req, res) => {
           process.env.FOLDER_NAME
         )
         subSection.videoUrl = uploadDetails.secure_url
-        subSection.timeDuration = `${uploadDetails.duration}`
+        subSection.timeDuration = convertSecondsToDuration(`${uploadDetails.duration}`)
       }
   
       await subSection.save()
@@ -94,7 +94,7 @@ exports.createSubSection = async (req, res) => {
         "subSection"
       )
   
-      console.log("updated section", updatedSection)
+      console.log("updated section : ", updatedSection)
   
       return res.json({
         success: true,

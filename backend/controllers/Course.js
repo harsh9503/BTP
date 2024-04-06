@@ -84,7 +84,7 @@ exports.createCourse = async (req, res) => {
                 price,
                 tag,
                 category: categoryDetails._id,
-                thumbnail: thumbnailImage,
+                thumbnail: thumbnailImage.secure_url,
                 status: status,
                 instructions,
               })
