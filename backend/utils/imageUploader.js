@@ -1,4 +1,6 @@
-const cloudinary = require('cloudinary')
+//const cloudinary = require('cloudinary')
+const cloudinary = require("cloudinary").v2;
+
 require('dotenv').config();
 
 exports.uploadImageToCloudinary  = async (file, folder, height, quality) => {
@@ -13,7 +15,7 @@ exports.uploadImageToCloudinary  = async (file, folder, height, quality) => {
     options.resource_type = "auto";
     try {
         const result = await cloudinary.uploader.upload(file.tempFilePath,options);
-    return result.secure_url
+    return result
     }
     catch(err){
         console.log(err);

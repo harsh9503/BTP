@@ -1,7 +1,8 @@
 // Import necessary modules
 const Section = require("../models/Section")
 const SubSection = require("../models/SubSection")
-
+const { uploadImageToCloudinary } = require("../utils/imageUploader")
+const { convertSecondsToDuration } = require("../utils/secToDuration")
 //-------------------------------------------------------------------------------------------
 
 exports.createSubSection = async (req, res) => {
@@ -23,11 +24,11 @@ exports.createSubSection = async (req, res) => {
       video,
       process.env.FOLDER_NAME
     )
-    console.log(uploadDetails)
+    console.log("Upload details: ",uploadDetails)
     // Create a new sub-section with the necessary information
     const SubSectionDetails = await SubSection.create({
       title: title,
-      timeDuration: `${uploadDetails.duration}`,
+      timeDuration: convertSecondsToDuration(`${uploadDetails.duration}`),
       description: description,
       videoUrl: uploadDetails.secure_url,
     })
