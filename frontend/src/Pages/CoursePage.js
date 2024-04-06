@@ -184,6 +184,7 @@ const CoursePage = ()=>{
                 </div>
                 <h1 className="white text-center">Reviews from other learners</h1>
                 <div className="course-reviews">
+                    {course?.ratingAndReviews?.length==0 && <h2 className="text-center white">No reviews</h2>}
                     {course && course?.ratingAndReviews?.map((ele)=>{
                         return <ReviewCard firstname={ele.user.firstName} lastname={ele.user.lastName} stars={ele.rating} review={ele.review}/>
                     })}

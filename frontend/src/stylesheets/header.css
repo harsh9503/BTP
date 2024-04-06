@@ -5,7 +5,6 @@ body{
     width: auto;
     background-color: rgba(28, 25, 41, 0.992);
     display: flex;
-    position: sticky;
     justify-content: center;
     height: 60px;
     border-bottom: 1px solid rgba(245, 245, 245, 0.4);
@@ -54,6 +53,7 @@ body{
     text-align: center;
     background-color:white;
     border-radius: 10px;
+    z-index: 1000;
 }
 .dropdown-content button{
     width: 100%;
@@ -65,7 +65,7 @@ body{
 }
 .dropdown:hover .dropdown-content{
     display: block;
-} 
+}
 .features{
     width: 150px;
     margin-right: 5%;
