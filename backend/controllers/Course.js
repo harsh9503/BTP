@@ -147,6 +147,7 @@ exports.getAllCourses = async (req, res) => {
         instructor: true,
         ratingAndReviews: true,
         studentsEnrolled: true,
+        avg_rating:true,
       }
     )
       .populate("instructor")

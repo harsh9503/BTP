@@ -70,7 +70,11 @@ const coursesSchema = new mongoose.Schema({
 		enum: ["Draft", "Published"],
 		default: "Published",
 	},
-    
+	avg_rating: {
+        type: Number,
+        default: 0,
+    },
+
 	createdAt: {
 		type:Date,
 		default:Date.now

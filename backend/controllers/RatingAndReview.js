@@ -37,16 +37,21 @@ exports.createRating = async (req, res) => {
                                         course:courseId,
                                         user:userId,
                                     });
-       
-        //update course with this rating/review
+        const allRatings = courseDetails.ratingAndReviews.length; 
+        const newAvgRating = (courseDetails.avg_rating * allRatings + rating)/(allRatings + 1);
+
+        //update course with this new rating/review and avg_rating
         const updatedCourseDetails = await Course.findByIdAndUpdate({_id:courseId},
                                     {
+                                        avg_rating: newAvgRating,
                                         $push: {
                                             ratingAndReviews: ratingReview._id,
                                         }
                                     },
                                     {new: true});
+
         console.log(updatedCourseDetails);
+
         return res.status(200).json({
             success:true,
             message:"Rating and Review created Successfully",
@@ -63,7 +68,7 @@ exports.createRating = async (req, res) => {
 }
 
 //-------------------------------------------------------------------------------------
-
+/*
 exports.getAverageRating = async (req, res) => {
     try {
             const courseId = req.body.courseId;
@@ -110,7 +115,7 @@ exports.getAverageRating = async (req, res) => {
         })
     }
 }
-
+*/
 //--------------------------------------------------------------------------------------------------
 
 
