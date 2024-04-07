@@ -9,6 +9,7 @@ import CatalogMain from './Pages/Catalog.js';
 import {RouterProvider, createBrowserRouter} from "react-router-dom";
 import CoursePage from './Pages/CoursePage.js';
 import Home from './Pages/HomePage.js';
+import Profile from './Pages/Profile.js';
 const router = createBrowserRouter([
   {
     path:"/signup",
@@ -42,6 +43,9 @@ const router = createBrowserRouter([
   {
     path:"/course/:courseId",
     element: <CoursePage/>
+  },{
+    path:"/profile",
+    element:<Profile/>
   }
 ])
 const HeaderRouter = createBrowserRouter([

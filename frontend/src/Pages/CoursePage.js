@@ -113,7 +113,7 @@ const CoursePage = ()=>{
     return(
         <div className="course-page-main">
             <div className="course-page-top">
-                <div className="course-page-path white">
+                <div className="path white">
                     {`Home / Learning / `}
                     <span className="text-yellow">{course?course.category.name:""}</span>
                 </div>
