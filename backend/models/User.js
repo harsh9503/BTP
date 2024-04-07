@@ -62,6 +62,18 @@ const userSchema = new mongoose.Schema(
 				ref: "courseProgress",
 			},
 		],
+		wishlist: [
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "Course",
+            },
+        ],
+
+        totalPrice: {
+            type: Number,
+            default: 0,
+        },
+
 	},
 	{ timestamps: true }
 );
