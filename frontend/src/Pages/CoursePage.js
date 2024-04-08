@@ -123,7 +123,7 @@ const CoursePage = ()=>{
                     <div className="course-desc">{course.courseDescription}
                     </div>
                     <div className="course-stars">
-                        {ratings||"No review"} 
+                        {ratings.toFixed(1)||"No review"} 
                         <IconContext.Provider value={{size:"18px",style:{marginRight:"2px"}}}>
                             {ratings?stars:""}
                         </IconContext.Provider>

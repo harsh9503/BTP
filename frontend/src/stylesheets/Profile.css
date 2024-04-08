@@ -21,10 +21,11 @@
 .profile-page-main-info{
     display: block;
     margin-left: 5%;
+    width: 300px;
 }
 .profile-page-info button, .profile-details-top button{
     margin: 0;
-    margin-left: auto !important;
+    margin-left: auto;
     margin-right: 5%;
     width: 100px;
     display: flex;
@@ -57,10 +58,112 @@
     position: absolute;
     right: 0;
 }
-.profile-page-fields :nth-child(2){
-}
 .profile-page-fields{
     width: 60%;
     height: auto;
     position: relative;
 }
+
+.profile-page-info .edit{
+    margin-left: 0;
+    margin-top: 10px;
+}
+.row{
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    height: fit-content;
+    margin: 20px 0px;
+}
+.col{
+    display: inline-block;
+    width: 45%;
+}
+.col > p{
+    color: var(--text-color);
+}
+.profile-main input:focus{
+    outline: none;
+    border-bottom: 1px solid var(--border-bottom-hover);
+  }
+.profile-main .col > input{
+    display: block;
+    color: #fff;
+    border: none;
+    border-bottom: 1px solid var(--border-bottom-color);
+    border-radius: 10px;
+    padding: 10px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+    background-color: var(--background-color);
+    font-size: smaller;
+  }
+
+  input[type="date"]::-webkit-calendar-picker-indicator{
+    color-scheme: dark;
+  }
+.gender{
+    width: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 10px;
+    background-color: var(--background-color);
+    border-radius: 10px;
+}
+.gender input[type="radio"], .gender input[type="radio"]:focus{
+    appearance: none;
+    opacity: 1;
+    position: static;
+    border: none;
+    margin: 0;
+}
+.small-circle{
+    height: 14px;
+    width: 14px;
+    background-color: var(--highlight-color);
+    border-radius: 100%;
+    position: absolute;
+    display: none;
+ }
+ .gender .circle{
+    height: 19px;
+    width: 19px;
+    border-radius: 100%;
+    position: relative;
+    background-color: transparent;
+    border: 2px solid var(--border-bottom-color);
+ }
+ 
+.gender input[type="radio"]:checked + .circle .small-circle{
+    position: absolute;
+    display: block;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto auto;
+}
+ .gender input[type="radio"]:checked + .circle{
+    border-radius: 50%;
+    background-color: transparent;
+    border: 2px solid var(--highlight-color);
+    display: inline-block;
+ }
+  .gender > div{
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    height: fit-content;
+    justify-content: space-between;
+    position: relative;
+  }
+  .gender label{
+    display: inline-block;
+    margin-left: auto;
+    width: auto;
+    font-size: small;
+    margin-left: 5px;
+  }

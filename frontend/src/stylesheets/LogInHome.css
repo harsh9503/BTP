@@ -535,7 +535,7 @@ p > p{
 .review-container{
     display: block;
     width: fit-content;
-    animation: slider 30s linear 0s infinite;
+    transition: all 0.2s ease-in-out;
 }
 @keyframes slider {
     from{transform: translateX(0%);}

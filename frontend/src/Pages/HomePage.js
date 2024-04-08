@@ -13,7 +13,8 @@ import { BsPeopleFill } from "react-icons/bs";
 import { MdPlayLesson } from "react-icons/md";
 import { FaStar, FaRegStar } from "react-icons/fa";
 import { IconContext } from "react-icons";
-import { useState,useEffect } from "react";
+import { useState,useEffect,useRef } from "react";
+import React from "react";
 const Card=(props)=>{
     useEffect(()=>{
         document.getElementsByClassName(props.className)[0].addEventListener("click",onclick);
@@ -73,13 +74,31 @@ const Home = ()=>{
     <ReviewCard firstname="Dev" lastname="Kabra" description="SDE at Walmart" review="One of the best courses that I could find these days. Worth spending money on." stars={5}/>,
     <ReviewCard firstname="Rishi" lastname="Pathak" description="Data anaylst @Wizzy.ai" review="It is the best course avaialable in the industry. Everyone should take its course for once at least." stars={4}/>,
     <ReviewCard firstname="Chandan" lastname="Makwana" description="ML engineer at Kruskal" review="It is the best course avaialable in the industry. Everyone should take its course for once at least." stars={4}/>,
-    <ReviewCard firstname="Ritesh" lastname="Darji" description="SDE-III at Alphabet" review="It is the best course avaialable in the industry. Everyone should take its course for once at least." stars={5}/>,]
-    const [content, setContent] = useState(reviews);
+    <ReviewCard firstname="Ritesh" lastname="Darji" description="SDE-III at Alphabet" review="It is the best course avaialable in the industry. Everyone should take its course for once at least." stars={5}/>,
+<ReviewCard firstname="Ritesh" lastname="Darji" description="SDE-III at Alphabet" review="It is the best course avaialable in the industry. Everyone should take its course for once at least." stars={5}/>,
+<ReviewCard firstname="Ritesh" lastname="Darji" description="SDE-III at Alphabet" review="It is the best course avaialable in the industry. Everyone should take its course for once at least." stars={5}/>,
+<ReviewCard firstname="Ritesh" lastname="Darji" description="SDE-III at Alphabet" review="It is the best course avaialable in the industry. Everyone should take its course for once at least." stars={5}/>,
+<ReviewCard firstname="Ritesh" lastname="Darji" description="SDE-III at Alphabet" review="It is the best course avaialable in the industry. Everyone should take its course for once at least." stars={5}/>,
+<ReviewCard firstname="Ritesh" lastname="Darji" description="SDE-III at Alphabet" review="It is the best course avaialable in the industry. Everyone should take its course for once at least." stars={5}/>,
+<ReviewCard firstname="Ritesh" lastname="Darji" description="SDE-III at Alphabet" review="It is the best course avaialable in the industry. Everyone should take its course for once at least." stars={5}/>,
+<ReviewCard firstname="Ritesh" lastname="Darji" description="SDE-III at Alphabet" review="It is the best course avaialable in the industry. Everyone should take its course for once at least." stars={5}/>,
+<ReviewCard firstname="Ritesh" lastname="Darji" description="SDE-III at Alphabet" review="It is the best course avaialable in the industry. Everyone should take its course for once at least." stars={5}/>,
+<ReviewCard firstname="Ritesh" lastname="Darji" description="SDE-III at Alphabet" review="It is the best course avaialable in the industry. Everyone should take its course for once at least." stars={5}/>,
+<ReviewCard firstname="Ritesh" lastname="Darji" description="SDE-III at Alphabet" review="It is the best course avaialable in the industry. Everyone should take its course for once at least." stars={5}/>,
+]
+    let content = reviews.slice(0,4);
+    const slide = useRef("");
     useEffect(()=>{
         //Slider
+        let i=0;
+        let idx = 4;
         const slider = document.querySelector(".review-container");
-        const container = document.querySelector(".reviews");
-        container.appendChild(slider.cloneNode(true));
+        setTimeout(()=>{
+            slider.style.transform = `translateX(-${i}px)`;
+            console.log(React.createElement(reviews[idx]));
+            idx = (idx+1)%reviews.length;
+            i+=360;
+        },2000);
     },[]);
     const keywords = ["using","namespace","std","return","int","template","typename","T"];
     const code = ["#include <iostream>","using namespace std;","template<typename> T;","T sum(T a, T b){","return a+b;","}","int main(){","int num1=1, num2=4;","int result = sum<int>(num1,num2);","return 0;","}"];
@@ -253,9 +272,9 @@ const Home = ()=>{
             </div>
             <h1 className="text-center white margin-down-20px">Reviews from other learners</h1>
             <div className="reviews">
-                <div className="review-container">
-                    {content}
-                    {content}
+                <div className="review-container" ref={slide}>{
+                    reviews.slice(0,4)
+                }
                 </div>
             </div>
     </div>
