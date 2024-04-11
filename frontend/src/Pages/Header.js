@@ -1,5 +1,6 @@
 import "../stylesheets/header.css";
 import logo from "../logo.png";
+import {Toaster} from "react-hot-toast";
 import { useCookies } from "react-cookie";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import { MdOutlineShoppingCart } from "react-icons/md";
@@ -32,6 +33,8 @@ const Header = (props)=>{
         }
     }
     return (
+        <>
+        <Toaster containerStyle={{marginTop:"50px"}}/>
         <div className="head">
             <img alt="logo" src={logo} id="img-logo"></img>
             <div className="links">
@@ -51,9 +54,10 @@ const Header = (props)=>{
                 <span><FaMagnifyingGlass/></span>
                 <span><MdOutlineShoppingCart/></span>
                 </IconContext.Provider>
-                <button type="button" className={cookie["user-data"]?"user-profile":"button"} onClick={handleClick}>{cookie['user-data']?<img src={cookie['user-data'].image}></img>:props.page === "signup"?"Log In":"Sign In"}</button>
+                <button type="button" className={cookie["user-data"]?"user-profile":"button"} onClick={handleClick}>{cookie['user-data']?<img src={cookie['user-data']?.image}></img>:props.page === "signup"?"Log In":"Sign In"}</button>
             </div>
         </div>
+        </>
     )
 }
 export default Header;

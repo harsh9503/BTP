@@ -1,20 +1,27 @@
+@import url("https://cdn.jsdelivr.net/npm/tom-select@2.0.0-rc.4/dist/css/tom-select.css");
 .profile-main{
     width: auto;
-    padding: 50px 0 50px 120px;
+    padding: 20px 0 0px 120px;
     color: rgb(255, 255, 255);
+    position: relative;
+    font-size: 15px;
 }
-
+:root{
+    --input-color: rgba(110, 114, 114, 0.214);
+}
 .profile-page-info{
     width: 40rem;
     background-color: rgba(61, 69, 74, 0.674);
     display: flex;
     align-items: center;
+    position: relative;
     padding: 20px;
     border-radius: 20px;
     border: 1px solid rgba(255, 255, 255, 0.156);
 }
 .profile-page-info img{
-    width: 4rem;
+    width: 60px;
+    height: 60px;
     border-radius: 100%;
     display: inline-block;
 }
@@ -36,9 +43,9 @@
 
 .profile-page-details{
     width: 40rem;
-    background-color: rgba(61, 69, 74, 0.674);
+    background-color: rgba(61, 69, 74, 0.4);
     padding: 20px;
-    margin-top: 20px;
+    margin-top: 10px;
     border-radius: 20px;
     border: 1px solid rgba(255, 255, 255, 0.156);
 }
@@ -86,8 +93,8 @@
     outline: none;
     border-bottom: 1px solid var(--border-bottom-hover);
   }
-.profile-main .col > input{
-    display: block;
+.profile-main .col > input, .phone-number input, .main-block input{
+    display: inline-block;
     color: #fff;
     border: none;
     border-bottom: 1px solid var(--border-bottom-color);
@@ -97,7 +104,7 @@
     margin-left: auto;
     margin-right: auto;
     box-sizing: border-box;
-    background-color: var(--background-color);
+    background-color: var(--input-color);
     font-size: smaller;
   }
 
@@ -167,3 +174,127 @@
     font-size: small;
     margin-left: 5px;
   }
+  .phone-number input{
+    width: 75%;
+    margin: 0;
+  }
+ .phone-number{
+   width: 100%;
+   display: flex;
+   justify-content: space-between;
+}
+.main-block{
+    width: 100%;
+}
+.main-block div{
+    width: 50%;
+    display: inline-block;
+    margin-top: 10px;
+}
+.main-block div input{
+    width: 90%;
+    margin-top: 5px;
+}
+
+.btns{
+    display: flex;
+    margin-left: 0 !important;
+    width: 40rem;
+    justify-content: end;
+    padding: 0px 20px;
+}
+.btns .btn{
+    width: 15%;
+    font-size: 1rem;
+    display: flex;
+    margin-top: 10px;
+    margin-bottom: 0;
+    align-items: center;
+    justify-content: center;
+}
+.profile-page-main-info label{
+    padding: 10px 20px;
+    color: black;
+}
+.profile-page-info .loader{
+    margin: 35px 0 0 20px;
+}
+.phoneInput select{
+    width: fit-content;
+    margin-right: 10px;
+    padding: auto 0px;
+    appearance: none;
+    background-color: var(--input-color);
+}
+input[type="file"]{
+    display: none;
+}
+.delete-account{
+    width: 40rem;
+    background-color: #b709097d;
+    border-radius: 20px;
+    display: flex;
+    height: fit-content;
+    padding: 20px;
+    border: 2px solid #ea0c0c74;
+    margin-top: 1rem;
+}
+.confirm-delete{
+    color: #f5d1d1;
+}
+.confirm-delete h3{
+    color: #fff;
+}
+.confirm-delete a{
+    text-decoration: none;
+    color:#c70d0df9;
+    font-style: italic;
+    font-weight: bold;
+}
+a:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}
+.delete-account img{
+    height: 40px;
+    color: #fff;
+    width: fit-content;
+    display: block;
+    margin-right: 1rem;
+}
+.delete-dialog{
+    display: block;
+    width: fit-content;
+    padding: 5rem;
+    position: absolute;
+    height: fit-content;
+    background-color: var(--background-color);
+    border-radius: 20px;
+    font-size: medium;
+    top: 0;
+    bottom: 0;
+    left:0;
+    right:0;
+    margin: auto auto;
+    z-index: 100;
+}
+.delete-confirm{
+    text-align: center;
+}
+.delete-confirm :nth-child(2){
+    background-color: red;
+    color: #fff;
+}
+#select-state option{
+    appearance: none;
+    background-color: var(--background-color);
+    color: white;
+}
+::-webkit-scrollbar{
+    background-color:black;
+    color: var(--text-color);
+    width: 20px;
+}
+::-webkit-scrollbar-thumb{
+    background-color: var(--background-color);
+}

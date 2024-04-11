@@ -39,10 +39,12 @@ body{
 .links button:hover{
     cursor: pointer;
     background-color: rgb(8, 2, 44);
+    color:var(--highlight-color);
 }
 .dropdown{
     display: inline-block;
     position: relative;
+    height: 100%;
 }
 .dropdown-content{
     display: none;
@@ -62,6 +64,7 @@ body{
 }
 .dropdown-content button:hover{
     background-color:rgba(51, 43, 43, 0.167);
+    color: black;
 }
 .dropdown:hover .dropdown-content{
     display: block;
@@ -75,7 +78,7 @@ body{
 .features *{
     display: inline-block;
     margin: auto auto;
-    color: rgba(255, 249, 249,0.85);
+    color: rgba(96, 94, 94, 0.85);
 }
 
 .features svg{
@@ -94,12 +97,13 @@ body{
 .features button{
     padding: 10px;
     background-color: transparent;
-    border: 1px solid rgba(255, 249, 249,0.85);
+    border: 1px solid rgba(104, 101, 101, 0.85);
     border-radius: 10px;
 }
 .features .user-profile img{
-    width: 70%;
-    border-radius: 30px;
+    width: 45px;
+    height: 45px;
+    border-radius: 100%;
     display: block;
     margin-top: auto;
     margin-bottom: auto;

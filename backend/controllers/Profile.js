@@ -20,10 +20,10 @@ exports.updateProfile = async (req, res) => {
           gender,
       } = req.body;
       const id = req.user.id;
-
+      console.log(req.body);
       // Find the profile by id
       const userDetails = await User.findById(id);
-      const profile = await Profile.findById(userDetails.additionalDetails);
+      const profile = {};
 
       // Update user details
       const updateFields = {};
@@ -32,25 +32,23 @@ exports.updateProfile = async (req, res) => {
       const updatedUser = await User.findByIdAndUpdate(id, updateFields, {
           new: true,
       });
-
       // Update profile fields
       if (dateOfBirth) profile.dateOfBirth = dateOfBirth;
       if (about) profile.about = about;
       if (contactNumber) profile.contactNumber = contactNumber;
       if (gender) profile.gender = gender;
-
-      // Save the updated profile
-      await profile.save();
-
+      console.log(profile);
+      const updatedProfile = await Profile.findByIdAndUpdate(userDetails.additionalDetails,profile);
+      await updatedProfile.save();
+      await updatedUser.save();
       // Find the updated user details
       const updatedUserDetails = await User.findById(id)
           .populate("additionalDetails")
           .exec();
-
       return res.json({
           success: true,
           message: "Profile updated successfully",
-          updatedUser,
+          updatedUserDetails,
       });
   } catch (error) {
       console.log(error);
@@ -129,8 +127,23 @@ exports.updateProfile = async (req, res) => {
 
   exports.updateDisplayPicture = async (req, res) => {
     try {
-      const displayPicture = req.files.displayPicture
-      const userId = req.user.id
+      const displayPicture = req?.files?.displayPicture;
+      const userId = req.user.id;
+      if(!displayPicture){
+        const updatedProfile = await User.findByIdAndUpdate(
+          { _id: userId },
+          [{$set:{
+              image: {$concat:["http://ui-avatars.com/api/?name=","$firstName","+","$lastName"]}
+          }}],
+          { new: true }
+        )
+        res.json({
+          success: true,
+          message: `Profile photo Updated successfully`,
+          data: updatedProfile,
+        })
+        return;
+      }
       const image = await uploadImageToCloudinary(
         displayPicture,
         process.env.FOLDER_NAME,
@@ -145,7 +158,7 @@ exports.updateProfile = async (req, res) => {
         { new: true }
       )
 
-      res.send({
+      res.json({
         success: true,
         message: `Profile photo Updated successfully`,
         data: updatedProfile,

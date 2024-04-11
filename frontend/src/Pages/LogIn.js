@@ -1,4 +1,3 @@
-
 import LoginCard from "./loginCard";
 import "../stylesheets/HomePage.css"
 import img from "../img-log.jpg"

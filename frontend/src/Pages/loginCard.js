@@ -1,6 +1,7 @@
 import {BarLoader} from 'react-spinners';
 import { useRef, useState } from 'react';
 import {useCookies} from "react-cookie";
+import toast,{Toaster} from "react-hot-toast";
 import axios from "axios";
 import "../stylesheets/loginCard.css"
 function LoginCard(){
@@ -10,18 +11,21 @@ function LoginCard(){
     const password = useRef("");
     const HandleLogin=async()=>{
           setSpin(true);
-          await axios.post(`${process.env.REACT_APP_BURL}/api/v1/auth/login`,{
+          const promise = axios.post(`${process.env.REACT_APP_BURL}/api/v1/auth/login`,{
             email:email.current.value,
             password:password.current.value
           },{
             withCredentials:true
           }).then((res)=>{
+            if(!res.data.success) throw res.data.message;
              setCookie("user-data",JSON.stringify(res.data.user),{maxAge: 24*3600});
              window.location.href = "/";
-          }).catch((err)=>{
-            console.log(err);
-            setSpin(false);
           })
+          toast.promise(promise, {
+            success:"Login Successful!",
+            error: ({response:res})=>`${res.data.message}`,
+            loading:"Loading"
+          });
     }
     return (
         <>
