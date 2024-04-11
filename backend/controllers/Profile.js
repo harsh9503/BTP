@@ -242,35 +242,44 @@ exports.updateProfile = async (req, res) => {
   }
   
   //--------------------------------------------------------------------------------------
-
+  
   exports.adminDashboard = async (req, res) => {
     try {
-        // Fetching total number of users
-    const totalUsers = await User.countDocuments();
-
-    // Fetching total number of instructors
-    const totalInstructors = await User.countDocuments({ accountType: 'Instructor' });
-
-    // Fetching total number of courses
-    const totalCourses = await Course.countDocuments();
-
-    // Fetching total number of active users (students who have purchased courses)
-    const totalActiveUsers = await User.countDocuments({ accountType: 'Student', courses: { $exists: true, $ne: [] } });
-
-    res.status(200).json({
-      totalUsers,
-      totalInstructors,
-      totalCourses,
-      totalActiveUsers,
-    });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ 
-      message: "Server Error" 
-    });
+      const totalUsers = await User.countDocuments();
+      const totalInstructors = await User.countDocuments({ accountType: "Instructor" });
+      const totalStudents = await User.countDocuments({ accountType: "Student" });
+      const totalCourses = await Course.countDocuments();
+      const totalActiveUsers = await User.countDocuments({ accountType: "Student", courses: { $exists: true, $ne: [] } });
+      const totalRevenue = await calculateTotalRevenue();
+  
+      res.status(200).json({
+        totalUsers,
+        totalInstructors,
+        totalStudents,
+        totalCourses,
+        totalActiveUsers,
+        totalRevenue,
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: "Server Error" });
+    }
+  };
+  
+  async function calculateTotalRevenue() {
+    try {
+      const courses = await Course.find();
+      let totalRevenue = 0;
+      for (const course of courses) {
+        totalRevenue += course.price * course.studentsEnrolled.length;
+      }
+      return totalRevenue;
+    } catch (error) {
+      console.error("Error calculating total revenue:", error);
+      return 0;
+    }
   }
-};
-
+  
 //-----------------------------------------------------------------------
 exports.instructorDashboard = async (req, res) => {
   try {
