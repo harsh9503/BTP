@@ -22,7 +22,7 @@ const Header = (props)=>{
     },[]);
     const handleClick = ()=>{
         if(cookie["user-data"]){
-            window.location.href = "/profile";
+            window.location.href = "/user/profile";
             return;
         }
         if(props.page === "login"){

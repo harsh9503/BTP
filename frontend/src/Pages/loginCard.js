@@ -21,9 +21,15 @@ function LoginCard(){
              setCookie("user-data",JSON.stringify(res.data.user),{maxAge: 24*3600});
              window.location.href = "/";
           })
+          setSpin(false);
           toast.promise(promise, {
             success:"Login Successful!",
-            error: ({response:res})=>`${res.data.message}`,
+            error: (err)=>{
+               if(err.code === "ERR_NETWORK"){
+                return "Can't connect to the Server"
+               }
+               return err?.response?.data?.message || "Error Occurred!"
+            },
             loading:"Loading"
           });
     }

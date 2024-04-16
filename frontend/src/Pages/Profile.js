@@ -5,7 +5,6 @@ import "../stylesheets/Profile.css";
 import {BarLoader} from 'react-spinners';
 import codes from "../fetchData/contry-code.json";
 import delete_icon from "../delete-icon.svg";
-import toast from "react-hot-toast";
 import axios from "axios";
 const UpdateProfile =()=>{
     const [cookie, setCookie, removeCookie] = useCookies(['user-data']);
@@ -13,8 +12,6 @@ const UpdateProfile =()=>{
     const [user, setUser] = useState();
     const [dialog, setDialog] = useState(false);
     const refs = useRef(new Array(11));
-    const ch = useRef(new Array(6));
-    let err = 0;
     const [spin, setSpin] = useState(false);
     const HandleSubmit = async()=>{
             setSpin(true);
@@ -24,7 +21,7 @@ const UpdateProfile =()=>{
                     lastName: refs.current[0].value.slice(refs.current[0].value.split(" ")[0].length+1)||"",
                     dateOfBirth: refs.current[2].value,
                     about:refs.current[8].value,
-                    contactNumber: refs.current[6].value+refs.current[7].value,
+                    contactNumber: refs.current[6].value+"|"+refs.current[7].value,
                     gender:refs.current[3].checked?"Male":refs.current[4].checked?"Female":"Other"
                 },{
                     withCredentials: true
@@ -53,8 +50,8 @@ const UpdateProfile =()=>{
             if(data?.additionalDetails?.gender === "male") refs.current[3].checked = true;
             if(data?.additionalDetails?.gender === "female") refs.current[4].checked = true;
             if(data?.additionalDetails?.gender === "other") refs.current[5].checked = true;
-            refs.current[6].value = "+"+data?.additionalDetails?.contactNumber?.toString().slice(0,2);
-            refs.current[7].value = data?.additionalDetails?.contactNumber?.toString().slice(2);
+            refs.current[6].value = data?.additionalDetails?.contactNumber?.toString().split("|")[0];
+            refs.current[7].value = data?.additionalDetails?.contactNumber?.toString().slice(refs.current[6].value.length+1);
             setSpin(false);
         }    
         func();
@@ -169,8 +166,8 @@ const UpdateProfile =()=>{
                 <div className="col">
                 <p className="no-margin">Phone no:</p>
                     <div className="phone-number phoneInput">
-                        <select id="select-state" placeholder="Pick country" ref={(ele)=>refs.current[6]=ele}>
-                            {codes.map((ele)=><option value={ele.dial_code}>{`(${ele.dial_code})`}</option>)}
+                        <select id="select-state" placeholder="Pick country" ref={(ele)=>refs.current[6]=ele} slot="1">
+                            {codes.map((ele)=><option value={ele.dial_code} id={ele.dial_code}>{`${ele.code} (${ele.dial_code})`}</option>)}
                         </select>
                         <input type="number" maxLength={10} placeholder="Enter Phone No:" ref={(ele)=>refs.current[7]=ele}></input>
                     </div>
@@ -225,7 +222,7 @@ const Profile = ()=>{
             <div className="profile-page-details">
                 <div className="profile-details-top">
                     <h3 className="no-margin">Personal Details</h3>
-                    <button type="button" className="btn btn-semisquare yellow no-margin"><FiEdit size={"25px"}/> &nbsp;Edit</button>
+                    <button type="button" className="btn btn-semisquare yellow no-margin" onClick={()=>{setEdit(true);}}><FiEdit size={"25px"}/> &nbsp;Edit</button>
                 </div>
                 <div className="profile-page-fields">
                     <div className="field">First Name<br/>{_user.firstName}</div>

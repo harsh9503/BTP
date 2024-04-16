@@ -1,24 +1,30 @@
-import {BarLoader} from 'react-spinners';
 import { useState } from 'react';
 import axios from 'axios';
+import {toast} from "react-hot-toast";
 import "../stylesheets/VerifyEmail.css"
+import { useCookies } from 'react-cookie';
 function VerifyCard(){
     window.onload = () =>{
         document.getElementsByTagName("input")[0].focus();
     }
     let code = new Array(6);
-
-    const [spin, setSpin] = useState(false);
-    const Verify=async()=>{
+    const [cookie, setCookie] = useCookies(['user-data']);
+    const Verify=()=>{
           let int_code = code.join("");
-          setSpin(true);
-          axios.post(`${process.env.REACT_APP_BURL}/api/v1/auth/signup`,{
+          const promise = axios.post(`${process.env.REACT_APP_BURL}/api/v1/auth/signup`,{
             ...JSON.parse(localStorage.getItem("user-data")),...{otp:int_code}
-          }).then(()=>{
+          }).then((res)=>{
+            console.log("HERE");
+            setCookie("user-data",JSON.stringify(res.data.user));
             localStorage.removeItem("user-data");
-            window.location.href = "/home"
-          }).catch(err=>console.log(err));
-          setSpin(false);
+          })
+          toast.promise(promise,{
+            loading:"Please Wait!",
+            success:"Verification Successful!",
+            error:(err)=>{
+                return err?.response?.data?.message||"Can't connect to Server!"
+            }
+          })
     }
     const handleCode = (event, idx)=>{
         let d = event.target.value;
@@ -30,12 +36,11 @@ function VerifyCard(){
         code[idx] = event.target.value;
         if(idx < 5) document.getElementsByTagName("input")[idx+1].focus();
         else{
-            document.getElementsByTagName("button")[5].click();
+            document.getElementsByTagName("button")[10].click();
         }
     }
     return (
         <>
-        {spin &&<BarLoader color="#36d7b7" width={"100%"}/>}
         <div className="verifyMain">
             <div className="verifyPanel">
                 <h1>Verify email</h1>

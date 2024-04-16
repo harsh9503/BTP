@@ -1,0 +1,81 @@
+.enrolled-courses-main{
+    padding: 5vh 0 0 20vw;
+}
+
+.course-dialog{
+    width: 100%;
+    height: 70px;
+    color: var(--text-color);
+    display: flex;
+    background-color: var(--background-color);
+    align-items: center;
+    font-size: medium;
+    box-sizing: border-box;
+    padding: 0px 20px;
+}
+.course-dialog > :nth-child(n+2){
+    margin-left: 10vw;
+}
+.course-info-enrolled{
+    display: flex;
+    align-items: center;
+}
+.course-data-enrolled p{
+    display: block;
+    font-size: small;
+}
+.course-icon{
+    width: 50px;
+    height: 50px;
+    margin-right: 1vw;
+    border-radius: 50%;
+}
+.course-menu{
+    font-size: x-large;
+}
+.courses-enrolled::before{
+    content: "Courses";
+    background-color: rgb(66, 72, 86);
+    height: 12vh;
+    align-items: center;
+    justify-content: center;
+    font-size: large;
+    display: flex;
+}
+.courses-enrolled{
+    border: 2px solid rgb(66, 72, 86);
+    height: fit-content;
+    width: 85%;
+}
+.course-menu{
+    position: relative;
+    width: fit-content;
+    border: none;
+}
+.course-menu:hover{
+    cursor: pointer !important;
+}
+.course-menu[class*="active"] *{
+    display: block;
+}
+.menu{
+    height: fit-content;
+    font-size: x-small;
+    width: 12vw;
+    right: 0;
+    background-color: black;
+    border: 2px solid var(--background-color);
+}
+.menu div{
+    margin: 10px !important;
+    display: flex !important;
+    align-items: center;
+}
+.menu div:hover{
+    color: white;
+    cursor: pointer;
+}
+.course-menu > *{
+    display: none;
+    position: absolute;
+}

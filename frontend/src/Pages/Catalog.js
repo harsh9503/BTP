@@ -17,7 +17,7 @@ const CatalogMain=()=>{
             setCatalog(res?.data?.data.name);
             setDesc(res?.data?.data.description);
             const temp = res?.data?.data.courses.map((c,idx)=>{
-                return <CourseCard rcount={c.ratingAndReviews.length} stars={c.avg_rating.toFixed(1)} _id={c._id} price={c.price} index={idx} coursename={c.courseName} thumbnail={c.thumbnail} instructor={c.instructor.firstName+" "+c.instructor.lastName}/>
+                return <CourseCard rcount={c.ratingAndReviews.length} stars={c.avg_rating.toFixed(1)} _id={c._id} price={c.price} index={idx} coursename={c.courseName} thumbnail={c.thumbnail} instructor={c?.instructor?.firstName+" "+c?.instructor?.lastName}/>
             });
             setCourse(temp);
         },[]);

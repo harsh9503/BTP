@@ -7,4 +7,13 @@ font-family: "Nunito", sans-serif;
 }
 body{
   background-color: rgb(3, 3, 32);
+  min-height: 100%;
+  height: fit-content;
+}
+#root{
+  height: fit-content;
+}
+.App{
+  min-height: 100%;
+  height: 200vh;
 }

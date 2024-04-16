@@ -1,9 +1,11 @@
 @import url("https://cdn.jsdelivr.net/npm/tom-select@2.0.0-rc.4/dist/css/tom-select.css");
 .profile-main{
     width: auto;
-    padding: 20px 0 0px 120px;
+    padding: 20px 0 0px 5rem;
     color: rgb(255, 255, 255);
     position: relative;
+    display: inline-block;
+    vertical-align: top;
     font-size: 15px;
 }
 :root{
@@ -11,7 +13,7 @@
 }
 .profile-page-info{
     width: 40rem;
-    background-color: rgba(61, 69, 74, 0.674);
+    background-color: var(--background-color);
     display: flex;
     align-items: center;
     position: relative;
@@ -183,6 +185,9 @@
    display: flex;
    justify-content: space-between;
 }
+.phoneInput select{
+    width: 20% !important;
+}
 .main-block{
     width: 100%;
 }
@@ -270,6 +275,7 @@ a:hover{
     height: fit-content;
     background-color: var(--background-color);
     border-radius: 20px;
+    border: 1px solid var(--border-bottom-color);
     font-size: medium;
     top: 0;
     bottom: 0;

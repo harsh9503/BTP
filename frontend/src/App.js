@@ -10,6 +10,8 @@ import {RouterProvider, createBrowserRouter} from "react-router-dom";
 import CoursePage from './Pages/CoursePage.js';
 import Home from './Pages/HomePage.js';
 import Profile from './Pages/Profile.js';
+import {EnrolledCourses} from './Pages/EnrolledCourses.js';
+import { SideBar } from './Pages/SideBar.js';
 const router = createBrowserRouter([
   {
     path:"/signup",
@@ -25,7 +27,7 @@ const router = createBrowserRouter([
     element: <VerifyCard/>
   },
   {
-    path:"/changepassword",
+    path:"/user/changepassword",
     element:<ChangePassword/>
   },
   {
@@ -44,8 +46,11 @@ const router = createBrowserRouter([
     path:"/course/:courseId",
     element: <CoursePage/>
   },{
-    path:"/profile",
+    path:"/user/profile",
     element:<Profile/>
+  },{
+    path:"/user/enrolled-courses",
+    element:<EnrolledCourses/>
   }
 ])
 const HeaderRouter = createBrowserRouter([
@@ -58,11 +63,22 @@ const HeaderRouter = createBrowserRouter([
       element: <Header page="signup"/>
     }
 ])
+const sideRouter = createBrowserRouter([
+  {
+    path:"/user/:userPath",
+    element: <SideBar/>
+  },
+  {
+    path:"*",
+    element:<></>
+  }
+])
 function App() {
   return (
     <div className="App">
       <RouterProvider router={HeaderRouter}/>
-      <RouterProvider router={router}/>
+        <RouterProvider router={sideRouter}/>
+        <RouterProvider router={router}/>
     </div>
   );
 }
