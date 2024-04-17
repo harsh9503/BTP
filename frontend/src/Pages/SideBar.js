@@ -7,7 +7,7 @@ import { AiOutlineShoppingCart } from "react-icons/ai";
 import { PiStudent } from "react-icons/pi";
 import { IoSettingsOutline } from "react-icons/io5";
 import { IoIosLogOut } from "react-icons/io";
-import {useParams, Link} from "react-router-dom";
+import {useParams, a} from "react-router-dom";
 import { useEffect } from "react";
 import { useCookies } from "react-cookie";
 export const SideBar = ()=>{
@@ -23,51 +23,51 @@ export const SideBar = ()=>{
         <div className="sidebar-main">
             <IconContext.Provider value={{style:{marginRight:"10px"},size:"20px"}}>
             <div className="user-routes">
-                <Link to="/user/profile">
+                <a href="/user/profile">
                 <div className="route profile">
                     <CgProfile/>
                     My Profile
                 </div>
-                </Link>
-                <Link to="/user/enrolled-courses">
+                </a>
+                <a href="/user/enrolled-courses">
                 <div className="route enrolled-courses">
                     <LiaBookSolid/>
                     Enrolled Courses
                 </div>
-                </Link>
-                <Link to="/user/wishlist">
+                </a>
+                <a href="/user/wishlist">
                 <div className="route wishlist">
                     <FaRegBookmark/>
                     WishList
                 </div>
-                </Link>
-                <Link to="/user/purchase-history">
+                </a>
+                <a href="/user/purchase-history">
                 <div className="route purchase-history">
                     <AiOutlineShoppingCart/>
                     Purchase History
                 </div>
-                </Link>
-                <Link to="/user/mycourses">
+                </a>
+                <a href="/user/mycourses">
                 <div className="route mycourses">
                     <PiStudent/>    
                     Courses
                 </div>
-                </Link>
+                </a>
             </div>
             <hr/>
             <div className="actions">
-                <Link to="/user/settings">
+                <a href="/user/settings">
                 <div className="route settings">
                     <IoSettingsOutline/>
                     Settings
                 </div>
-                </Link>
-                <Link to="/user/logout">
+                </a>
+                <a href="/user/logout">
                 <div className="route log-out">
                     <IoIosLogOut/>
                     Log Out
                 </div>
-                </Link>
+                </a>
             </div>
             </IconContext.Provider>
         </div>

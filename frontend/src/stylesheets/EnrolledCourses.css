@@ -7,18 +7,20 @@
     height: 70px;
     color: var(--text-color);
     display: flex;
+    justify-content: space-between;
     background-color: var(--background-color);
     align-items: center;
     font-size: medium;
     box-sizing: border-box;
     padding: 0px 20px;
 }
-.course-dialog > :nth-child(n+2){
-    margin-left: 10vw;
-}
 .course-info-enrolled{
     display: flex;
     align-items: center;
+    width: 30%;
+}
+.course-progress{
+    width: 15%;
 }
 .course-data-enrolled p{
     display: block;
@@ -28,7 +30,7 @@
     width: 50px;
     height: 50px;
     margin-right: 1vw;
-    border-radius: 50%;
+    border-radius: 10%;
 }
 .course-menu{
     font-size: x-large;
@@ -65,15 +67,16 @@
     right: 0;
     background-color: black;
     border: 2px solid var(--background-color);
+    float: inline-start;
 }
 .menu div{
-    margin: 10px !important;
     display: flex !important;
     align-items: center;
+    padding: 10px;
+    transition: all 200ms ease-in-out;
 }
 .menu div:hover{
-    color: white;
-    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.333);
 }
 .course-menu > *{
     display: none;

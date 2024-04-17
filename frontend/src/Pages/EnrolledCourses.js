@@ -3,7 +3,7 @@ import {useEffect, useRef, useState} from "react";
 import {BarLoader} from "react-spinners";
 import { IoMdCheckmarkCircleOutline,IoIosRemoveCircleOutline } from "react-icons/io";
 import "../stylesheets/EnrolledCourses.css"
-const CourseDialog = (props)=>{
+export const CourseDialog = (props)=>{
     const thisEle = useRef("");
     useEffect(()=>{
         

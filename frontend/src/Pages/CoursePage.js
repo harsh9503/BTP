@@ -7,6 +7,7 @@ import { IoIosArrowDown } from "react-icons/io";
 import { PiMonitorPlayFill } from "react-icons/pi";
 import { CiCircleInfo } from "react-icons/ci";
 import { HiLanguage } from "react-icons/hi2";
+import { FaRegBookmark,FaBookmark } from "react-icons/fa";
 import { ReviewCard } from "./HomePage";
 import axios from "axios";
 const Subsection = (props)=>{
@@ -85,6 +86,7 @@ const CoursePage = ()=>{
     const {courseId} = useParams();
     const [course,setCourse] = useState("");
     const [totalDuration, setTotalDuration] = useState("");
+    const [wished, setWished] = useState("");
     const [cvideos, setCvideos] = useState("");
     let ratings = 0;
     const stars = [];
@@ -92,6 +94,7 @@ const CoursePage = ()=>{
         ratings += ele.rating
     });
     ratings = ratings/course.ratingAndReviews?.length;
+    if(isNaN(ratings)){ratings = 0}
     for(let i=1;i<=5;i++){
         if(i <= ratings) stars.push(<FaStar/>);
         else stars.push(<FaRegStar/>)
@@ -106,10 +109,42 @@ const CoursePage = ()=>{
             setCourse(response.data.data.courseDetails);
             setTotalDuration(response.data.data.totalDuration);
             setCvideos(response.data.data.completedVideos);
+
         }).catch((err)=>{
             window.alert(err);
-        })
+        });
     },[]);
+    useEffect(()=>{
+        axios.get(`${process.env.REACT_APP_BURL}/api/v1/profile/getUserDetails`,{withCredentials:true}).then((res)=>{
+            setWished(res.data?.data?.wishlist.indexOf(courseId) != -1);
+        }).catch((err)=>{
+            console.log(err);
+        })
+        document.getElementsByClassName("bookmark")[0].addEventListener("click",toggleWishlist);
+    },[wished]);
+        const toggleWishlist = ()=>{
+            if(!wished){
+                axios.post(`${process.env.REACT_APP_BURL}/api/v1/profile/addtowishlist`,{
+                    courseId: courseId
+                },{
+                    withCredentials:true
+                }).then((res)=>{
+                    setWished(true);
+                }).catch((err)=>{
+                    console.log(err);
+                })
+            }
+            else{
+                axios.delete(`${process.env.REACT_APP_BURL}/api/v1/profile/removefromwishlist`,{
+                    data:{courseId:courseId}
+                    ,withCredentials:true
+                }).then((res)=>{
+                    setWished(false);
+                }).catch((err)=>{
+                    console.log(err);
+                })
+            }
+        }
     return(
         <div className="course-page-main">
             <div className="course-page-top">
@@ -118,8 +153,9 @@ const CoursePage = ()=>{
                     <span className="text-yellow">{course?course.category.name:""}</span>
                 </div>
                 <div className="course-info">
-                    <h2 className="white">{course.courseName}
+                    <h2 className="white" style={{display:"inline-block"}}>{course.courseName}
                     </h2>
+                    &nbsp;&nbsp;&nbsp;&nbsp;{!wished?<FaRegBookmark className="bookmark" size={"25px"} style={{verticalAlign:"text-middle"}}/>:<FaBookmark className="bookmark" size={"25px"} style={{verticalAlign:"text-middle"}}/>}
                     <div className="course-desc">{course.courseDescription}
                     </div>
                     <div className="course-stars">

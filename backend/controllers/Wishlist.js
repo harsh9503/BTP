@@ -130,7 +130,8 @@ exports.getWishlistDetails = async (req, res) => {
             return {
                 _id: course._id,
                 courseName: course.courseName,
-                instructor: `${course.instructor.firstName} ${course.instructor.lastName}`,
+                thumbnail: course.thumbnail,
+                instructor: `${course?.instructor?.firstName} ${course?.instructor?.lastName}`,
                 price: course.price,
                 avgRating: course.avg_rating.toFixed(2), // Rounded to 2 decimal places
                 totalRatingCount: course.ratingAndReviews.length,

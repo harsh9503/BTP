@@ -1,0 +1,16 @@
+.wishlist-main{
+    padding: 5vh 5vw 0 20vw;
+    color: var(--text-color);
+    width: auto;
+}
+.wishlist-main .course-dialog{
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.wishlist-main .course-instructor{
+    width: 20%;
+}
+
+

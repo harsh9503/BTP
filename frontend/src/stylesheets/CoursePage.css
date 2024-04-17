@@ -193,7 +193,9 @@
     border-radius:30px;
     border: 2px solid white;
 }
-
+.bookmark:hover{
+    cursor: pointer;
+}
 .course-reviews{
     width: 90%;
     display: flex;
