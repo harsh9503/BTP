@@ -1,17 +1,11 @@
 import { useEffect, useState,useRef } from "react";
 import { FaStar, FaRegStar} from "react-icons/fa";
+import {toast} from "react-hot-toast";
 import axios from "axios";
-import { IoMdCheckmarkCircleOutline,IoIosRemoveCircleOutline } from "react-icons/io";
 import "../stylesheets/Wishlist.css";
 import { IconContext } from "react-icons/lib";
 const CourseDialog = (props)=>{
     const thisEle = useRef("");
-    window.onclick= (event)=>{
-        if(!event.target.className.includes("course-menu")){
-            const arr = document.querySelectorAll(".course-menu");
-            arr?.forEach((ele)=>ele.classList.remove("active"));
-        }
-    };
     const stars = [];
     for(let x = 1;x<=5;x++){
         if(x <= props.avgRating) stars.push(<FaStar/>);
@@ -19,11 +13,25 @@ const CourseDialog = (props)=>{
     }
     useEffect(()=>{
         thisEle.current?.addEventListener("click",(event)=>{
-            console.log(event.target);
-            if(event.target.className.includes("course-menu")) return;
+            if(event.target.className === "wishlist-delete"){return;}
             window.location.href = "/course/"+props.id;
-        })
+        });
     },[]);
+    const HandleDelete = ()=>{
+        const promise = axios.delete(`${process.env.REACT_APP_BURL}/api/v1/profile/removefromwishlist`,{
+            data:{courseId:props.id}
+            ,withCredentials:true
+        })
+        toast.promise(promise,{
+            success:()=>{
+                const list = props.currList.filter((ele)=>ele._id!==props.id);
+                props.change(list);
+                return "Course deleted from wishlist"
+            },
+            error: (err)=>err?.response?.data?.message||"Error Occurred",
+            loading:"Deleting"
+        })
+    }
     return (
         <div className="course-dialog" ref={thisEle}>
             <div className="course-info-enrolled" style={{width:"30%"}}>
@@ -40,11 +48,7 @@ const CourseDialog = (props)=>{
             </IconContext.Provider>
                 </div>
             </div>
-            <div className="course-menu" onClick={(event)=>{event.target?.classList?.toggle("active")}}>&#8942;
-                <div className="menu">
-                    <div className="no-margin"><IoMdCheckmarkCircleOutline display={"inline-block"} size={"20px"}/>&nbsp;&nbsp;Mark as Completed</div>
-                    <div className="no-margin"><IoIosRemoveCircleOutline display={"inline-block"} size={"20px"}/>&nbsp;&nbsp;Remove</div>
-                </div>
+            <div className="wishlist-delete" onClick={HandleDelete}>&#10006;
             </div>
         </div>
     )
@@ -72,7 +76,7 @@ const Wishlist = () =>{
                     <div className="wishlist-title" style={{width:"10%"}}>Rating</div>
                 </div>
                 {wishlist.map((ele)=>{
-                    return <CourseDialog instructor={ele.instructor} id={ele._id} coursename={ele.courseName} image={ele.thumbnail} price={ele.price} avgRating={ele.avgRating}/>
+                    return <CourseDialog currList={wishlist} change={setWishlist} instructor={ele.instructor} id={ele._id} coursename={ele.courseName} image={ele.thumbnail} price={ele.price} avgRating={ele.avgRating}/>
                 })}
             </div>
         </div>

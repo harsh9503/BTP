@@ -120,9 +120,10 @@ const CoursePage = ()=>{
         }).catch((err)=>{
             console.log(err);
         })
-        document.getElementsByClassName("bookmark")[0].addEventListener("click",toggleWishlist);
+        if(!wished) document.getElementsByClassName("bookmark")[0].addEventListener("click",toggleWishlist);
+        else document.getElementsByClassName("rbookmark")[0].addEventListener("click",toggleWishlist);
     },[wished]);
-        const toggleWishlist = ()=>{
+        const toggleWishlist = (event)=>{
             if(!wished){
                 axios.post(`${process.env.REACT_APP_BURL}/api/v1/profile/addtowishlist`,{
                     courseId: courseId
@@ -155,7 +156,7 @@ const CoursePage = ()=>{
                 <div className="course-info">
                     <h2 className="white" style={{display:"inline-block"}}>{course.courseName}
                     </h2>
-                    &nbsp;&nbsp;&nbsp;&nbsp;{!wished?<FaRegBookmark className="bookmark" size={"25px"} style={{verticalAlign:"text-middle"}}/>:<FaBookmark className="bookmark" size={"25px"} style={{verticalAlign:"text-middle"}}/>}
+                    &nbsp;&nbsp;&nbsp;&nbsp;{!wished?<FaRegBookmark className="bookmark" size={"25px"} style={{verticalAlign:"text-middle"}}/>:<FaBookmark className="rbookmark" size={"25px"} style={{verticalAlign:"text-middle"}}/>}
                     <div className="course-desc">{course.courseDescription}
                     </div>
                     <div className="course-stars">
