@@ -5,12 +5,33 @@
 }
 .wishlist-main .course-dialog{
     width: 90%;
+}
+
+.wishlist-header{
+    background-color: rgb(66, 72, 86);
+    width: 90%;
+    height: 50px;
+    padding: 0px 20px;
+    box-sizing: border-box;
     display: flex;
-    justify-content: space-between;
+    gap: 5%;
+    justify-content: flex-start;
+    box-sizing: border-box;
+}
+.wishlist-title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.wishlist-main .course-instructor{
-    width: 20%;
+.wishlist-main .course-stars{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0px !important;
+    position: relative;
 }
-
+.wishlist-main .course-stars > *{
+    margin-left: 0;
+}
 

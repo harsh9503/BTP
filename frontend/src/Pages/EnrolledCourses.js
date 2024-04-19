@@ -10,15 +10,15 @@ export const CourseDialog = (props)=>{
     },[]);
     return (
         <div className="course-dialog" ref={thisEle}>
-            <div className="course-info-enrolled">
+            <div className="course-info-enrolled" style={{width:"30%"}}>
                 <img className="course-icon" src={props.image}></img>
                 <div className="course-data-enrolled">
                     <p className="no-margin">{props.coursename}</p>
                     <p className="no-margin">{props.description.length>=25?props.description.slice(0,25)+"...":props.description}</p>
                 </div>
             </div>
-            <div className="course-duration">{props.duration}</div>
-            <div className="course-progress">
+            <div className="course-duration" style={{width:"20%"}}>{props.duration}</div>
+            <div className="course-progress" style={{width:"10%"}}>
                 <label className="no-margin text-yellow">Progress: {props.progressPercentage}%</label><br/>
                 <progress className="course-progress-bar" max={100} value={props.progressPercentage}></progress>
             </div>
