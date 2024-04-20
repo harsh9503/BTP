@@ -13,6 +13,8 @@ import Profile from './Pages/Profile.js';
 import {EnrolledCourses} from './Pages/EnrolledCourses.js';
 import { SideBar } from './Pages/SideBar.js';
 import Wishlist from './Pages/Wishlist.js';
+import Footer from './Pages/Footer.js';
+
 const router = createBrowserRouter([
   {
     path:"/signup",
@@ -67,6 +69,13 @@ const HeaderRouter = createBrowserRouter([
       element: <Header page="signup"/>
     }
 ])
+const FooterRouter = createBrowserRouter([
+  {
+    path: "*",
+    element: <Footer />,
+  },
+]);
+
 const sideRouter = createBrowserRouter([
   {
     path:"/user/:userPath",
@@ -83,6 +92,7 @@ function App() {
       <RouterProvider router={HeaderRouter}/>
         <RouterProvider router={sideRouter}/>
         <RouterProvider router={router}/>
+        <RouterProvider router={FooterRouter}/>
     </div>
   );
 }
