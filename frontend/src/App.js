@@ -71,9 +71,17 @@ const HeaderRouter = createBrowserRouter([
 ])
 const FooterRouter = createBrowserRouter([
   {
-    path: "*",
+    path: "/",
     element: <Footer />,
   },
+  {
+    path: "/course/:courseId",
+    element: <Footer />,
+  },
+  {
+    path: "/catalog/:catalogId",
+    element: <Footer />,
+  }
 ]);
 
 const sideRouter = createBrowserRouter([
