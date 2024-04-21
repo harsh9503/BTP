@@ -14,6 +14,7 @@ import {EnrolledCourses} from './Pages/EnrolledCourses.js';
 import { SideBar } from './Pages/SideBar.js';
 import Wishlist from './Pages/Wishlist.js';
 import Footer from './Pages/Footer.js';
+import Contact from './Pages/Contact.js';
 
 const router = createBrowserRouter([
   {
@@ -23,8 +24,7 @@ const router = createBrowserRouter([
   {
     path:"/login",
     element:<LoginPage request="login"/>
-  }
-  ,
+  },
   {
     path:"/verify",
     element: <VerifyCard/>
@@ -57,6 +57,9 @@ const router = createBrowserRouter([
   },{
     path:"/user/wishlist",
     element:<Wishlist/>
+  },{
+    path:"/contact",
+    element:<Contact/>
   }
 ])
 const HeaderRouter = createBrowserRouter([
@@ -81,6 +84,10 @@ const FooterRouter = createBrowserRouter([
   {
     path: "/catalog/:catalogId",
     element: <Footer />,
+  },
+  {
+    path: "/contact",
+    element: <Footer />,
   }
 ]);
 
@@ -94,6 +101,7 @@ const sideRouter = createBrowserRouter([
     element:<></>
   }
 ])
+
 function App() {
   return (
     <div className="App">
