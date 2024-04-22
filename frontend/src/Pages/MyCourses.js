@@ -8,7 +8,7 @@ import { PiMonitorPlayFill } from "react-icons/pi";
 const Subsection = (props)=>{
     return (
       <div className="subsection">
-          <NavLink to={"/../subSection/"+props.id}>
+          <NavLink to={"../subSection/"+props.id}>
           <div className="subsection-main">
               <PiMonitorPlayFill/>&nbsp;&nbsp;
               <p className="title">{`${props.title}`}</p>&nbsp;&nbsp;

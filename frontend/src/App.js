@@ -61,7 +61,7 @@ const router = createBrowserRouter([
   },{
     path:"/user/mycourses/:courseId/subSection?/:subSectionId?",
     element:<MyCourses/>,
-
+  },{
     path:"/contact",
     element:<Contact/>
   }
