@@ -14,6 +14,9 @@ import {EnrolledCourses} from './Pages/EnrolledCourses.js';
 import { SideBar } from './Pages/SideBar.js';
 import Wishlist from './Pages/Wishlist.js';
 import MyCourses from './Pages/MyCourses.js';
+import Footer from './Pages/Footer.js';
+import Contact from './Pages/Contact.js';
+
 const router = createBrowserRouter([
   {
     path:"/signup",
@@ -22,8 +25,7 @@ const router = createBrowserRouter([
   {
     path:"/login",
     element:<LoginPage request="login"/>
-  }
-  ,
+  },
   {
     path:"/verify",
     element: <VerifyCard/>
@@ -58,7 +60,10 @@ const router = createBrowserRouter([
     element:<Wishlist/>
   },{
     path:"/user/mycourses/:courseId/subSection?/:subSectionId?",
-    element:<MyCourses/>
+    element:<MyCourses/>,
+
+    path:"/contact",
+    element:<Contact/>
   }
 ])
 const HeaderRouter = createBrowserRouter([
@@ -71,6 +76,25 @@ const HeaderRouter = createBrowserRouter([
       element: <Header page="signup"/>
     }
 ])
+const FooterRouter = createBrowserRouter([
+  {
+    path: "/",
+    element: <Footer />,
+  },
+  {
+    path: "/course/:courseId",
+    element: <Footer />,
+  },
+  {
+    path: "/catalog/:catalogId",
+    element: <Footer />,
+  },
+  {
+    path: "/contact",
+    element: <Footer />,
+  }
+]);
+
 const sideRouter = createBrowserRouter([
   {
     path:"/user/:userPath",
@@ -81,12 +105,14 @@ const sideRouter = createBrowserRouter([
     element:<></>
   }
 ])
+
 function App() {
   return (
     <div className="App">
       <RouterProvider router={HeaderRouter}/>
         <RouterProvider router={sideRouter}/>
         <RouterProvider router={router}/>
+        <RouterProvider router={FooterRouter}/>
     </div>
   );
 }
