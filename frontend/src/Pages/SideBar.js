@@ -7,7 +7,7 @@ import { AiOutlineShoppingCart } from "react-icons/ai";
 import { PiStudent } from "react-icons/pi";
 import { IoSettingsOutline } from "react-icons/io5";
 import { IoIosLogOut } from "react-icons/io";
-import {useParams, a} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import { useEffect } from "react";
 import { useCookies } from "react-cookie";
 export const SideBar = ()=>{
