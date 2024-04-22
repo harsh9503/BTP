@@ -13,6 +13,7 @@ import Profile from './Pages/Profile.js';
 import {EnrolledCourses} from './Pages/EnrolledCourses.js';
 import { SideBar } from './Pages/SideBar.js';
 import Wishlist from './Pages/Wishlist.js';
+import MyCourses from './Pages/MyCourses.js';
 const router = createBrowserRouter([
   {
     path:"/signup",
@@ -55,6 +56,9 @@ const router = createBrowserRouter([
   },{
     path:"/user/wishlist",
     element:<Wishlist/>
+  },{
+    path:"/user/mycourses/:courseId/subSection?/:subSectionId?",
+    element:<MyCourses/>
   }
 ])
 const HeaderRouter = createBrowserRouter([

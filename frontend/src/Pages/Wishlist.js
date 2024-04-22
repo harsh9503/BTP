@@ -68,7 +68,7 @@ const Wishlist = () =>{
                     Home / Dashboard / <span className="text-yellow">Wishlist</span>
             </div>
             <h2 className="white">Wishlist</h2>
-            <div className="wishlist-container">
+            {wishlist.length ? <div className="wishlist-container">
                 <div className="wishlist-header">
                     <div className="wishlist-title" style={{width:"30%"}}>Title</div>
                     <div className="wishlist-title" style={{width:"20%"}}>Instructor</div>
@@ -78,7 +78,7 @@ const Wishlist = () =>{
                 {wishlist.map((ele)=>{
                     return <CourseDialog currList={wishlist} change={setWishlist} instructor={ele.instructor} id={ele._id} coursename={ele.courseName} image={ele.thumbnail} price={ele.price} avgRating={ele.avgRating}/>
                 })}
-            </div>
+            </div> : "Wishlist is Empty!"}
         </div>
     )
 }

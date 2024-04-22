@@ -1,0 +1,42 @@
+.mycourse-main{
+    width: 100%;
+    color: var(--text-color);
+    display:flex;
+    height: 100%;
+}
+.mycourse-main .section{
+    width: 100%;
+    font-size: 1.2ch;
+    box-sizing: border-box;
+}
+.mycourse-main .section-name{
+    vertical-align: text-top;
+}
+.mycourse-main .sections{
+    margin-top: 10px;
+}
+.mycourse-main .subsections{
+    border: none;
+    font-size: inherit;
+}
+.mycourse-main .subsection-description{
+    font-size: inherit;
+}
+.mycourse-main .section-name{
+    padding: 2vh 20px;
+}
+.mycourse-sidebar{
+    width: 20%;
+    background-color: var(--background-color);
+    height: 100%;
+}
+.mycourse-title{
+    padding: 2.5vh 0;
+    font-size: small;
+    margin: 0px auto;
+    width: fit-content;
+
+}
+.subsection :any-link{
+    appearance: none;
+}
