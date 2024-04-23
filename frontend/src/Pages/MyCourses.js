@@ -14,7 +14,7 @@ const Subsection = (props)=>{
       <div className="subsection">
           <div className="subsection-main">
               <PiMonitorPlayFill/>&nbsp;&nbsp;
-              <NavLink to="" onClick={()=>props.onClick()}>
+              <NavLink to="#" onClick={()=>props.onClick()} className={isActive=>isActive?"active":""}>
               <p className="title">{`${props.title}`}</p>
               </NavLink>&nbsp;&nbsp;
               <IoIosArrowDown onClick={(event)=>event.target.parentElement.toggleAttribute("active")}/>
@@ -121,6 +121,15 @@ const MyCourses = ()=>{
             setCourse(response.data.data.courseDetails);
             toast.dismiss();
         }).catch((err)=>console.log(err));
+        window.addEventListener("keydown",(e)=>{
+            
+            if(e.code === "ArrowRight"){
+                handleSkip({target:{dataset:{skip:"+10"}}});
+            }
+            if(e.code === "ArrowLeft"){
+                handleSkip({target:{dataset:{skip:"-10"}}});
+            }
+        })
     },[]);
     useEffect(()=>{
         toggleButton.current.addEventListener("click",togglePlay);
@@ -154,6 +163,20 @@ const MyCourses = ()=>{
             mousedown = false;
         })
     },[lecture]);
+    const getTime = (time)=>{
+        time = Number.parseInt(time);
+        console.log(typeof time);
+        const ans = [0,0,0];
+        ans[2] = String(time%60).padStart(2,"0");
+        time=(time/60)|0;
+        ans[1] = String(time%60).padStart(2,"0");
+        time=(time/60)|0;
+        ans[0] = time;
+        if(ans[0] && ans[0] <= 9) ans[0] = "0"+ans[0].toString();
+        let str = `${ans[1]}:${ans[2]}`;
+        if(ans[0]) str = `${ans[0]}:${str}`;
+        return str;
+    }
     return (
         <div className="mycourse-main">
             <div className="mycourse-sidebar">
@@ -182,6 +205,7 @@ const MyCourses = ()=>{
                         <button type="button" ref={toggleButton}><IoPlaySkipForwardSharp/></button>
                         <button type="button" ref={toggleButton}>{button}</button>
                         <button type="button" ref={toggleButton}><IoPlaySkipForwardSharp/></button>
+                        <span className="time-frame">{`${getTime(player.current.currentTime)} / ${getTime(player.current.duration)}`}</span>
                         <FaVolumeHigh/><input type="range" name="volume" className="controls__slider" min="0" max="1" step="0.05" defaultValue="1"/>
                         {`Speed: ${player.current.playbackRate}x`}<input type="range" name="playbackRate" className="controls__slider" min="0.5" max="2" step="0.5" defaultValue="1"/>
                         <button className="controls__button" data-skip="-10">« 10s</button>

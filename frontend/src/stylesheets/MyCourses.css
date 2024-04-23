@@ -107,3 +107,6 @@
     transform: translateX(50%);
     transform-origin: center;
 }
+.mycourse-sidebar a.active{
+    color: var(--highlight-color);  
+}
