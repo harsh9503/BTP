@@ -6,7 +6,7 @@
 }
 .mycourse-main .section{
     width: 100%;
-    font-size: 1.2ch;
+    font-size: small;
     box-sizing: border-box;
 }
 .mycourse-main .section-name{
@@ -17,7 +17,7 @@
 }
 .mycourse-main .subsections{
     border: none;
-    font-size: inherit;
+    font-size: small;
 }
 .mycourse-main .subsection-description{
     font-size: inherit;
@@ -49,7 +49,6 @@
     flex-wrap: wrap;
     width: 100%;
     align-items: center;
-    display: none;
 }
 .video-player{
     position: relative;
@@ -108,5 +107,23 @@
     transform-origin: center;
 }
 .mycourse-sidebar a.active{
-    color: var(--highlight-color);  
+    color: var(--highlight-color) !important;  
+}
+.completed , .completed + a{
+    color: rgb(5, 166, 80);
+}
+.video-completed{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.568);
+    top:0;
+    z-index: 99999;
+    justify-content: center;
+    align-items: center;
+    display: none;
+}
+.video-completed .btn{
+    width:10%;
+    font-size: medium;
 }

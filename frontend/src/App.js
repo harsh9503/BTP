@@ -59,7 +59,7 @@ const router = createBrowserRouter([
     path:"/user/wishlist",
     element:<Wishlist/>
   },{
-    path:"/user/mycourses/:courseId/subSection?/:subSectionId?",
+    path:"/user/mycourses/:courseId/:subSectionId?",
     element:<MyCourses/>,
   },{
     path:"/contact",
