@@ -16,7 +16,7 @@ const Subsection = (props)=>{
       <div className="subsection">
           <div className="subsection-main" completed={completed?"true":"false"}>
               {completed?<ImCheckboxChecked className="completed"/>:<PiMonitorPlayFill/>}&nbsp;&nbsp;
-              <NavLink to={"/user/mycourses/"+props.cid+"/"+props.id} onClick={()=>props.onClick()}>
+              <NavLink to={"/user/mycourses/"+props.cid+"/"+props.id} onClick={()=>props.onClick()} on={()=>{props.onClick();console.log("YES!")}}>
               <p className="title">{`${props.title}`}</p>
               </NavLink>&nbsp;&nbsp;
               <IoIosArrowDown onClick={(event)=>event.target.parentElement.toggleAttribute("active")}/>
@@ -68,7 +68,7 @@ const Section = (props)=>{
 return(
     <div className="section">
         <div className="section-name" onClick={(event)=>{event.target.parentElement.toggleAttribute("active");}}>
-         <IoIosArrowDown/>&nbsp;&nbsp;{props.sectionName}
+         <IoIosArrowDown size={"25px"}/>&nbsp;&nbsp;{props.sectionName}
          <div className="section-info text-yellow">
             &nbsp; &nbsp;{totalDur[0]?`${totalDur[0]}h`:""}
             {totalDur[1]?`${totalDur[1]}m`:""}
@@ -145,7 +145,6 @@ const MyCourses = ()=>{
         player.current.addEventListener("play",updateToggleButton);
         player.current.addEventListener("pause",updateToggleButton);
         player.current.addEventListener("timeupdate",handleProgress);
-
         player.current.addEventListener("ended",()=>{
             layer.current.style.display = "flex";
             handleComplete();
@@ -204,7 +203,6 @@ const MyCourses = ()=>{
                 </div>
             <div className="mycourse-content">
                 <div className="video-player" key={lecture?.videoUrl}>
-                    {lecture?.videoUrl}
                     <video className="lecture" ref={player} key={lecture}>
                         <source src={lecture?.videoUrl} type="video/mp4"/>
                         <p>Sorry! Your browser doesn't support playing HTML5 videos.</p>
@@ -229,6 +227,10 @@ const MyCourses = ()=>{
                         <button type="button" className="btn btn-semisquare" onClick={(event)=>{player.current.currentTime = 0; setCounter(0); event.target.parentElement.style.display = "none"}}>Replay</button>
                     </div>
                 </div>
+                <span className="lecture-description">
+                        {lecture?.title}<br/>
+                        {lecture?.description}
+                </span>
             </div>
         </div>
     )
