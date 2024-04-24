@@ -7,7 +7,6 @@ import { MdOutlineShoppingCart } from "react-icons/md";
 import { IconContext } from "react-icons";
 import { useEffect,useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
 
 const Header = (props)=>{
     const [cookie,setCookie] =useCookies(['user-data']);
