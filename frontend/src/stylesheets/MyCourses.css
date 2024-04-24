@@ -1,6 +1,7 @@
 .mycourse-main{
     width: 100%;
     color: var(--text-color);
+    background-color: black;
     display:flex;
     height: 100%;
 }
@@ -72,6 +73,20 @@
 .progress + * :nth-child(1){
     transform: rotateZ(90deg);
     transform-origin: center;
+}
+.video-player video{
+    width: 100%;
+}
+.video-player button:not(.btn){
+    padding: 0;
+    border: none;
+    background: none;
+    color: white;
+}
+.btn a{
+    text-decoration: none;
+    color: inherit;
+    font-weight: unset;
 }
 .progress__filled{
     width: 50%;

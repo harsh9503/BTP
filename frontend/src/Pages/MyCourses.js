@@ -59,7 +59,7 @@ const Section = (props)=>{
     let totalDur = [0,0,0];
     const temp = props.subsections?.map((ele,idx)=>{
         totalDur = add(totalDur,parseString(ele.timeDuration));
-        return <Subsection cvideos={props.cvideos} cid={props.cid} onClick={()=>{props.setLecture(ele)}} id={ele._id} title={ele.title} duration={ele.timeDuration} description={ele.description} url={ele.videoUrl}/>
+        return <Subsection cvideos={props.cvideos} cid={props.cid} onClick={()=>{props.setLecture(ele); props.nextVideo.current=props.subsections[idx+1]||props.next}} id={ele._id} title={ele.title} duration={ele.timeDuration} description={ele.description} url={ele.videoUrl}/>
     });
     totalDur[1] += parseInt(totalDur[2]/60);
     totalDur[0] += parseInt(totalDur[1]/60);
@@ -90,7 +90,7 @@ const MyCourses = ()=>{
     const [counter, setCounter] = useState(0);
     const [cvideos, setCvideos] = useState([]);
     let player = useRef(""), toggleButton=useRef(""), progress=useRef(""), progressBar=useRef("");
-    let layer = useRef("");
+    let layer = useRef(""), nextVideo = useRef("");
     const togglePlay = ()=>{
         if(player.current.paused || player.current.ended){
             player.current.play();
@@ -123,9 +123,6 @@ const MyCourses = ()=>{
             loading: "Please Wait!"
         })
     }
-    const goto = ()=>{
-
-    } 
     useEffect(()=>{
         axios.post(`${process.env.REACT_APP_BURL}/api/v1/course/getFullCourseDetails`,{courseId:courseId},{withCredentials:true}).then((response)=>{
             setCourse(response.data.data.courseDetails);
@@ -148,6 +145,7 @@ const MyCourses = ()=>{
         player.current.addEventListener("play",updateToggleButton);
         player.current.addEventListener("pause",updateToggleButton);
         player.current.addEventListener("timeupdate",handleProgress);
+
         player.current.addEventListener("ended",()=>{
             layer.current.style.display = "flex";
             handleComplete();
@@ -200,7 +198,7 @@ const MyCourses = ()=>{
                 <hr style={{position:"static",width:"90%",marginLeft:"auto",marginRight:"auto"}}/>
                 <div className="sections">
                     {course?.courseContent?.map((ele,idx)=>{
-                    return <Section cvideos={cvideos} cid={courseId} setLecture={setLecture} sid={idx} sectionName={ele.sectionName} subsections={ele.subSection}/>
+                    return <Section nextVideo={nextVideo} next={course?.courseContent[idx+1]?course?.courseContent[idx+1].subSection[0]:null} cvideos={cvideos} cid={courseId} setLecture={setLecture} sid={idx} sectionName={ele.sectionName} subsections={ele.subSection}/>
                     })}
                     </div>
                 </div>
@@ -227,9 +225,7 @@ const MyCourses = ()=>{
                         </IconContext.Provider>
                     </div>
                     <div className="video-completed" ref={layer}>
-                        <button type="button" className="btn btn-semisquare yellow" onClick={(event)=>{
-
-                        }}>Next</button>
+                        <button type="button" className="btn btn-semisquare yellow"><NavLink to={`/user/mycourses/${courseId}/${nextVideo.current._id}`} onClick={()=>{setLecture(nextVideo.current);setCounter(0);player.current.currentTime=0;}}>Next</NavLink></button>
                         <button type="button" className="btn btn-semisquare" onClick={(event)=>{player.current.currentTime = 0; setCounter(0); event.target.parentElement.style.display = "none"}}>Replay</button>
                     </div>
                 </div>
