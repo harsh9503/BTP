@@ -208,7 +208,7 @@ const MyCourses = ()=>{
                     </div>
                 </div>
             <div className="mycourse-content">
-                <div className="video-player" key={lecture?.videoUrl}>
+                    <div className="video-player" key={lecture?.videoUrl} style={{display:lecture?"block":"none"}}>
                     <video className="lecture" ref={player} key={lecture}>
                         <source src={lecture?.videoUrl} type="video/mp4"/>
                         <p>Sorry! Your browser doesn't support playing HTML5 videos.</p>
@@ -232,6 +232,10 @@ const MyCourses = ()=>{
                         <button type="button" className="btn btn-semisquare yellow"><NavLink to={`/user/mycourses/${courseId}/${nextVideo.current?._id}`} onClick={()=>{setLecture(nextVideo.current);setCounter(0);player.current.currentTime=0;}}>Next</NavLink></button>
                         <button type="button" className="btn btn-semisquare" onClick={(event)=>{player.current.currentTime = 0; setCounter(0); event.target.parentElement.style.display = "none"}}>Replay</button>
                     </div>
+                </div>
+                <div className="course" style={{display:lecture?"none":"block"}}>
+                    <h2 className="white">{course?.courseName}</h2>
+                    {course?.instructor?.firstName+" "+course?.instructor?.lastName}
                 </div>
                 <span className="lecture-description">
                         {lecture?.title}<br/>

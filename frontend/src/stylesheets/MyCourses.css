@@ -29,7 +29,10 @@
 .mycourse-sidebar{
     width: 30%;
     background-color: var(--background-color);
-    height: 100%;
+    height: calc(100vh - 61px);
+    position: sticky;
+    top:61px;
+    overflow-y: auto;
 }
 .mycourse-title{
     padding: 2.5vh 1vw;
