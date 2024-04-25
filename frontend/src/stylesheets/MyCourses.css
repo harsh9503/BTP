@@ -32,16 +32,26 @@
     height: 100%;
 }
 .mycourse-title{
-    padding: 2.5vh 0;
+    padding: 2.5vh 1vw;
     font-size: small;
-    margin: 0px auto;
     width: fit-content;
-
+    display: flex;
+    justify-content: space-between;
+}
+.mycourse-title span.completed{
+    color: rgb(6, 181, 6);
+}
+.mycourse-title span{
+    font-size: medium;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+.mycourse-title span:first-child{
+    width: 95%;
+    text-overflow: ellipsis;
 }
 .subsection :any-link{
     appearance: none;
 }
-
 .controls{
     display: none;
     position: absolute;

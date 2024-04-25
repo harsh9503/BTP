@@ -66,9 +66,9 @@ const Section = (props)=>{
     totalDur[2] %= 60;
     totalDur[1] %= 60;
 return(
-    <div className="section">
-        <div className="section-name" onClick={(event)=>{event.target.parentElement.toggleAttribute("active");}}>
-         <IoIosArrowDown size={"25px"}/>&nbsp;&nbsp;{props.sectionName}
+    <div className="section" active="true">
+        <div className="section-name">
+         {props.sectionName}
          <div className="section-info text-yellow">
             &nbsp; &nbsp;{totalDur[0]?`${totalDur[0]}h`:""}
             {totalDur[1]?`${totalDur[1]}m`:""}
@@ -89,6 +89,10 @@ const MyCourses = ()=>{
     const [button, setButton] = useState(<FaPlay/>);
     const [counter, setCounter] = useState(0);
     const [cvideos, setCvideos] = useState([]);
+    
+    let tVideos = 0;
+    course?.courseContent?.map((ele)=>tVideos+=ele.subSection.length);
+
     let player = useRef(""), toggleButton=useRef(""), progress=useRef(""), progressBar=useRef("");
     let layer = useRef(""), nextVideo = useRef("");
     const togglePlay = ()=>{
@@ -158,8 +162,8 @@ const MyCourses = ()=>{
             ele.addEventListener("click",handleSkip);
         })
         document.querySelector(".progress").addEventListener(("click"),(event)=>{
-            setCounter((event.offsetX/1000)*100);
-            player.current.currentTime = ((event.offsetX/1000)*player.current.duration).toFixed(4);
+            setCounter((event.offsetX/event.currentTarget.offsetWidth)*100);
+            player.current.currentTime = ((event.offsetX/event.currentTarget.offsetWidth)*player.current.duration).toFixed(4);
         })
         let mousedown = false;
         document.querySelector(".progress").addEventListener(("mousedown"),(event)=>{
@@ -192,11 +196,13 @@ const MyCourses = ()=>{
         <div className="mycourse-main">
             <div className="mycourse-sidebar">
                 <div className="mycourse-title">
-                    {course?.courseName}
+                    <span style={{textOverflow:"ellipsis", maxWidth:"80%"}} >{course?.courseName}</span>&nbsp; &nbsp;
+                    <span className={`${tVideos === cvideos.length && "completed"}`}>{`${cvideos.length}/${tVideos}`}</span>
                 </div>
                 <hr style={{position:"static",width:"90%",marginLeft:"auto",marginRight:"auto"}}/>
                 <div className="sections">
                     {course?.courseContent?.map((ele,idx)=>{
+                    tVideos += ele.subSection.length;
                     return <Section nextVideo={nextVideo} next={course?.courseContent[idx+1]?course?.courseContent[idx+1].subSection[0]:null} cvideos={cvideos} cid={courseId} setLecture={setLecture} sid={idx} sectionName={ele.sectionName} subsections={ele.subSection}/>
                     })}
                     </div>
@@ -223,13 +229,17 @@ const MyCourses = ()=>{
                         </IconContext.Provider>
                     </div>
                     <div className="video-completed" ref={layer}>
-                        <button type="button" className="btn btn-semisquare yellow"><NavLink to={`/user/mycourses/${courseId}/${nextVideo.current._id}`} onClick={()=>{setLecture(nextVideo.current);setCounter(0);player.current.currentTime=0;}}>Next</NavLink></button>
+                        <button type="button" className="btn btn-semisquare yellow"><NavLink to={`/user/mycourses/${courseId}/${nextVideo.current?._id}`} onClick={()=>{setLecture(nextVideo.current);setCounter(0);player.current.currentTime=0;}}>Next</NavLink></button>
                         <button type="button" className="btn btn-semisquare" onClick={(event)=>{player.current.currentTime = 0; setCounter(0); event.target.parentElement.style.display = "none"}}>Replay</button>
                     </div>
                 </div>
                 <span className="lecture-description">
                         {lecture?.title}<br/>
                         {lecture?.description}
+                        <div className="instructions">
+                            {course?.instructions?.map((ele)=><p>{ele}</p>)}
+                        </div>
+                        {new Date(course?.createdAt).toLocaleDateString('en-US',{dateStyle:"medium"})}
                 </span>
             </div>
         </div>
