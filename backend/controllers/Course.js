@@ -297,27 +297,65 @@ exports.getFullCourseDetails = async (req, res) => {
 exports.getInstructorCourses = async (req, res) => {
   try {
     // Get the instructor ID from the authenticated user or request body
-    const instructorId = req.user.id
+    const instructorId = req.user.id;
 
     // Find all courses belonging to the instructor
     const instructorCourses = await Course.find({
       instructor: instructorId,
-    }).sort({ createdAt: -1 })
+    }).sort({ createdAt: -1 });
 
-    // Return the instructor's courses
+    // Loop through each course to calculate total duration
+    const coursesWithDuration = await Promise.all(instructorCourses.map(async (course) => {
+      // Find all sections of the current course
+      const sections = await Section.find({ _id: { $in: course.courseContent } });
+
+      // Calculate total duration for each course
+      let totalDurationInSeconds = 0;
+      for (const section of sections) {
+        // Find all subsections of the current section
+        const subsections = await SubSection.find({ _id: { $in: section.subSection } });
+
+        // Sum up the durations of all subsections
+        subsections.forEach(subSection => {
+          // Parse the timeDuration string to get hours, minutes, and seconds
+          const timeParts = subSection.timeDuration.match(/\d+\s*[hms]/g);
+          timeParts.forEach(part => {
+            const value = parseInt(part);
+            if (part.includes('h')) {
+              totalDurationInSeconds += value * 3600; // Convert hours to seconds
+            } else if (part.includes('m')) {
+              totalDurationInSeconds += value * 60; // Convert minutes to seconds
+            } else if (part.includes('s')) {
+              totalDurationInSeconds += value; // Seconds
+            }
+          });
+        });
+      }
+
+      // Convert total duration to hours, minutes, and seconds format
+      const hours = Math.floor(totalDurationInSeconds / 3600);
+      const minutes = Math.floor((totalDurationInSeconds % 3600) / 60);
+      const seconds = totalDurationInSeconds % 60;
+
+      // Add total duration to the course object
+      return { ...course.toObject(), totalDuration: `${hours}h ${minutes}m ${seconds}s` };
+    }));
+
+    // Return the instructor's courses with total duration
     res.status(200).json({
       success: true,
-      data: instructorCourses,
-    })
+      data: coursesWithDuration,
+    });
   } catch (error) {
-    console.error(error)
+    console.error(error);
     res.status(500).json({
       success: false,
       message: "Failed to retrieve instructor courses",
       error: error.message,
-    })
+    });
   }
-}
+};
+
 
 //-------------------------------------------------------------------------------------
 
