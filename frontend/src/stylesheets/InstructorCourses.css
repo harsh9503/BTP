@@ -125,11 +125,41 @@
 .addcourse-main .tag{
     width: fit-content;
     box-sizing: border-box;
-    padding: 5px 4px;
+    padding: 5px 6px;
     background-color: rgb(57, 57, 72);
     border-radius: 20px;
     margin: 0 8px 8px 0;
+    display: flex;
+    align-items: center;
 }
-.addcourse-main .tag:hover{
+.addcourse-main .tag svg{
+    padding: 2px;
+}
+.addcourse-main .tag:hover svg{
     cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.341);
+    border-radius: 50%;
+}
+.cloud-icon{
+    background-color: black;
+    color: var(--highlight-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+.course-image-div{
+    width:100%;
+    min-height: 20vh;
+    padding: 15px;
+    background-color:rgba(63, 70, 79, 0.579); 
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    color: var(--text-color);
 }

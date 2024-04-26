@@ -6,6 +6,7 @@ import { GoCalendar, GoCheckCircleFill } from "react-icons/go";
 import { BarLoader } from "react-spinners";
 import { FaAngleLeft } from "react-icons/fa";
 import { catContext } from "../App";
+import { CiCloudOn } from "react-icons/ci";
 import { FaX } from "react-icons/fa6";
 
 /**
@@ -79,8 +80,15 @@ const AddCourseDetails = ()=>{
             <label>Tags:*</label>
             <div className="tags">{tags.map((ele,idx)=><div className="tag">{ele} &nbsp;<FaX size={"10px"} onClick={()=>deleteTag(idx)}/>&nbsp;</div>)}</div>
             <input type="text" placeholder="Enter Tags" ref={tagInput} onKeyDown={addTag}/>
-            <label>Course Thumbnail:*</label>
-            <input type="file" placeholder="Enter Course Title" required/>
+            <label htmlFor="course-image">Course Thumbnail:*
+                <div className="course-image-div">
+                    <div className="cloud-icon"><CiCloudOn size={"30px"}/></div>
+                    Drag and drop an image, or Click Here.<br/>
+                    <span>Max 6MB</span>
+                    <p><span>&middot; Aspect ratio 16:9</span><span> &middot; Recommended size 1024x576</span></p>
+                </div>
+            </label>
+            <input type="file" placeholder="Enter Course Thumbnail" id="course-image" required/>
             <label>Benefits of the Course:*</label>
             <input type="text" placeholder="Enter Benefits" required/>
             <label>Requirements / Instructions*</label>
