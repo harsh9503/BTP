@@ -19,10 +19,11 @@ export const SideBar = ()=>{
     if(!cookie["user-data"]){
         return <></>;
     }
+    let isStudent = cookie['user-data'].accountType === "Student";
     return (
         <div className="sidebar-main">
             <IconContext.Provider value={{style:{marginRight:"10px"},size:"20px"}}>
-            <div className="user-routes">
+            {isStudent?<div className="user-routes">
                 <a href="/user/profile">
                 <div className="route profile">
                     <CgProfile/>
@@ -53,7 +54,23 @@ export const SideBar = ()=>{
                     Courses
                 </div>
                 </a>
-            </div>
+            </div>:
+            <div className="instructor-routes">
+                <a href="/user/profile">
+                <div className="route profile">
+                    <CgProfile/>
+                    My Profile
+                </div>
+                </a>
+                <hr/>
+                <span className="white" style={{marginLeft:"25px"}}>Instructor</span>
+                <a href="/user/mycourses">
+                <div className="route enrolled-courses">
+                    <LiaBookSolid/>
+                    My Courses
+                </div>
+                </a>
+            </div>}
             <hr/>
             <div className="actions">
                 <a href="/user/settings">
@@ -62,7 +79,7 @@ export const SideBar = ()=>{
                     Settings
                 </div>
                 </a>
-                <a href="/user/logout">
+                <a href="">
                 <div className="route log-out">
                     <IoIosLogOut/>
                     Log Out

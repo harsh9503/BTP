@@ -1,0 +1,50 @@
+.instructor-courses-main{
+    width: auto;
+    display: block;
+    padding: 5vh 20vw;
+}
+
+.instructor-courses-main .course-data{
+    height: 200px;
+    color: white;
+    display: grid;
+    grid-template-columns: 60% repeat(3,1fr);
+    width: 100%;
+}
+.instructor-courses-main .course-icon{
+    width: 45%;
+    height: 30%;
+    object-fit: contain;
+    border-radius: 10px;
+}
+.course-data-enrolled{
+    display: grid;
+    grid-template-rows: 20% auto 1fr 1fr;
+    row-gap: 5px;
+}
+.instructor-courses-main .course-data h3{
+    margin: 0;
+    margin-bottom: 5px;
+}
+.course-data-enrolled p{
+    color: var(--text-color);
+}
+.course-data-enrolled h3{
+    font-weight: bold;
+}
+.published{
+    color: yellow;
+}
+.drafted{
+    color: rgb(230, 100, 100);
+}
+.status-div{
+    display: flex;
+    align-items: center;
+    background-color: rgb(58, 58, 83);
+    width: fit-content;
+    padding: 0px 8px;
+    box-sizing: border-box;
+    font-size: small;
+    border-radius: 20px;
+}
