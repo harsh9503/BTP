@@ -5,12 +5,12 @@ import { useCookies } from "react-cookie";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { IconContext } from "react-icons";
-import { useEffect,useState } from "react";
+import { useEffect,useState, useContext} from "react";
+import { catContext } from "../App";
 import axios from "axios";
-
 const Header = (props)=>{
     const [cookie,setCookie] =useCookies(['user-data']);
-    const [cats, setCats] = useState([]);
+    const {cats, setCats} = useContext(catContext); 
     useEffect(()=>{
         axios.get(`${process.env.REACT_APP_BURL}/api/v1/course/showAllCategories`).then((res)=>{
             const jsx = res.data.data.map((ele,idx)=>{

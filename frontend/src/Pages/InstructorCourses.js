@@ -1,9 +1,12 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "../stylesheets/InstructorCourses.css"
 import axios from "axios";
 import toast from "react-hot-toast";
 import { GoCalendar, GoCheckCircleFill } from "react-icons/go";
 import { BarLoader } from "react-spinners";
+import { FaAngleLeft } from "react-icons/fa";
+import { catContext } from "../App";
+
 /**
  * @param image image
  * @param coursename
@@ -28,6 +31,46 @@ const CourseDialog = (props)=>{
         </div>
     )
 }
+const CreateCourse = ()=>{
+    return(
+        <div className="create-course-main">
+            <div className="back-button"><FaAngleLeft/> Back to Dashboard</div>
+            <div className="course-tracker">
+                <div className="course-circle">1</div>
+                <hr/>
+                <div className="course-circle">2</div>
+                <hr/>
+                <div className="course-circle">3</div>
+            </div>
+            <AddCourseDetails/>
+        </div>
+    )
+}
+const AddCourseDetails = ()=>{
+    const cats = useContext(catContext).cats;
+    return(
+        <div className="addcourse-main">
+            <label htmlFor="title">Course Title:*</label>
+            <input type="text" id="title" placeholder="Enter Course Title" required/>
+            <label>Course Short Description:*</label>
+            <textarea type="text" placeholder="Enter Description" required/>
+            <label>Price:*</label>
+            <input type="number" id="title" placeholder="Enter Price" required/>
+            <label>Category:*</label>
+            <select className='category-select' value="">
+                {cats.map((ele)=><option value={ele.props.children}>{ele.props.children}</option>)}
+            </select>
+            <label>Tags:*</label>
+            <input type="text" placeholder="Choose a tag" required/>
+            <label>Course Thumbnail:*</label>
+            <input type="file" placeholder="Enter Course Title" required/>
+            <label>Benefits of the Course:*</label>
+            <input type="text" placeholder="Enter Benefits" required/>
+            <label>Requirements / Instructions*</label>
+            <input type="text" placeholder="Enter Instructions" required/>
+        </div>
+    )
+}
 const InstructorCourses = ()=>{
     const [courses, setCourses] = useState([]);
     const [spin, setSpin] = useState(false);
@@ -40,10 +83,10 @@ const InstructorCourses = ()=>{
             toast.error(err);
             console.log(err);
         }).finally(()=>{
-            toast.success("Finally");
             setSpin(false);
         });
     },[]);
+    return <CreateCourse/>
     return (
         <div className="instructor-courses-main">
             {spin &&<BarLoader width={"100%"}/>}

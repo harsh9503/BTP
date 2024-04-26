@@ -15,6 +15,7 @@ import { SideBar } from './Pages/SideBar.js';
 import Wishlist from './Pages/Wishlist.js';
 import MyCourses from './Pages/MyCourses.js';
 import InstructorCourses from './Pages/InstructorCourses.js'
+import { createContext, useState } from 'react';
 const router = createBrowserRouter([
   {
     path:"/signup",
@@ -86,13 +87,16 @@ const sideRouter = createBrowserRouter([
     element:<></>
   }
 ])
-
+export const catContext = createContext([]);
 function App() {
+  const [cats, setCats] = useState([]);
   return (
     <div className="App">
+      <catContext.Provider value={{cats,setCats}}>
       <RouterProvider router={HeaderRouter}/>
         <RouterProvider router={sideRouter}/>
         <RouterProvider router={router}/>
+        </catContext.Provider>
     </div>
   );
 }
