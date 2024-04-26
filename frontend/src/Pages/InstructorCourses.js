@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import "../stylesheets/InstructorCourses.css"
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -6,6 +6,7 @@ import { GoCalendar, GoCheckCircleFill } from "react-icons/go";
 import { BarLoader } from "react-spinners";
 import { FaAngleLeft } from "react-icons/fa";
 import { catContext } from "../App";
+import { FaX } from "react-icons/fa6";
 
 /**
  * @param image image
@@ -48,6 +49,21 @@ const CreateCourse = ()=>{
 }
 const AddCourseDetails = ()=>{
     const cats = useContext(catContext).cats;
+    const [tags, setTags] = useState([]);
+    const tagInput = useRef("");
+    const addTag = (event)=>{
+        console.log(event);
+        if(event.code === "Enter"){
+            const tag = tagInput.current.value;
+            if(!tag.length) return;
+            setTags(tags.concat(tag));
+            tagInput.current.value = "";
+            return;
+        }
+    }
+    const deleteTag = (idx)=>{
+        setTags((tags.filter((ele,cidx)=>cidx!==idx)))
+    }
     return(
         <div className="addcourse-main">
             <label htmlFor="title">Course Title:*</label>
@@ -57,11 +73,12 @@ const AddCourseDetails = ()=>{
             <label>Price:*</label>
             <input type="number" id="title" placeholder="Enter Price" required/>
             <label>Category:*</label>
-            <select className='category-select' value="">
+            <select className='category-select' defaultValue="">
                 {cats.map((ele)=><option value={ele.props.children}>{ele.props.children}</option>)}
             </select>
             <label>Tags:*</label>
-            <input type="text" placeholder="Choose a tag" required/>
+            <div className="tags">{tags.map((ele,idx)=><div className="tag">{ele} &nbsp;<FaX size={"10px"} onClick={()=>deleteTag(idx)}/>&nbsp;</div>)}</div>
+            <input type="text" placeholder="Enter Tags" ref={tagInput} onKeyDown={addTag}/>
             <label>Course Thumbnail:*</label>
             <input type="file" placeholder="Enter Course Title" required/>
             <label>Benefits of the Course:*</label>

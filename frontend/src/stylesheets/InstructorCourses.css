@@ -117,3 +117,19 @@
     background-color: rgba(63, 70, 79, 0.579) ;
     color: inherit;
 }
+.addcourse-main .tags{
+    display: flex;
+    font-size: smaller;
+    flex-wrap: wrap;
+}
+.addcourse-main .tag{
+    width: fit-content;
+    box-sizing: border-box;
+    padding: 5px 4px;
+    background-color: rgb(57, 57, 72);
+    border-radius: 20px;
+    margin: 0 8px 8px 0;
+}
+.addcourse-main .tag:hover{
+    cursor: pointer;
+}
