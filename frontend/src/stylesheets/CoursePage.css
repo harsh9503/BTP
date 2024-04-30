@@ -121,7 +121,7 @@
     min-height: 10vh;
     width: 60vw;
     border: 1px solid rgba(255, 255, 255, 0.105);
-    background-color: rgb(66, 72, 86);
+    background-color: rgb(37, 47, 69);
 }
 
 .section:hover{
@@ -163,11 +163,13 @@
 .section-name{
     display: flex;
     height: 100%;
-    padding: 4vh 50px;
+    padding: 20px 50px;
     align-items: center;
 }
 .section-info{
     margin-left: auto;
+    display: flex;
+    align-items: center;
 }
 .subsection-description{
     display: none;

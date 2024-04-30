@@ -1,7 +1,7 @@
 .instructor-courses-main{
     width: auto;
     display: block;
-    padding: 5vh 0 0 20vw;
+    padding: 5vh 5vw 0 20vw;
 }
 
 .instructor-courses-main .course-data{
@@ -18,14 +18,22 @@
     object-fit: contain;
     border-radius: 1rem;
 }
+.instructor-courses-main .course-info-enrolled{
+    width: auto;
+}
 .course-data-enrolled{
     display: grid;
-    grid-template-rows: 20% minmax(auto,2.5fr) 1fr 1fr;
+    grid-template-rows: 20% minmax(auto,2fr) 1fr 1fr;
     row-gap: 5px;
+    margin: 0 !important;
+}
+.course-info-enrolled  *{
+    margin-left: 0 !important;
 }
 .instructor-courses-main .course-data h3{
     margin: 0;
     margin-bottom: 5px;
+    display: block;
 }
 .course-data-enrolled p{
     color: var(--text-color);
@@ -52,9 +60,17 @@
 .create-course-main{
     width: 60%;
     color: white;
-    padding: 5vh 0 0 20vw;
     box-sizing: border-box;
     font-size: medium;
+    overflow: auto;
+}
+.current-stage{
+    border: 2px solid var(--highlight-color);
+    color: var(--highlight-color);
+}
+.completed{
+    content: '';
+    background-color: var(--highlight-color) !important;
 }
 .course-tracker hr{
     width: 10px;
@@ -68,6 +84,20 @@
     height: fit-content;
     width: 70%;
     margin: 5vh auto;
+}
+.relative{
+    position: relative;
+}
+.right-btn{
+    float: right;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15vh !important;
 }
 .course-circle{
     width: 50px;
@@ -83,7 +113,19 @@
     display: flex;
     align-items: center;
 }
-
+span{
+    display: inline-block;
+}
+button[type="submit"]{
+    float: right;
+    display: block;
+    width: 15%;
+}
+button[type="submit"]::after{
+    clear: both;
+    content: '';
+    display: block;
+}
 .addcourse-main{
     width: 100%;
     background-color: rgb(26, 38, 55);
@@ -92,6 +134,7 @@
     box-sizing: border-box;
     padding: 20px;
     border: 1px solid var(--border-bottom-color);
+    overflow: auto
 }
 .addcourse-main textarea{
     background-color: rgba(63, 70, 79, 0.579);
@@ -140,6 +183,11 @@
     background-color: rgba(255, 255, 255, 0.341);
     border-radius: 50%;
 }
+.special{
+    background-color: transparent;
+    border: 2px solid var(--highlight-color);
+    color: var(--highlight-color);
+}
 .cloud-icon{
     background-color: black;
     color: var(--highlight-color);
@@ -162,4 +210,50 @@
     align-items: center;
     box-sizing: border-box;
     color: var(--text-color);
+}
+.red{
+    color: yellow;
+}
+
+.link{
+    background-color: transparent;
+    border: none;
+    color: yellow;
+    font-size: medium;
+    font-weight: 700;
+    cursor: pointer;
+}
+.section-edit, .subsection-edit{
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 25px;
+    background-color: transparent
+}
+.sections-edit{
+    background-color: rgba(80, 81, 109, 0.379);
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
+.subsection-actions{
+    margin-left: auto;
+}
+.subsection-adder{
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+.section-name-edit{
+    display: flex;
+    height: 100%;
+    align-items: center;
+    padding: 10px 0;
+}
+hr.vertical{
+    width: 10px;
+    position: unset;
+    height: 0;
+    border-top: 1px solid var(--border-bottom-color);
+    transform-origin: center;
+    transform: rotateZ(90deg) scaleX(2.5);
+    margin-right: 10px;
 }
