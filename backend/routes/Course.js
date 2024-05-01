@@ -22,7 +22,7 @@ const { getEnrolledCourses }= require("../controllers/Profile");
 router.post("/createCourse", auth, isInstructor, createCourse)
 router.get("/getAllCourses", getAllCourses)
 router.get("/getCourseDetails", getCourseDetails)
-router.post("/getFullCourseDetails", auth, getFullCourseDetails)
+router.post("/getFullCourseDetails", getFullCourseDetails)
 router.get("/getInstructorCourses", auth, isInstructor, getInstructorCourses)
 router.delete("/deleteCourse",auth, deleteCourse)
 router.put("/editCourse", auth, isInstructor, editCourse)
