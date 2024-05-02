@@ -14,7 +14,7 @@
     height: inherit;
   }
   
-  .loginPanel input, .addcourse-main input{
+  .loginPanel input, .addcourse-main input, dialog input{
     display: block;
     color: #fff;
     border: none;
@@ -29,7 +29,7 @@
     font-size: smaller;
   }
   
-  .loginPanel input:focus{
+  .loginPanel input:focus, dialog input:focus, .addcourse-main input{
     outline: none;
     border-bottom: 1px solid var(--border-bottom-hover);
   }

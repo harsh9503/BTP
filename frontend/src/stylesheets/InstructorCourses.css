@@ -1,3 +1,7 @@
+:root{
+    --hover-background: rgba(255, 255, 255, 0.237);
+    --active-background: rgba(255, 255, 255, 0.5);
+}
 .instructor-courses-main{
     width: auto;
     display: block;
@@ -5,14 +9,13 @@
 }
 
 .instructor-courses-main .course-data{
-    height: 200px;
     color: white;
     display: grid;
     grid-template-columns: 60% repeat(3,1fr);
     width: 100%;
     margin: 25px 0;
 }
-.instructor-courses-main .course-icon{
+.course-icon{
     width: 40%;
     height: 40%;
     object-fit: contain;
@@ -23,7 +26,7 @@
 }
 .course-data-enrolled{
     display: grid;
-    grid-template-rows: 20% minmax(auto,2fr) 1fr 1fr;
+    grid-template-rows: minmax(20%,min-content) minmax(auto,2fr) 1fr 1fr;
     row-gap: 5px;
     margin: 0 !important;
 }
@@ -55,6 +58,7 @@
     padding: 0px 8px;
     box-sizing: border-box;
     font-size: 90%;
+    height: 30px;
     border-radius: 1rem;
 }
 .create-course-main{
@@ -126,7 +130,7 @@ button[type="submit"]::after{
     content: '';
     display: block;
 }
-.addcourse-main{
+.addcourse-main, .publish-course-main{
     width: 100%;
     background-color: rgb(26, 38, 55);
     height: auto;
@@ -136,7 +140,7 @@ button[type="submit"]::after{
     border: 1px solid var(--border-bottom-color);
     overflow: auto
 }
-.addcourse-main textarea{
+.addcourse-main textarea, dialog textarea{
     background-color: rgba(63, 70, 79, 0.579);
     border: none;
     border-radius: 10px;
@@ -147,7 +151,7 @@ button[type="submit"]::after{
     width: 100%;
     min-height: 120px;
 }
-.addcourse-main label{
+form label{
     font-size: x-small;
     display: block;
     margin: 15px 0 5px 0;
@@ -191,14 +195,14 @@ button[type="submit"]::after{
 .cloud-icon{
     background-color: black;
     color: var(--highlight-color);
-    border-radius: 50%;
+    border-radius: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 10px;
     margin-bottom: 10px;
 }
-.course-image-div{
+.course-image-div, .course-video-div{
     width:100%;
     min-height: 20vh;
     padding: 15px;
@@ -248,6 +252,19 @@ button[type="submit"]::after{
     align-items: center;
     padding: 10px 0;
 }
+svg[clickable]{
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 100%;
+    transition: all 0.1s ease-in-out;
+    overflow: visible;
+}
+svg[clickable]:hover{
+    background-color: var(--hover-background);
+}
+svg[clickable]:active{
+    background-color: var(--active-background);
+}
 hr.vertical{
     width: 10px;
     position: unset;
@@ -256,4 +273,46 @@ hr.vertical{
     transform-origin: center;
     transform: rotateZ(90deg) scaleX(2.5);
     margin-right: 10px;
+}
+input:disabled{
+    border-bottom: 2px solid transparent !important;
+    outline: none;
+}
+input.inplace{
+    width: 40%;
+    margin: unset;
+    border-radius: 0;
+    background-color: transparent;
+    border-bottom: 2px solid var(--border-bottom-color);
+    outline: none;
+}
+input.inplace:focus{
+    border-bottom-color: blue;
+}
+dialog{
+    padding: 20px 30px;
+    width: fit-content;
+    background-color: rgb(76, 78, 126);
+    border-radius: 15px;
+    color: #fff;
+    border: 1px solid var(--border-bottom-color)
+}
+.checkbox{
+    margin-top: 20px;
+}
+.checkbox input[type="checkbox"]{
+    appearance: none;
+}
+.checkbox-label ::after{
+    content: '';
+    display: block;
+    height: 20px;
+    width: 20px;
+    background-color: rgba(255, 255, 255, 0.237);
+}
+#public:checked svg{
+    display: block;
+}
+.add-lecture{
+    width: 80px !important;
 }

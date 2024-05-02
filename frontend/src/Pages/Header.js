@@ -13,10 +13,7 @@ const Header = (props)=>{
     const {cats, setCats} = useContext(catContext); 
     useEffect(()=>{
         axios.get(`${process.env.REACT_APP_BURL}/api/v1/course/showAllCategories`).then((res)=>{
-            const jsx = res.data.data.map((ele,idx)=>{
-                return <button type="button" id={idx} onClick={()=>window.location.href="/catalog/"+ele._id}>{ele.name}</button>
-            })
-            setCats(jsx);
+            setCats(res.data.data);
         }).catch((err)=>{
             console.log(err);
         })
@@ -35,7 +32,7 @@ const Header = (props)=>{
     }
     return (
         <>
-        <Toaster containerStyle={{marginTop:"50px"}}/>
+        <Toaster containerStyle={{marginTop:"50px",zIndex:"9999999"}}/>
         <div className="head">
             <img alt="logo" src={logo} id="img-logo"></img>
             <div className="links">
@@ -44,7 +41,9 @@ const Header = (props)=>{
             <button type="button" className="catalog">Catalog
             </button>
                 <div className="dropdown-content">
-                    {cats}
+                    {cats.map((ele,idx)=>{
+                return <button type="button" id={idx} onClick={()=>window.location.href="/catalog/"+ele._id}>{ele.name}</button>
+            })}
                 </div>
             </div>
             <button type="button">About Us</button>

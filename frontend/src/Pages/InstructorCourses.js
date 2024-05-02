@@ -8,12 +8,13 @@ import { FaAngleLeft, FaCaretDown, FaList, FaPen, FaPlusCircle } from "react-ico
 import { catContext } from "../App";
 import { CiCloudOn } from "react-icons/ci";
 import { FaX } from "react-icons/fa6";
-import { IoCheckmark } from "react-icons/io5";
+import { IoCheckmark, IoCheckmarkSharp } from "react-icons/io5";
 import { IoIosArrowDown } from "react-icons/io";
 import { MdDelete } from "react-icons/md";
 import { IconContext } from "react-icons";
 import { AiOutlinePlus } from "react-icons/ai";
 const sectionContext = createContext([]);
+const courseContext = createContext("");
 /**
  * @param image image
  * @param coursename
@@ -26,9 +27,9 @@ const Subsection = (props)=>{
           <div className="subsection-main">
               <FaList/>&nbsp;&nbsp;
               <p className="title" style={{fontSize:"medium"}}>{`${props.title}`}</p>&nbsp;&nbsp;
-              <IoIosArrowDown onClick={(event)=>event.target.parentElement.toggleAttribute("active")}/>
+              <IoIosArrowDown clickable="true" onClick={(event)=>event.target.parentElement.toggleAttribute("active")}/>
               <div className="subsection-actions">
-              <FaPen/> <MdDelete onClick={props.delete}/>
+              <FaPen clickable="true"/> <MdDelete clickable="true" onClick={props.delete}/>
               </div>
           </div>
           <div className="subsection-description">{props.description}</div>
@@ -37,35 +38,55 @@ const Subsection = (props)=>{
 }
 const Section = (props)=>{
     const [subsections, setSubsections] = useState(props.subsections||[]);
-    const {setSections, sections} = useContext(sectionContext);
-    const HandleDelete = ()=>{ 
-        setSections(sections.filter((ele,iidx)=>iidx!=props.idx));
+    const {courseId,setSectionId,dialog,setSetterSubSection} = useContext(courseContext);
+    const section = useRef("");
+    let initialValue = section.current.value;
+
+    const changeSectionName = ()=>{
+         if(section.current.value === initialValue) return;
+         const promise = axios.post(`${process.env.REACT_APP_BURL}/api/v1/course/updateSection`,{
+            sectionId: props.id,
+            sectionName: section.current.value,
+            courseId: courseId
+         },{
+            withCredentials: true
+         })
+         promise.then((res)=>{
+             initialValue = section.current.value;
+         })
+         promise.catch((err)=>{
+            section.current.value = initialValue;
+         })
+         toast.promise(promise,{
+            success: `Changed Section to ${section.current.value}`,
+            error: (err)=>err?.response?.data?.message||"Error Updating Section",
+            loading: "Changing section"
+         })
+    }
+    const toggleEdit = ()=>{
+        section.current.toggleAttribute("disabled");
     }
     const temp = subsections?.map((ele,idx)=>{
-        return <Subsection delete={()=>setSubsections(subsections.filter((ele,iidx)=>iidx!=idx))} title={ele.title} duration={ele.timeDuration} description={ele.description} url={ele.videoUrl}/>
+        return <Subsection title={ele.title} duration={ele.timeDuration} description={ele.description} url={ele.videoUrl}/>
     });
 return(
     <div className="section-edit">
         <div className="section-name-edit" onClick={(event)=>{event.target.parentElement.toggleAttribute("active");}}>
-         <FaList/> &nbsp; &nbsp;{props.sectionName}
+         <FaList/> &nbsp; &nbsp;<input type="text" className="inplace" ref={section} disabled onBlur={changeSectionName} defaultValue={props.sectionName}/>
          <div className="section-info">
             <IconContext.Provider value={{style:{marginRight:"10px", verticalAlign:"text-top"}}}>
-            <FaPen/> <MdDelete onClick={HandleDelete}/>
+            <FaPen clickable="true" onClick={toggleEdit}/> <MdDelete clickable="true"/>
             <hr className="vertical"/>
-            <FaCaretDown/>
+            <FaCaretDown clickable="true"/>
             </IconContext.Provider>
          </div>
         </div>
         <div className="subsections-edit">
         {temp}
-        <div className="subsection-adder text-yellow"><AiOutlinePlus/>&nbsp;Add Lecture</div>
+        <div className="subsection-adder text-yellow" onClick={()=>{setSectionId(props.id);setSetterSubSection(()=>(val)=>setSubsections(val));dialog.current.showModal()}}><AiOutlinePlus/>&nbsp;Add Lecture</div>
         </div>
     </div>
 )
-}
-Section.defaultProps = {
-    sectionName:"TEST SECTION",
-    subsections: [{"title":"T1","timeDuration":"2h","description":"TBA"},{"title":"T2","timeDuration":"2m","description":"TBA"}]
 }
 const CourseDialog = (props)=>{
     return (
@@ -85,12 +106,76 @@ const CourseDialog = (props)=>{
         </div>
     )
 }
+const PublishPage = ()=>{
+    return (<>
+        <div className="publish-course-main">
+            <h2 className="no-margin">Publish Settings</h2>
+            <div className="checkbox">
+                <label htmlFor="public" className="checkbox-label"><input type="checkbox" id="public"/><IoCheckmarkSharp display={"none"}/> Make this Course Public</label>
+            </div>
+        </div>
+        <div className="navigators">
+            <button type="button" className="btn btn-semisquare">{"< Back"}</button>
+            <button type="button" className="btn btn-semisquare">Save as a Draft</button>
+            <button type="button" className="btn btn-semisquare yellow">Save and Publish</button>
+        </div>
+        </>
+    )
+}
 const stageContext = React.createContext(0);
 const CreateCourse = ()=>{
     const {stage,setStage} = useContext(stageContext); 
-    const curr_stage = [<AddCourseDetails/>,<AddSections/>]
+    const curr_stage = [<AddCourseDetails/>,<AddSections/>,<PublishPage/>]
+    const [courseId,setCourseId] = useState("66329046302a8a549aa984a7");
+    const [sectionId, setSectionId] = useState("");
+    const [setterSubsection, setSetterSubSection] = useState(()=>()=>{console.log("Dummy Function!")});
+    const dialog = useRef("");
+    const data = useRef(new Array(3));
+    const addLecture = (e)=>{
+        e.preventDefault();
+        dialog.current.close();
+        const promise = axios.post(`${process.env.REACT_APP_BURL}/api/v1/course/addSubSection`,{
+            sectionId: sectionId,
+            title: data.current[1].value,
+            description: data.current[2].value,
+            video: data.current[0].files[0]
+        },{
+            withCredentials: true,
+            headers:{
+                'Content-Type':'multipart/form-data'
+            }
+        })
+        promise.then((res)=>{
+            console.log(setterSubsection);
+            setterSubsection(res.data.data.subSection)
+        })
+        toast.promise(promise, {
+            success: "Lecture Added Successfully",
+            error:(err)=>err?.response?.data?.message||"Error Adding the Lecture",
+            loading: "Uploading Lecture"
+        })
+    }
     return(
+        <courseContext.Provider value={{courseId,setCourseId,setSectionId,dialog,setterSubsection,setSetterSubSection}}>
         <div className="create-course-main">
+            <dialog ref={dialog}>
+                <form onSubmit={addLecture}>
+                    <label htmlFor="course-video">Lecture Video:*
+                        <div className="course-video-div">
+                            <div className="cloud-icon"><CiCloudOn size={"30px"}/></div>
+                            Drag and drop a video, or Click Here.<br/>
+                            <span>Max: 120MB</span>
+                            <p><span>&middot; Aspect ratio 16:9</span><span> &middot; Recommended size 1024x576</span></p>
+                        </div>
+                    </label>
+                    <input type="file" id="course-video" ref={(ele)=>data.current[0]=ele} name="video" accept="video/*" required/>
+                    <label htmlFor="title">Lecture Title: *</label>
+                    <input type="text" ref={(ele)=>data.current[1]=ele} maxLength="30" id="title" placeholder="Enter Lecture Title" required/>
+                    <label htmlFor="description">Lecture Description: *</label>
+                    <textarea maxLength="255" ref={(ele)=>data.current[2]=ele} id="description" placeholder="Enter Description" required/>
+                    <button type="submit" className="btn btn-semisquare yellow add-lecture">Add</button>
+                </form>
+            </dialog>
             <div className="back-button"><FaAngleLeft/> Back to Dashboard</div>
             <div className="course-tracker">
                 <div className={"course-circle "+ (stage>=1?stage===1?"current-stage":"completed":"")}>{stage>1?<IoCheckmark size={"25px"}/>:1}</div>
@@ -101,12 +186,14 @@ const CreateCourse = ()=>{
             </div>
                 {curr_stage[stage]}
         </div>
+        </courseContext.Provider>
     )
 }
 const VariableInputArray = (props)=>{
     const [count, setCount] = useState(1);
     const inputs = new Array(Math.min(6,count));
-    inputs.fill(<input type="text" placeholder="Enter Instruction" style={{marginBottom:"10px"}}/>)
+    let idx=0;
+    inputs.fill(<input type="text" ref={(ele)=>props.reference.current[6].current[idx++]=ele} placeholder="Enter Instruction" style={{marginBottom:"10px"}}/>)
     return(
         <>
         {inputs}
@@ -116,8 +203,11 @@ const VariableInputArray = (props)=>{
 }
 const AddCourseDetails = ()=>{
     const cats = useContext(catContext).cats;
+    const {courseId, setCourseId} = useContext(courseContext);
     const [tags, setTags] = useState([]);
     const instruArray = useRef("");
+    const data = useRef(new Array(7));
+    data.current[6] = useRef(new Array(6));
     const {setStage} = useContext(stageContext);
     const tagInput = useRef("");
     useEffect(()=>{;
@@ -155,18 +245,48 @@ const AddCourseDetails = ()=>{
         }
         reader.readAsDataURL(event.target.files[0]||"");
     }
+    const HandleSubmit = (e)=>{
+        e.preventDefault();
+        const formData = {
+            "courseName":data.current[0].value,
+            "courseDescription":data.current[1].value,
+            "price":data.current[2].value,
+            "category":data.current[3].value,
+            "tag":JSON.stringify(tags),
+            "thumbnailImage":data.current[4].files[0],
+            "whatYouWillLearn":JSON.stringify([data.current[5].value]),
+            "instructions":JSON.stringify(data.current[6].current?.reduce((acc,ele)=>{if(ele?.value){acc.push(ele?.value)} return acc;},[]))
+        }
+        
+        const promise = axios.post(`${process.env.REACT_APP_BURL}/api/v1/course/createCourse`,formData,{
+            withCredentials:true,
+            headers:{
+                'Content-Type':'multipart/form-data'
+            }
+        });
+        promise.then((res)=>{
+            console.log(res.data);
+            setCourseId(res.data.data._id);
+            setStage(2);
+        })
+        toast.promise(promise,{
+            success:"Course Created!",
+            error:(err)=>err?.response?.data?.message||"Error Occurred!",
+            loading: "Creating Course!"
+        });
+    }
     return(
         <div className="addcourse-main">
-            <form onSubmit={()=>setStage(2)}>
+            <form onSubmit={HandleSubmit}>
             <label htmlFor="title">Course Title:*</label>
-            <input type="text" id="title" placeholder="Enter Course Title" required/>
+            <input type="text" ref={(ele)=>data.current[0]=ele} id="title" placeholder="Enter Course Title" required/>
             <label>Course Short Description:*</label>
-            <textarea type="text" placeholder="Enter Description" required/>
+            <textarea type="text" ref={(ele)=>data.current[1]=ele} placeholder="Enter Description" required/>
             <label>Price:*</label>
-            <input type="number" id="title" placeholder="Enter Price" required/>
+            <input type="number" id="title" ref={(ele)=>data.current[2]=ele} placeholder="Enter Price" required/>
             <label>Category:*</label>
-            <select className='category-select' defaultValue="">
-                {cats.map((ele)=><option value={ele.props.children}>{ele.props.children}</option>)}
+            <select className='category-select' ref={(ele)=>data.current[3]=ele} defaultValue="">
+                {cats.map((ele)=><option value={ele._id}>{ele.name}</option>)}
             </select>
             <label>Tags:*</label>
             <div className="tags">{tags.map((ele,idx)=><div className="tag">{ele} &nbsp;<FaX size={"10px"} onClick={()=>deleteTag(idx)}/>&nbsp;</div>)}</div>
@@ -179,12 +299,12 @@ const AddCourseDetails = ()=>{
                     <p><span>&middot; Aspect ratio 16:9</span><span> &middot; Recommended size 1024x576</span></p>
                 </div>
             </label>
-            <input type="file" accept="image/png, image/jpeg" multiple={false} onChange={HandleFile} placeholder="Enter Course Thumbnail" id="course-image" required/>
+            <input type="file" ref={(ele)=>data.current[4]=ele} accept="image/png, image/jpeg" multiple={false} onChange={HandleFile} placeholder="Enter Course Thumbnail" id="course-image" required/>
             <label>Benefits of the Course:*</label>
-            <textarea type="text" placeholder="Enter Benefits" required/>
+            <textarea type="text" ref={(ele)=>data.current[5]=ele} placeholder="Enter Benefits" required/>
             <label>Requirements / Instructions*</label>
             <div className="instructions" ref={(ele)=>instruArray.current=ele}>
-                <VariableInputArray element={<input type="text" placeholder="Enter Instruction"/>}/>
+                <VariableInputArray reference={data} element={<input type="text" placeholder="Enter Instruction"/>}/>
             </div>
             <button type="submit" style={{display:"inline-block"}} className="btn btn-semisquare yellow">Next</button>
             </form>
@@ -192,17 +312,40 @@ const AddCourseDetails = ()=>{
     )
 }
 const AddSections = (props)=>{
-    const [sections, setSections] = useState(props.sections||[]);
+    const [sections, setSections] = useState(props.sections);
+    const {courseId} = useContext(courseContext);
+    const newSection = useRef("");
+    const addSection = ()=>{
+        if(!newSection.current.value){
+            newSection.current.focus();
+            return;
+        }
+        const promise = axios.post(`${process.env.REACT_APP_BURL}/api/v1/course/addSection`,{
+            sectionName:newSection.current.value,
+            courseId:courseId
+        },{
+            withCredentials: true
+        });
+        promise.then((res)=>{
+            setSections(res.data.updatedCourse.courseContent);
+            newSection.current.value = "";
+        })
+        toast.promise(promise, {
+            success: `Created Section ${newSection.current.value}`,
+            loading: `Adding Section ${newSection.current.value}`,
+            error: (err)=>err?.response?.data?.message||"Error Adding the Section"
+        })
+    }
     return(
         <sectionContext.Provider value={{sections,setSections}}>
         <div className="addcourse-main">
             <h3 className="no-margin">Course Builder</h3>
             <div className="course-builder">
                 <div className="sections-edit">
-                    {sections}
+                    {sections?.map((ele)=><Section id={ele._id} sectionName={ele.sectionName} subsections={ele.subSection}/>)}
                 </div>
-                <input type="" disabled placeholder="Add a section to build your course"/>
-                <button type="button" className="btn btn-semisquare special" onClick={()=>setSections(sections.concat([<Section idx={sections.length}/>]))}><FaPlusCircle/> Add Section</button>
+                <input type="" ref={newSection} placeholder="Add a section to build your course"/>
+                <button type="button" className="btn btn-semisquare special" onClick={addSection}><FaPlusCircle/> Add Section</button>
             </div>
         </div>
         </sectionContext.Provider>
@@ -234,7 +377,7 @@ const InstructorCourses = ()=>{
                 <button type="button" className="right-btn btn btn-semisquare yellow" onClick={()=>setStage(1)}><FaPlusCircle/>&nbsp;New</button>
             </div>
             <div className="course-table">
-                {courses.map((ele)=><CourseDialog status={ele.status} createdAt={ele.createdAt} image={ele.thumbnail} price={ele.price} coursename={ele.courseName} description={ele.courseDescription} duration={ele.courseDuration}/>)}
+                {courses.map((ele)=><CourseDialog status={ele.status} courseContent={ele.courseContent} createdAt={ele.createdAt} image={ele.thumbnail} price={ele.price} coursename={ele.courseName} description={ele.courseDescription} duration={ele.courseDuration}/>)}
             </div></>
             :<stageContext.Provider value={{stage, setStage}}><CreateCourse/></stageContext.Provider>}
             

@@ -224,8 +224,11 @@ const MyCourses = ()=>{
                         <span className="time-frame">{`${getTime(player.current.currentTime)} / ${getTime(player.current.duration)}`}</span>
                         <FaVolumeHigh/><input type="range" name="volume" className="controls__slider" min="0" max="1" step="0.05" defaultValue="1"/>
                         {`Speed: ${player.current.playbackRate}x`}<input type="range" name="playbackRate" className="controls__slider" min="0.5" max="2" step="0.5" defaultValue="1"/>
+                        <div className="time-skip" style={{marginLeft: "auto",marginRight:"20px"}}>
                         <button className="controls__button" data-skip="-10">« 10s</button>
+                        &nbsp;&nbsp;
                         <button className="controls__button" data-skip="10">10s »</button>
+                        </div>
                         </IconContext.Provider>
                     </div>
                     <div className="video-completed" ref={layer}>

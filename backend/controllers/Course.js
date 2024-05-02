@@ -23,7 +23,7 @@ exports.createCourse = async (req, res) => {
             status,
             instructions: _instructions,
           } = req.body
-
+          console.log(req.body);
           // Get thumbnail image from request files
           const thumbnail = req.files.thumbnailImage;
           const tag = JSON.parse(_tag)

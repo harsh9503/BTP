@@ -92,11 +92,12 @@ function App() {
   const [cats, setCats] = useState([]);
   return (
     <div className="App">
+
       <catContext.Provider value={{cats,setCats}}>
-      <RouterProvider router={HeaderRouter}/>
+        <RouterProvider router={HeaderRouter}/>
         <RouterProvider router={sideRouter}/>
         <RouterProvider router={router}/>
-        </catContext.Provider>
+      </catContext.Provider>
     </div>
   );
 }
