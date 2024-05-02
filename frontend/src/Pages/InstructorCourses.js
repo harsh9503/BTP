@@ -102,7 +102,8 @@ const CourseDialog = (props)=>{
             </div>
             <div className="course-col course-duration">{props.duration}</div>
             <div className="course-col course-price">{props.price}</div>
-            <div className="course-col course-actions">Edit Delete</div>
+            <div className="course-col course-actions">
+                <FaPen clickable="true"/><MdDelete clickable="true" onClick={props.delete}/></div>
         </div>
     )
 }
@@ -355,6 +356,22 @@ const InstructorCourses = ()=>{
     const [courses, setCourses] = useState([]);
     const [spin, setSpin] = useState(false);
     const [stage, setStage] = useState(0);
+    const deleteCourse = (id)=>{
+        const promise = axios.delete(`${process.env.REACT_APP_BURL}/api/v1/course/deleteCourse`,{
+            data:{
+                courseId: id
+            },
+            withCredentials: true
+        });
+        promise.then(()=>{
+            setCourses(courses.filter((ele)=>ele._id !== id));
+        })
+        toast.promise(promise, {
+            success:"Course Deleted Successfully!",
+            error: (err)=>err?.response?.data?.message||"Error Deleting Course",
+            loading: "Deleting Course"
+        })
+    }
     useEffect(()=>{
         setSpin(true);
         axios.get(`${process.env.REACT_APP_BURL}/api/v1/course/getInstructorCourses`,{withCredentials:true}).then((res)=>{
@@ -377,7 +394,7 @@ const InstructorCourses = ()=>{
                 <button type="button" className="right-btn btn btn-semisquare yellow" onClick={()=>setStage(1)}><FaPlusCircle/>&nbsp;New</button>
             </div>
             <div className="course-table">
-                {courses.map((ele)=><CourseDialog status={ele.status} courseContent={ele.courseContent} createdAt={ele.createdAt} image={ele.thumbnail} price={ele.price} coursename={ele.courseName} description={ele.courseDescription} duration={ele.courseDuration}/>)}
+                {courses.map((ele)=><CourseDialog delete={()=>deleteCourse(ele._id)} status={ele.status} courseContent={ele.courseContent} createdAt={ele.createdAt} image={ele.thumbnail} price={ele.price} coursename={ele.courseName} description={ele.courseDescription} duration={ele.courseDuration}/>)}
             </div></>
             :<stageContext.Provider value={{stage, setStage}}><CreateCourse/></stageContext.Provider>}
             

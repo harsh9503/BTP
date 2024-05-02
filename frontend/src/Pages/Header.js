@@ -7,7 +7,10 @@ import { MdOutlineShoppingCart } from "react-icons/md";
 import { IconContext } from "react-icons";
 import { useEffect,useState, useContext} from "react";
 import { catContext } from "../App";
+
 import axios from "axios";
+import { FaChalkboardTeacher, FaUser } from "react-icons/fa";
+import { PiStudentBold } from "react-icons/pi";
 const Header = (props)=>{
     const [cookie,setCookie] =useCookies(['user-data']);
     const {cats, setCats} = useContext(catContext); 
@@ -54,7 +57,7 @@ const Header = (props)=>{
                 <span><FaMagnifyingGlass/></span>
                 <span><MdOutlineShoppingCart/></span>
                 </IconContext.Provider>
-                <button type="button" className={cookie["user-data"]?"user-profile":"button"} onClick={handleClick}>{cookie['user-data']?<img src={cookie['user-data']?.image}></img>:props.page === "signup"?"Log In":"Sign In"}</button>
+                <button type="button" className={cookie["user-data"]?"user-profile":"button"} onClick={handleClick}>{cookie['user-data']?<div><img src={cookie['user-data']?.image}></img>{cookie['user-data'].accountType==="Student"?<PiStudentBold/>:<FaChalkboardTeacher/>}</div>:props.page === "signup"?"Log In":"Sign In"}</button>
             </div>
         </div>
         </>

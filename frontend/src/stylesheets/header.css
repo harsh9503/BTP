@@ -122,8 +122,24 @@ body{
 .features .user-profile:hover{
     border: none;
 }
+.features .user-profile div{
+    position: relative;
+}
+.user-profile svg{
+    position: absolute;
+    bottom: 0;
+    right: -8px;
+    fill: rgb(252, 252, 252);
+    scale: 1.2;
+    background-color: var(--background-color);
+    border-radius: 100%;
+    padding: 2px;
+    border: 1px solid rgba(245, 245, 245, 0.4);
+    overflow: visible;
+}
 .features button:hover{
     border: 1px solid white;
     cursor: pointer;
     color: white;
 }  
+
