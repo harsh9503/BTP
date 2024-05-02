@@ -2,6 +2,8 @@
 
 ### VirtuLearn is an Educational Technology platform aimed at revolutionizing online education. It provides a seamless and interactive learning experience for students while offering instructors a platform to showcase their expertise.
 
+## [Documentation](https://drive.google.com/file/d/1ABKhqvv_nsVwfHrqIDTzzEnnDE6g3jZu/view?usp=sharing)
+
 ## Functionality of Application
 
 ### 
