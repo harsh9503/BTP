@@ -37,6 +37,7 @@ exports.createRating = async (req, res) => {
                                         course:courseId,
                                         user:userId,
                                     });
+                                    
         const allRatings = courseDetails.ratingAndReviews.length; 
         const newAvgRating = (courseDetails.avg_rating * allRatings + rating)/(allRatings + 1);
 

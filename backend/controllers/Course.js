@@ -223,76 +223,87 @@ exports.getCourseDetails = async (req, res) => {
   }
 }
 //-----------------------------------------------------------------------------------
-
 exports.getFullCourseDetails = async (req, res) => {
   try {
-    const { courseId } = req.body
-    const userId = req.user.id
+    let userId = null;
+    if (req.user) {
+      // If user is logged in, get the userId from req.user
+      userId = req.user.id;
+    }
+
+    const { courseId } = req.body;
+
+    // Fetch course details
     const courseDetails = await Course.findOne({
       _id: courseId,
     })
-      .populate({
-        path: "instructor",
-        populate: {
-          path: "additionalDetails",
-        },
-      })
-      .populate("category")
-      .populate({
-        path:"ratingAndReviews",
-        populate:{
-          path:"user",
-          select:"firstName lastName"
-        }
-      })
-      .populate({
-        path: "courseContent",
-        populate: {
-          path: "subSection",
-        },
-      })
-      .exec()
-
-    let courseProgressCount = await CourseProgress.findOne({
-      courseID: courseId,
-      userId: userId,
+    .populate({
+      path: "instructor",
+      populate: {
+        path: "additionalDetails",
+      },
     })
-
-    console.log("courseProgressCount : ", courseProgressCount)
+    .populate("category")
+    .populate({
+      path: "ratingAndReviews",
+      populate: {
+        path: "user",
+        select: "firstName lastName",
+      },
+    })
+    .populate({
+      path: "courseContent",
+      populate: {
+        path: "subSection",
+      },
+    })
+    .exec();
 
     if (!courseDetails) {
       return res.status(400).json({
         success: false,
         message: `Could not find course with id: ${courseId}`,
-      })
+      });
     }
 
-    let totalDurationInSeconds = 0
+    let completedVideos = [];
+    if (userId) {
+      // If user is logged in, fetch course progress
+      const courseProgressCount = await CourseProgress.findOne({
+        courseID: courseId,
+        userId: userId,
+      });
+      if (courseProgressCount) {
+        completedVideos = courseProgressCount.completedVideos || [];
+      }
+    }
+
+    // Calculate total duration
+    let totalDurationInSeconds = 0;
     courseDetails.courseContent.forEach((content) => {
       content.subSection.forEach((subSection) => {
-        const timeDurationInSeconds = parseInt(subSection.timeDuration)
-        totalDurationInSeconds += timeDurationInSeconds
-      })
-    })
+        const timeDurationInSeconds = parseInt(subSection.timeDuration);
+        totalDurationInSeconds += timeDurationInSeconds;
+      });
+    });
+    const totalDuration = convertSecondsToDuration(totalDurationInSeconds);
 
-    const totalDuration = convertSecondsToDuration(totalDurationInSeconds)
-    console.log(courseDetails);
+    // Return course details along with total duration and completed videos
     return res.status(200).json({
       success: true,
       data: {
         courseDetails,
         totalDuration,
-        completedVideos: courseProgressCount?.completedVideos?courseProgressCount?.completedVideos: [],
+        completedVideos,
       },
-    })
+    });
   } catch (error) {
     return res.status(500).json({
       success: false,
       message: error.message,
-    })
+    });
   }
-}
-
+};
 //-----------------------------------------------------------------------------------------
 exports.getInstructorCourses = async (req, res) => {
   try {
