@@ -227,7 +227,8 @@ exports.getFullCourseDetails = async (req, res) => {
   try {
     let userId = null;
     if (req.user) {
-      // If user is logged in, get the userId from req.user
+      console.log(req.user);
+        // If user is logged in, get the userId from req.user
       userId = req.user.id;
     }
 
@@ -277,7 +278,7 @@ exports.getFullCourseDetails = async (req, res) => {
         completedVideos = courseProgressCount.completedVideos || [];
       }
     }
-
+    console.log(userId, courseId,completedVideos)
     // Calculate total duration
     let totalDurationInSeconds = 0;
     courseDetails.courseContent.forEach((content) => {

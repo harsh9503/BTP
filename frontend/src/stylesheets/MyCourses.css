@@ -59,11 +59,13 @@
     display: none;
     position: absolute;
     bottom: 0;
-    width: auto;
-    flex-wrap: wrap;
     width: 100%;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    padding: 0px 10px;
     align-items: center;
-    background-color: rgba(0, 0, 0, 0.305);
+    justify-self: center;
+    background: linear-gradient(to top,rgba(0, 0, 0, 0.519), rgba(2, 2, 2, 0.026));
 }
 .video-player{
     position: relative;
@@ -97,7 +99,7 @@
     background: none;
     color: white;
 }
-.btn a{
+.btn a, .mycourse-sidebar a{
     text-decoration: none;
     color: inherit;
     font-weight: unset;
@@ -112,7 +114,36 @@
     vertical-align: middle;
     display: flex;
     align-items: center;
+    transition: flex-basis 50ms ease-in-out;
     right: 0;
+}
+@keyframes move{
+    0%{
+        transform: rotateZ(0deg);
+    }
+    100%{
+        transform: rotateZ(360deg);
+    }
+}
+.video-player .loader{
+    height: fit-content;
+    width: fit-content;
+    position: absolute;
+    top:0;
+    bottom:0;
+    left: 0;
+    right: 0;
+    margin: auto auto;
+    transform: rotateZ(0deg);
+    display: flex;
+    justify-content: center;
+    -webkit-animation: move 900ms infinite linear;
+}
+.video-player .loader path:nth-child(2){
+    color: blue;
+}
+.video-player .loader path:nth-child(1){
+    fill: rgba(255, 255, 255, 0.767);
 }
 .video-player:hover .controls{
     display: flex;
@@ -137,10 +168,18 @@
     transform: translateX(50%);
     transform-origin: center;
 }
-.mycourse-sidebar a.active{
+.mycourse-sidebar a.active p{
     color: var(--highlight-color) !important;  
 }
-.completed , .completed + a{
+.mycourse-sidebar p{
+    vertical-align: top;
+    display: inline-block;
+}
+.mycourse-sidebar .subsection-main a{
+    display: flex;
+    align-items: center;
+}
+.completed-video , .completed-video + p{
     color: rgb(5, 166, 80);
 }
 .video-completed{

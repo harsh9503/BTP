@@ -8,6 +8,7 @@ import { ImCheckboxChecked } from "react-icons/im";
 import { PiMonitorPlayFill } from "react-icons/pi";
 import { IoPlaySkipForwardSharp } from "react-icons/io5";
 import { FaPlay, FaPause} from "react-icons/fa";
+import { CgSpinner } from "react-icons/cg";
 import { FaVolumeLow, FaVolumeHigh, FaVolumeOff } from "react-icons/fa6";
 import { IconContext } from "react-icons/lib";
 const Subsection = (props)=>{
@@ -15,8 +16,8 @@ const Subsection = (props)=>{
     return (
       <div className="subsection">
           <div className="subsection-main" completed={completed?"true":"false"}>
-              {completed?<ImCheckboxChecked className="completed"/>:<PiMonitorPlayFill/>}&nbsp;&nbsp;
-              <NavLink to={"/user/mycourses/"+props.cid+"/"+props.id} onClick={()=>props.onClick()} on={()=>{props.onClick();console.log("YES!")}}>
+              <NavLink to={"/user/mycourses/"+props.cid+"/"+props.id} onClick={()=>props.onClick()}>
+              {completed?<ImCheckboxChecked className="completed-video"/>:<PiMonitorPlayFill/>}&nbsp;&nbsp;
               <p className="title">{`${props.title}`}</p>
               </NavLink>&nbsp;&nbsp;
               <IoIosArrowDown onClick={(event)=>event.target.parentElement.toggleAttribute("active")}/>
@@ -89,7 +90,7 @@ const MyCourses = ()=>{
     const [button, setButton] = useState(<FaPlay/>);
     const [counter, setCounter] = useState(0);
     const [cvideos, setCvideos] = useState([]);
-    
+    const [loading, setLoading] = useState(false);
     let tVideos = 0;
     course?.courseContent?.map((ele)=>tVideos+=ele.subSection.length);
 
@@ -97,7 +98,10 @@ const MyCourses = ()=>{
     let layer = useRef(""), nextVideo = useRef("");
     const togglePlay = ()=>{
         if(player.current.paused || player.current.ended){
-            player.current.play();
+            setLoading(true)
+            player.current.play().then(()=>{
+                setLoading(false);
+            });
         }
         else{
             player.current.pause();
@@ -213,6 +217,9 @@ const MyCourses = ()=>{
                         <source src={lecture?.videoUrl} type="video/mp4"/>
                         <p>Sorry! Your browser doesn't support playing HTML5 videos.</p>
                     </video>
+                    {loading && <div className="loader">
+                        <CgSpinner size={"25%"}/>
+                    </div>}
                     <div className="controls">
                         <div className="progress" ref={progress}>
                             <div className="progress__filled" style={{flexBasis:counter+"%"}} ref={progressBar}><div className="slider-circle" draggable></div></div>
@@ -221,7 +228,7 @@ const MyCourses = ()=>{
                         <button className="controls__button" data-skip="-10"><IoPlaySkipForwardSharp/></button>
                         <button type="button" ref={toggleButton}>{button}</button>
                         <button className="controls__button" data-skip="10"><IoPlaySkipForwardSharp/></button>
-                        <span className="time-frame">{`${getTime(player.current.currentTime)} / ${getTime(player.current.duration)}`}</span>
+                        <span className="time-frame">{`${getTime(player.current.currentTime||0)} / ${getTime(player.current.duration||0)}`}</span>
                         <FaVolumeHigh/><input type="range" name="volume" className="controls__slider" min="0" max="1" step="0.05" defaultValue="1"/>
                         {`Speed: ${player.current.playbackRate}x`}<input type="range" name="playbackRate" className="controls__slider" min="0.5" max="2" step="0.5" defaultValue="1"/>
                         <div className="time-skip" style={{marginLeft: "auto",marginRight:"20px"}}>
