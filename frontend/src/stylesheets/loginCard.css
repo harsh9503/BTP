@@ -28,8 +28,7 @@
     background-color: rgba(63, 70, 79, 0.579);
     font-size: smaller;
   }
-  
-  .loginPanel input:focus, dialog input:focus, .addcourse-main input{
+  .loginPanel input:focus, dialog input:focus, .addcourse-main input:focus{
     outline: none;
     border-bottom: 1px solid var(--border-bottom-hover);
   }

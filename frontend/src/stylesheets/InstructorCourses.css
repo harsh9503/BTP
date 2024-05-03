@@ -18,16 +18,17 @@
     box-sizing: border-box;
     border: 1px solid var(--border-bottom-color)
 }
-.course-icon{
+.instructor-courses-main .course-icon{
     width: 40%;
     height: 40%;
     object-fit: contain;
     border-radius: 1rem;
+    max-height: fit-content;
 }
 .instructor-courses-main .course-info-enrolled{
     width: auto;
 }
-.course-data-enrolled{
+.instructor-courses-main .course-data-enrolled{
     display: grid;
     grid-template-rows: minmax(20%,min-content) minmax(auto,2fr) 1fr 1fr;
     row-gap: 5px;
@@ -41,12 +42,12 @@
     margin-bottom: 5px;
     display: block;
 }
-.course-data-enrolled p{
+.instructor-courses-main .course-data-enrolled p{
     color: var(--text-color);
     overflow: hidden;
     text-overflow: ellipsis;
 }
-.course-data-enrolled h3{
+.instructor-courses-main .course-data-enrolled h3{
     font-weight: bold;
 }
 .published{

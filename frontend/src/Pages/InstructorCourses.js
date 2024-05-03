@@ -185,7 +185,7 @@ const CreateCourse = ()=>{
                 <hr/>
                 <div className={"course-circle "+ (stage>=3?stage===3?"current-stage":"completed":"")}>{stage>3?<IoCheckmark size={"25px"}/>:3}</div>
             </div>
-                {curr_stage[stage]}
+                {curr_stage[stage-1]}
         </div>
         </courseContext.Provider>
     )

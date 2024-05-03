@@ -10,17 +10,17 @@ export const CourseDialog = (props)=>{
     },[]);
     return (
         <div className="course-dialog" ref={thisEle}>
-            <div className="course-info-enrolled" style={{width:"30%"}}>
+            <div className="course-info-enrolled">
                 <img className="course-icon" src={props.image}></img>
                 <div className="course-data-enrolled">
                     <p className="no-margin">{props.coursename}</p>
-                    <p className="no-margin">{props.description.length>=25?props.description.slice(0,25)+"...":props.description}</p>
+                    <p className="no-margin">{props.description+"lkmsklfslknfkldnaklvnkdlfvklsd bvgf sbvgf b gf kfg b ksg k gfb kg bk grkb trk bk rbv kjfdvjkdf vjfdk v  kj jk kj kj jk kj"}</p>
                 </div>
             </div>
-            <div className="course-duration" style={{width:"20%"}}>{props.duration}</div>
-            <div className="course-progress" style={{width:"10%"}}>
-                <label className="no-margin text-yellow">Progress: {props.progressPercentage}%</label><br/>
-                <progress className="course-progress-bar" max={100} value={props.progressPercentage}></progress>
+            <div className="course-duration">{props.duration}</div>
+            <div className={(props.progressPercentage===100)?"course-progress course-completed":"course-progress"}>
+                {props.progressPercentage===100?<label className="no-margin">Completed</label>:<label className="no-margin text-yellow">Progress: {props.progressPercentage||0}%</label>}
+                <progress className="course-progress-bar" max={100} value={props.progressPercentage||0}></progress>
             </div>
             <div className="course-menu" onClick={(event)=>{event.target?.classList?.toggle("active")}}>&#8942;
                 <div className="menu">

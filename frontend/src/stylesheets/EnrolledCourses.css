@@ -6,9 +6,8 @@
     width: 100%;
     height: 70px;
     color: var(--text-color);
-    display: flex;
-    justify-content: flex-start;
-    gap:5%;
+    display: grid;
+    grid-template-columns: 50% 16% 30% 4%;
     background-color: var(--background-color);
     align-items: center;
     font-size: medium;
@@ -17,11 +16,19 @@
     transition: all 0.1s ease-in-out;
     position: relative;
 }
-.course-dialog > :nth-child(n+2){
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.course-duration{
+    justify-self: center;
 }
+.course-completed *{
+    color: rgb(6, 184, 6) !important;
+}
+.course-dialog progress{
+    width: 80%;
+}
+.course-completed progress{
+    accent-color: rgb(6, 184, 6);
+}
+
 .course-dialog:hover{
     box-shadow: inset -1px 0px 0px 1px rgba(255, 255, 255, 0.075), inset 1px 0px 0px 0px rgba(255, 255, 255, 0.075),0px -1px 5px 1px rgb(16, 20, 31), 0px 1px 5px 2px rgb(16, 20, 31);
     z-index: 9999;
@@ -30,20 +37,32 @@
 .course-info-enrolled{
     display: flex;
     align-items: center;
-    width: 30%;
+    height: 100%;
 }
-.course-progress{
-    width: 15%;
+.course-data-enrolled{
+    width: auto;
+    max-height: 70px;
+    display: grid;
+    grid-template-rows: 1fr auto;
+    height: auto;
 }
 .course-data-enrolled p{
-    display: block;
+    overflow: hidden;
+    height: auto;
+    display: -webkit-box;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+.course-data-enrolled p:nth-child(2){
     font-size: small;
 }
-.course-icon{
-    width: 50px;
-    height: 50px;
-    margin-right: 1vw;
-    border-radius: 10%;
+.course-info-enrolled .course-icon{
+    width: 20%;
+    height: fit-content;
+    max-height: 50px;
+    margin-right: 5%;
+    border-radius: 10px;
 }
 .course-menu{
     font-size: x-large;
